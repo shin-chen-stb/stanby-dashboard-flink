@@ -1,0 +1,81 @@
+{
+    "name": "StanbyEvent",
+    "namespace": "inc.stanby.schema",
+    "type": "record",
+    "fields": [
+        {
+            "name": "service",
+            "type": "string",
+            "default" : "NONE"
+        },
+        {
+            "name": "event_type",
+            "type": "string",
+            "default" : "NONE"
+        },
+        {
+            "name": "suid",
+            "type": "string",
+            "default" : "NONE"
+        },
+        {
+            "name": "ssid",
+            "type": "string",
+            "default" : "NONE"
+        },
+        {
+            "name": "current_url",
+            "type": "string",
+            "default" : "NONE"
+        },
+        {
+            "name": "referrer",
+            "type": "string",
+            "default" : "NONE"
+        },
+        {
+            "name": "page",
+            "type": "string",
+            "default" : "NONE"
+        },
+        {
+            "name": "page_type",
+            "type": "string",
+            "default" : "NONE"
+        },
+        {
+            "name": "user_agent",
+            "type": "string",
+            "default" : "NONE"
+        },
+        {
+            "name": "search_request_id",
+            "type": "string",
+            "default" : "NONE"
+        },
+        {
+            "name": "epoch",
+            "type": "long"
+        },
+        {
+            "name": "ip",
+            "type": "string",
+            "default" : "NONE"
+        },
+        {
+            "name": "ua_os",
+            "type": "string",
+            "default" : "NONE"
+        },
+        {
+            "name": "ua_device",
+            "type": "string",
+            "default" : "NONE"
+        },
+        {
+            "name": "ua_family",
+            "type": "string",
+            "default" : "NONE"
+        }
+    ]
+}
