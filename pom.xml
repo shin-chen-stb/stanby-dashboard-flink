@@ -23,10 +23,10 @@ under the License.
 
 	<groupId>inc.stanby</groupId>
 	<artifactId>stanby-dashboard-flink</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.13</version>
 	<packaging>jar</packaging>
 
-	<name>Flink Quickstart Job</name>
+	<name>stanby-dashboard-flink</name>
 
 	<repositories>
 		<repository>

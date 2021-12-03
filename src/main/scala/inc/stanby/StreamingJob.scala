@@ -57,16 +57,15 @@ object StreamingJob {
     env.addSource(new FlinkKinesisConsumer[String](inputStreamName, new SimpleStringSchema, inputProperties))
   }
 
-  @throws[IOException]
-  private def createSourceFromApplicationProperties(env: StreamExecutionEnvironment) = {
-    val applicationProperties = KinesisAnalyticsRuntime.getApplicationProperties
-    env.addSource(new FlinkKinesisConsumer[StanbyEvent]("dmt-dataplatform-analytics-stream", new StanbyEventSchema, applicationProperties.get("ConsumerConfigProperties")))
-  }
-
   @throws[Exception]
   def main(args: Array[String]): Unit = { // set up the streaming execution environment
     val env = StreamExecutionEnvironment.getExecutionEnvironment
+    // Unknown error that failed to start application
+    // "java.lang.IllegalArgumentException: Kinesis consumer does not support DeserializationSchema that implements deserialization with a Collector. Unsupported DeserializationSchema: inc.stanby.utils.StanbyEventSchema\n\tat org.apache.flink.streaming.connectors.kinesis.serialization.KinesisDeserializationSchemaWrapper.<init>(KinesisDeserializationSchemaWrapper.java:49) ~[?:?]\n\tat org.apache.flink.streaming.connectors.kinesis.FlinkKinesisConsumer.<init>(FlinkKinesisConsumer.java:179) ~[?:?]\n\tat inc.stanby.StreamingJob$.createStanbyEventSourceFromStaticConfig(StreamingJob.scala:50) ~[?:?]\n\tat inc.stanby.StreamingJob$.main(StreamingJob.scala:64) ~[?:?]\n\tat inc.stanby.StreamingJob.main(StreamingJob.scala) ~[?:?]\n\tat jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]\n\tat jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]\n\tat
+    // https://github.com/apache/flink/blob/master/flink-connectors/flink-connector-kinesis/src/main/java/org/apache/flink/streaming/connectors/kinesis/serialization/KinesisDeserializationSchemaWrapper.java
     val input = createStanbyEventSourceFromStaticConfig(env, "dmt-dataplatform-analytics-stream")
+//    val input = createSourceFromStaticConfig(env, "dmt-dataplatform-analytics-stream")
+
     input.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event", "_doc"))
 
     // execute program
