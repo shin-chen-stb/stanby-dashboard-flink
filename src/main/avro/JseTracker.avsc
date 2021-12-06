@@ -6,248 +6,269 @@
         {
             "name": "adDistributionId",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "adJobs",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "adRequestId",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "address",
-            "type" : {
+            "type" : [
+            "null",
+            {
                 "type": "record",
                 "name": "Address",
+                "default": null,
                 "fields": [
-                    {"name": "addressLevel", "type": "int"},
-                    {"name": "cityCodes", "type": "string"},
+                    {"name": "addressLevel", "type": "int", "default": 0},
+                    {"name": "cityCodes", "type": "string", "default": ""},
                     {
-                        "name": "coordinatePoint", 
-                        "type": {
+                        "name": "coordinatePoint",
+                        "default": null,
+                        "type": [
+                        "null",
+                        {
                             "type": "record",
                             "name": "GeoLocation",
+                            "default": null,
                             "fields": [
-                                {"name": "latitude", "type": "float"},
-                                {"name": "longitude", "type": "float"}
+                                {"name": "latitude", "type": "float", "default": 0},
+                                {"name": "longitude", "type": "float", "default": 0}
                             ]
-                        }
+                        }]
                     },
-                    {"name": "distance", "type": "int"},
-                    {"name": "prefectureCode", "type": "string"},
-                    {"name": "station", "type": "string"}
+                    {"name": "distance", "type": "int", "default": 0},
+                    {"name": "prefectureCode", "type": "string", "default": ""},
+                    {"name": "station", "type": "string", "default": ""}
                 ]
-            }
+            }]
         },
         {
             "name": "bucketType",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "category",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "clickId",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "companyName",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "position",
-            "type": "int"
+            "type": "int",
+            "default" : 0
         },
         {
             "name": "createDateTime",
-            "type": "int",
-            "logicalType": "date"
+            "type": "string",
+            "default" : ""
         },
         {
             "name": "createdDateTime",
-            "type": "int",
-            "logicalType": "date"
+            "type": "string",
+            "default" : ""
         },
         {
             "name": "documentId",
             "type": "string",
-            "default" : "NONE"
+            "default": ""
         },
         {
             "name": "eventType",
             "type": "string",
-            "default" : "NONE"
+            "default": ""
         },
         {
             "name": "indexType",
             "type": "string",
-            "default" : "NONE"
+            "default": ""
         },
         {
             "name": "ip",
             "type": "string",
-            "default" : "NONE"
+            "default": ""
         },
         {
             "name": "isAd",
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
         },
         {
             "name": "jobContent",
             "type": "string",
-            "default" : "NONE"
+            "default": ""
         },
         {
             "name": "jobTitle",
             "type": "string",
-            "default" : "NONE"
+            "default": ""
         },
         {
             "name": "jobType",
             "type": "string",
-            "default" : "NONE"
+            "default": ""
         },
         {
             "name": "jobVersionDate",
-            "type": "int",
-            "logicalType": "date"
+            "type": "string",
+            "default": ""
         },
         {
             "name": "keyword",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "location",
             "type": "string",
-            "default" : "NONE"
+            "default": ""
         },
         {
             "name": "log_host",
             "type": "boolean",
-            "default" : false
+            "default": false
         },
         {
             "name": "newJobs",
             "type": "string",
-            "default" : "NONE"
+            "default": ""
         },
         {
             "name": "openDate",
-            "type": "int",
-            "logicalType": "date"
+            "type": "string",
+            "default" : ""
         },
         {
             "name": "order",
-            "type": "int"
+            "type": "int",
+            "default" : 0
         },
         {
             "name": "originDocumentId",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "originalKeyword",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "referer",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "relatedJobs",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "role",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "salary",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "searchPage",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "searchRequestId",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "searchRequestUrl",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "siteCodes",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "siteName",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "tag",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "time",
-            "type": "int",
-            "logicalType": "date"
+            "type": "string",
+            "default" : ""
         },
         {
             "name": "totalHits",
-            "type": "int"
+            "type": "int",
+            "default" : 0
         },
         {
             "name": "uaCategory",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "uaValue",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "uid",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "updateDate",
-            "type": "int",
-            "logicalType": "date"
+            "type": "string",
+            "default" : ""
         },
         {
             "name": "visitId",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
         },
         {
             "name": "workLocation",
             "type": "string",
-            "default" : "NONE"
+            "default" : ""
+        },
+        {
+            "name": "cityCode",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "geoLocation",
+            "type": "string",
+            "default" : ""
         }
     ]
 }

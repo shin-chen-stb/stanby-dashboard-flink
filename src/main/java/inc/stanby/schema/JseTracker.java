@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class JseTracker extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 8903925638515772312L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"JseTracker\",\"namespace\":\"inc.stanby.schema\",\"fields\":[{\"name\":\"adDistributionId\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"adJobs\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"adRequestId\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"address\",\"type\":{\"type\":\"record\",\"name\":\"Address\",\"fields\":[{\"name\":\"addressLevel\",\"type\":\"int\"},{\"name\":\"cityCodes\",\"type\":\"string\"},{\"name\":\"coordinatePoint\",\"type\":{\"type\":\"record\",\"name\":\"GeoLocation\",\"fields\":[{\"name\":\"latitude\",\"type\":\"float\"},{\"name\":\"longitude\",\"type\":\"float\"}]}},{\"name\":\"distance\",\"type\":\"int\"},{\"name\":\"prefectureCode\",\"type\":\"string\"},{\"name\":\"station\",\"type\":\"string\"}]}},{\"name\":\"bucketType\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"category\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"clickId\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"companyName\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"position\",\"type\":\"int\"},{\"name\":\"createDateTime\",\"type\":\"int\",\"logicalType\":\"date\"},{\"name\":\"createdDateTime\",\"type\":\"int\",\"logicalType\":\"date\"},{\"name\":\"documentId\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"eventType\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"indexType\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"ip\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"isAd\",\"type\":\"boolean\"},{\"name\":\"jobContent\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"jobTitle\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"jobType\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"jobVersionDate\",\"type\":\"int\",\"logicalType\":\"date\"},{\"name\":\"keyword\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"location\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"log_host\",\"type\":\"boolean\",\"default\":false},{\"name\":\"newJobs\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"openDate\",\"type\":\"int\",\"logicalType\":\"date\"},{\"name\":\"order\",\"type\":\"int\"},{\"name\":\"originDocumentId\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"originalKeyword\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"referer\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"relatedJobs\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"role\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"salary\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"searchPage\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"searchRequestId\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"searchRequestUrl\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"siteCodes\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"siteName\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"tag\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"time\",\"type\":\"int\",\"logicalType\":\"date\"},{\"name\":\"totalHits\",\"type\":\"int\"},{\"name\":\"uaCategory\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"uaValue\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"uid\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"updateDate\",\"type\":\"int\",\"logicalType\":\"date\"},{\"name\":\"visitId\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"workLocation\",\"type\":\"string\",\"default\":\"NONE\"}]}");
+  private static final long serialVersionUID = -4223850343945048817L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"JseTracker\",\"namespace\":\"inc.stanby.schema\",\"fields\":[{\"name\":\"adDistributionId\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"adJobs\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"adRequestId\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"address\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Address\",\"fields\":[{\"name\":\"addressLevel\",\"type\":\"int\",\"default\":0},{\"name\":\"cityCodes\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"coordinatePoint\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"GeoLocation\",\"fields\":[{\"name\":\"latitude\",\"type\":\"float\",\"default\":0},{\"name\":\"longitude\",\"type\":\"float\",\"default\":0}],\"default\":null}],\"default\":null},{\"name\":\"distance\",\"type\":\"int\",\"default\":0},{\"name\":\"prefectureCode\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"station\",\"type\":\"string\",\"default\":\"\"}],\"default\":null}]},{\"name\":\"bucketType\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"category\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"clickId\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"companyName\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"position\",\"type\":\"int\",\"default\":0},{\"name\":\"createDateTime\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"createdDateTime\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"documentId\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"eventType\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"indexType\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"ip\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"isAd\",\"type\":\"boolean\",\"default\":false},{\"name\":\"jobContent\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"jobTitle\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"jobType\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"jobVersionDate\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"keyword\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"location\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"log_host\",\"type\":\"boolean\",\"default\":false},{\"name\":\"newJobs\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"openDate\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"order\",\"type\":\"int\",\"default\":0},{\"name\":\"originDocumentId\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"originalKeyword\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"referer\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"relatedJobs\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"role\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"salary\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"searchPage\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"searchRequestId\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"searchRequestUrl\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"siteCodes\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"siteName\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"tag\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"time\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"totalHits\",\"type\":\"int\",\"default\":0},{\"name\":\"uaCategory\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"uaValue\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"uid\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"updateDate\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"visitId\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"workLocation\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"cityCode\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"geoLocation\",\"type\":\"string\",\"default\":\"\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -60,8 +60,8 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
   @Deprecated public java.lang.CharSequence clickId;
   @Deprecated public java.lang.CharSequence companyName;
   @Deprecated public int position;
-  @Deprecated public int createDateTime;
-  @Deprecated public int createdDateTime;
+  @Deprecated public java.lang.CharSequence createDateTime;
+  @Deprecated public java.lang.CharSequence createdDateTime;
   @Deprecated public java.lang.CharSequence documentId;
   @Deprecated public java.lang.CharSequence eventType;
   @Deprecated public java.lang.CharSequence indexType;
@@ -70,12 +70,12 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
   @Deprecated public java.lang.CharSequence jobContent;
   @Deprecated public java.lang.CharSequence jobTitle;
   @Deprecated public java.lang.CharSequence jobType;
-  @Deprecated public int jobVersionDate;
+  @Deprecated public java.lang.CharSequence jobVersionDate;
   @Deprecated public java.lang.CharSequence keyword;
   @Deprecated public java.lang.CharSequence location;
   @Deprecated public boolean log_host;
   @Deprecated public java.lang.CharSequence newJobs;
-  @Deprecated public int openDate;
+  @Deprecated public java.lang.CharSequence openDate;
   @Deprecated public int order;
   @Deprecated public java.lang.CharSequence originDocumentId;
   @Deprecated public java.lang.CharSequence originalKeyword;
@@ -89,14 +89,16 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
   @Deprecated public java.lang.CharSequence siteCodes;
   @Deprecated public java.lang.CharSequence siteName;
   @Deprecated public java.lang.CharSequence tag;
-  @Deprecated public int time;
+  @Deprecated public java.lang.CharSequence time;
   @Deprecated public int totalHits;
   @Deprecated public java.lang.CharSequence uaCategory;
   @Deprecated public java.lang.CharSequence uaValue;
   @Deprecated public java.lang.CharSequence uid;
-  @Deprecated public int updateDate;
+  @Deprecated public java.lang.CharSequence updateDate;
   @Deprecated public java.lang.CharSequence visitId;
   @Deprecated public java.lang.CharSequence workLocation;
+  @Deprecated public java.lang.CharSequence cityCode;
+  @Deprecated public java.lang.CharSequence geoLocation;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -153,8 +155,10 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
    * @param updateDate The new value for updateDate
    * @param visitId The new value for visitId
    * @param workLocation The new value for workLocation
+   * @param cityCode The new value for cityCode
+   * @param geoLocation The new value for geoLocation
    */
-  public JseTracker(java.lang.CharSequence adDistributionId, java.lang.CharSequence adJobs, java.lang.CharSequence adRequestId, inc.stanby.schema.Address address, java.lang.CharSequence bucketType, java.lang.CharSequence category, java.lang.CharSequence clickId, java.lang.CharSequence companyName, java.lang.Integer position, java.lang.Integer createDateTime, java.lang.Integer createdDateTime, java.lang.CharSequence documentId, java.lang.CharSequence eventType, java.lang.CharSequence indexType, java.lang.CharSequence ip, java.lang.Boolean isAd, java.lang.CharSequence jobContent, java.lang.CharSequence jobTitle, java.lang.CharSequence jobType, java.lang.Integer jobVersionDate, java.lang.CharSequence keyword, java.lang.CharSequence location, java.lang.Boolean log_host, java.lang.CharSequence newJobs, java.lang.Integer openDate, java.lang.Integer order, java.lang.CharSequence originDocumentId, java.lang.CharSequence originalKeyword, java.lang.CharSequence referer, java.lang.CharSequence relatedJobs, java.lang.CharSequence role, java.lang.CharSequence salary, java.lang.CharSequence searchPage, java.lang.CharSequence searchRequestId, java.lang.CharSequence searchRequestUrl, java.lang.CharSequence siteCodes, java.lang.CharSequence siteName, java.lang.CharSequence tag, java.lang.Integer time, java.lang.Integer totalHits, java.lang.CharSequence uaCategory, java.lang.CharSequence uaValue, java.lang.CharSequence uid, java.lang.Integer updateDate, java.lang.CharSequence visitId, java.lang.CharSequence workLocation) {
+  public JseTracker(java.lang.CharSequence adDistributionId, java.lang.CharSequence adJobs, java.lang.CharSequence adRequestId, inc.stanby.schema.Address address, java.lang.CharSequence bucketType, java.lang.CharSequence category, java.lang.CharSequence clickId, java.lang.CharSequence companyName, java.lang.Integer position, java.lang.CharSequence createDateTime, java.lang.CharSequence createdDateTime, java.lang.CharSequence documentId, java.lang.CharSequence eventType, java.lang.CharSequence indexType, java.lang.CharSequence ip, java.lang.Boolean isAd, java.lang.CharSequence jobContent, java.lang.CharSequence jobTitle, java.lang.CharSequence jobType, java.lang.CharSequence jobVersionDate, java.lang.CharSequence keyword, java.lang.CharSequence location, java.lang.Boolean log_host, java.lang.CharSequence newJobs, java.lang.CharSequence openDate, java.lang.Integer order, java.lang.CharSequence originDocumentId, java.lang.CharSequence originalKeyword, java.lang.CharSequence referer, java.lang.CharSequence relatedJobs, java.lang.CharSequence role, java.lang.CharSequence salary, java.lang.CharSequence searchPage, java.lang.CharSequence searchRequestId, java.lang.CharSequence searchRequestUrl, java.lang.CharSequence siteCodes, java.lang.CharSequence siteName, java.lang.CharSequence tag, java.lang.CharSequence time, java.lang.Integer totalHits, java.lang.CharSequence uaCategory, java.lang.CharSequence uaValue, java.lang.CharSequence uid, java.lang.CharSequence updateDate, java.lang.CharSequence visitId, java.lang.CharSequence workLocation, java.lang.CharSequence cityCode, java.lang.CharSequence geoLocation) {
     this.adDistributionId = adDistributionId;
     this.adJobs = adJobs;
     this.adRequestId = adRequestId;
@@ -201,6 +205,8 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
     this.updateDate = updateDate;
     this.visitId = visitId;
     this.workLocation = workLocation;
+    this.cityCode = cityCode;
+    this.geoLocation = geoLocation;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -253,6 +259,8 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
     case 43: return updateDate;
     case 44: return visitId;
     case 45: return workLocation;
+    case 46: return cityCode;
+    case 47: return geoLocation;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -270,8 +278,8 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
     case 6: clickId = (java.lang.CharSequence)value$; break;
     case 7: companyName = (java.lang.CharSequence)value$; break;
     case 8: position = (java.lang.Integer)value$; break;
-    case 9: createDateTime = (java.lang.Integer)value$; break;
-    case 10: createdDateTime = (java.lang.Integer)value$; break;
+    case 9: createDateTime = (java.lang.CharSequence)value$; break;
+    case 10: createdDateTime = (java.lang.CharSequence)value$; break;
     case 11: documentId = (java.lang.CharSequence)value$; break;
     case 12: eventType = (java.lang.CharSequence)value$; break;
     case 13: indexType = (java.lang.CharSequence)value$; break;
@@ -280,12 +288,12 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
     case 16: jobContent = (java.lang.CharSequence)value$; break;
     case 17: jobTitle = (java.lang.CharSequence)value$; break;
     case 18: jobType = (java.lang.CharSequence)value$; break;
-    case 19: jobVersionDate = (java.lang.Integer)value$; break;
+    case 19: jobVersionDate = (java.lang.CharSequence)value$; break;
     case 20: keyword = (java.lang.CharSequence)value$; break;
     case 21: location = (java.lang.CharSequence)value$; break;
     case 22: log_host = (java.lang.Boolean)value$; break;
     case 23: newJobs = (java.lang.CharSequence)value$; break;
-    case 24: openDate = (java.lang.Integer)value$; break;
+    case 24: openDate = (java.lang.CharSequence)value$; break;
     case 25: order = (java.lang.Integer)value$; break;
     case 26: originDocumentId = (java.lang.CharSequence)value$; break;
     case 27: originalKeyword = (java.lang.CharSequence)value$; break;
@@ -299,14 +307,16 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
     case 35: siteCodes = (java.lang.CharSequence)value$; break;
     case 36: siteName = (java.lang.CharSequence)value$; break;
     case 37: tag = (java.lang.CharSequence)value$; break;
-    case 38: time = (java.lang.Integer)value$; break;
+    case 38: time = (java.lang.CharSequence)value$; break;
     case 39: totalHits = (java.lang.Integer)value$; break;
     case 40: uaCategory = (java.lang.CharSequence)value$; break;
     case 41: uaValue = (java.lang.CharSequence)value$; break;
     case 42: uid = (java.lang.CharSequence)value$; break;
-    case 43: updateDate = (java.lang.Integer)value$; break;
+    case 43: updateDate = (java.lang.CharSequence)value$; break;
     case 44: visitId = (java.lang.CharSequence)value$; break;
     case 45: workLocation = (java.lang.CharSequence)value$; break;
+    case 46: cityCode = (java.lang.CharSequence)value$; break;
+    case 47: geoLocation = (java.lang.CharSequence)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -459,7 +469,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
    * Gets the value of the 'createDateTime' field.
    * @return The value of the 'createDateTime' field.
    */
-  public java.lang.Integer getCreateDateTime() {
+  public java.lang.CharSequence getCreateDateTime() {
     return createDateTime;
   }
 
@@ -467,7 +477,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
    * Sets the value of the 'createDateTime' field.
    * @param value the value to set.
    */
-  public void setCreateDateTime(java.lang.Integer value) {
+  public void setCreateDateTime(java.lang.CharSequence value) {
     this.createDateTime = value;
   }
 
@@ -475,7 +485,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
    * Gets the value of the 'createdDateTime' field.
    * @return The value of the 'createdDateTime' field.
    */
-  public java.lang.Integer getCreatedDateTime() {
+  public java.lang.CharSequence getCreatedDateTime() {
     return createdDateTime;
   }
 
@@ -483,7 +493,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
    * Sets the value of the 'createdDateTime' field.
    * @param value the value to set.
    */
-  public void setCreatedDateTime(java.lang.Integer value) {
+  public void setCreatedDateTime(java.lang.CharSequence value) {
     this.createdDateTime = value;
   }
 
@@ -619,7 +629,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
    * Gets the value of the 'jobVersionDate' field.
    * @return The value of the 'jobVersionDate' field.
    */
-  public java.lang.Integer getJobVersionDate() {
+  public java.lang.CharSequence getJobVersionDate() {
     return jobVersionDate;
   }
 
@@ -627,7 +637,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
    * Sets the value of the 'jobVersionDate' field.
    * @param value the value to set.
    */
-  public void setJobVersionDate(java.lang.Integer value) {
+  public void setJobVersionDate(java.lang.CharSequence value) {
     this.jobVersionDate = value;
   }
 
@@ -699,7 +709,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
    * Gets the value of the 'openDate' field.
    * @return The value of the 'openDate' field.
    */
-  public java.lang.Integer getOpenDate() {
+  public java.lang.CharSequence getOpenDate() {
     return openDate;
   }
 
@@ -707,7 +717,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
    * Sets the value of the 'openDate' field.
    * @param value the value to set.
    */
-  public void setOpenDate(java.lang.Integer value) {
+  public void setOpenDate(java.lang.CharSequence value) {
     this.openDate = value;
   }
 
@@ -923,7 +933,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
    * Gets the value of the 'time' field.
    * @return The value of the 'time' field.
    */
-  public java.lang.Integer getTime() {
+  public java.lang.CharSequence getTime() {
     return time;
   }
 
@@ -931,7 +941,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
    * Sets the value of the 'time' field.
    * @param value the value to set.
    */
-  public void setTime(java.lang.Integer value) {
+  public void setTime(java.lang.CharSequence value) {
     this.time = value;
   }
 
@@ -1003,7 +1013,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
    * Gets the value of the 'updateDate' field.
    * @return The value of the 'updateDate' field.
    */
-  public java.lang.Integer getUpdateDate() {
+  public java.lang.CharSequence getUpdateDate() {
     return updateDate;
   }
 
@@ -1011,7 +1021,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
    * Sets the value of the 'updateDate' field.
    * @param value the value to set.
    */
-  public void setUpdateDate(java.lang.Integer value) {
+  public void setUpdateDate(java.lang.CharSequence value) {
     this.updateDate = value;
   }
 
@@ -1045,6 +1055,38 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
    */
   public void setWorkLocation(java.lang.CharSequence value) {
     this.workLocation = value;
+  }
+
+  /**
+   * Gets the value of the 'cityCode' field.
+   * @return The value of the 'cityCode' field.
+   */
+  public java.lang.CharSequence getCityCode() {
+    return cityCode;
+  }
+
+  /**
+   * Sets the value of the 'cityCode' field.
+   * @param value the value to set.
+   */
+  public void setCityCode(java.lang.CharSequence value) {
+    this.cityCode = value;
+  }
+
+  /**
+   * Gets the value of the 'geoLocation' field.
+   * @return The value of the 'geoLocation' field.
+   */
+  public java.lang.CharSequence getGeoLocation() {
+    return geoLocation;
+  }
+
+  /**
+   * Sets the value of the 'geoLocation' field.
+   * @param value the value to set.
+   */
+  public void setGeoLocation(java.lang.CharSequence value) {
+    this.geoLocation = value;
   }
 
   /**
@@ -1089,8 +1131,8 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
     private java.lang.CharSequence clickId;
     private java.lang.CharSequence companyName;
     private int position;
-    private int createDateTime;
-    private int createdDateTime;
+    private java.lang.CharSequence createDateTime;
+    private java.lang.CharSequence createdDateTime;
     private java.lang.CharSequence documentId;
     private java.lang.CharSequence eventType;
     private java.lang.CharSequence indexType;
@@ -1099,12 +1141,12 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
     private java.lang.CharSequence jobContent;
     private java.lang.CharSequence jobTitle;
     private java.lang.CharSequence jobType;
-    private int jobVersionDate;
+    private java.lang.CharSequence jobVersionDate;
     private java.lang.CharSequence keyword;
     private java.lang.CharSequence location;
     private boolean log_host;
     private java.lang.CharSequence newJobs;
-    private int openDate;
+    private java.lang.CharSequence openDate;
     private int order;
     private java.lang.CharSequence originDocumentId;
     private java.lang.CharSequence originalKeyword;
@@ -1118,14 +1160,16 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
     private java.lang.CharSequence siteCodes;
     private java.lang.CharSequence siteName;
     private java.lang.CharSequence tag;
-    private int time;
+    private java.lang.CharSequence time;
     private int totalHits;
     private java.lang.CharSequence uaCategory;
     private java.lang.CharSequence uaValue;
     private java.lang.CharSequence uid;
-    private int updateDate;
+    private java.lang.CharSequence updateDate;
     private java.lang.CharSequence visitId;
     private java.lang.CharSequence workLocation;
+    private java.lang.CharSequence cityCode;
+    private java.lang.CharSequence geoLocation;
 
     /** Creates a new Builder */
     private Builder() {
@@ -1325,6 +1369,14 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
         this.workLocation = data().deepCopy(fields()[45].schema(), other.workLocation);
         fieldSetFlags()[45] = true;
       }
+      if (isValidValue(fields()[46], other.cityCode)) {
+        this.cityCode = data().deepCopy(fields()[46].schema(), other.cityCode);
+        fieldSetFlags()[46] = true;
+      }
+      if (isValidValue(fields()[47], other.geoLocation)) {
+        this.geoLocation = data().deepCopy(fields()[47].schema(), other.geoLocation);
+        fieldSetFlags()[47] = true;
+      }
     }
 
     /**
@@ -1517,6 +1569,14 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       if (isValidValue(fields()[45], other.workLocation)) {
         this.workLocation = data().deepCopy(fields()[45].schema(), other.workLocation);
         fieldSetFlags()[45] = true;
+      }
+      if (isValidValue(fields()[46], other.cityCode)) {
+        this.cityCode = data().deepCopy(fields()[46].schema(), other.cityCode);
+        fieldSetFlags()[46] = true;
+      }
+      if (isValidValue(fields()[47], other.geoLocation)) {
+        this.geoLocation = data().deepCopy(fields()[47].schema(), other.geoLocation);
+        fieldSetFlags()[47] = true;
       }
     }
 
@@ -1909,7 +1969,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       * Gets the value of the 'createDateTime' field.
       * @return The value.
       */
-    public java.lang.Integer getCreateDateTime() {
+    public java.lang.CharSequence getCreateDateTime() {
       return createDateTime;
     }
 
@@ -1918,7 +1978,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'createDateTime'.
       * @return This builder.
       */
-    public inc.stanby.schema.JseTracker.Builder setCreateDateTime(int value) {
+    public inc.stanby.schema.JseTracker.Builder setCreateDateTime(java.lang.CharSequence value) {
       validate(fields()[9], value);
       this.createDateTime = value;
       fieldSetFlags()[9] = true;
@@ -1939,6 +1999,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       * @return This builder.
       */
     public inc.stanby.schema.JseTracker.Builder clearCreateDateTime() {
+      createDateTime = null;
       fieldSetFlags()[9] = false;
       return this;
     }
@@ -1947,7 +2008,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       * Gets the value of the 'createdDateTime' field.
       * @return The value.
       */
-    public java.lang.Integer getCreatedDateTime() {
+    public java.lang.CharSequence getCreatedDateTime() {
       return createdDateTime;
     }
 
@@ -1956,7 +2017,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'createdDateTime'.
       * @return This builder.
       */
-    public inc.stanby.schema.JseTracker.Builder setCreatedDateTime(int value) {
+    public inc.stanby.schema.JseTracker.Builder setCreatedDateTime(java.lang.CharSequence value) {
       validate(fields()[10], value);
       this.createdDateTime = value;
       fieldSetFlags()[10] = true;
@@ -1977,6 +2038,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       * @return This builder.
       */
     public inc.stanby.schema.JseTracker.Builder clearCreatedDateTime() {
+      createdDateTime = null;
       fieldSetFlags()[10] = false;
       return this;
     }
@@ -2296,7 +2358,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       * Gets the value of the 'jobVersionDate' field.
       * @return The value.
       */
-    public java.lang.Integer getJobVersionDate() {
+    public java.lang.CharSequence getJobVersionDate() {
       return jobVersionDate;
     }
 
@@ -2305,7 +2367,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'jobVersionDate'.
       * @return This builder.
       */
-    public inc.stanby.schema.JseTracker.Builder setJobVersionDate(int value) {
+    public inc.stanby.schema.JseTracker.Builder setJobVersionDate(java.lang.CharSequence value) {
       validate(fields()[19], value);
       this.jobVersionDate = value;
       fieldSetFlags()[19] = true;
@@ -2326,6 +2388,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       * @return This builder.
       */
     public inc.stanby.schema.JseTracker.Builder clearJobVersionDate() {
+      jobVersionDate = null;
       fieldSetFlags()[19] = false;
       return this;
     }
@@ -2489,7 +2552,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       * Gets the value of the 'openDate' field.
       * @return The value.
       */
-    public java.lang.Integer getOpenDate() {
+    public java.lang.CharSequence getOpenDate() {
       return openDate;
     }
 
@@ -2498,7 +2561,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'openDate'.
       * @return This builder.
       */
-    public inc.stanby.schema.JseTracker.Builder setOpenDate(int value) {
+    public inc.stanby.schema.JseTracker.Builder setOpenDate(java.lang.CharSequence value) {
       validate(fields()[24], value);
       this.openDate = value;
       fieldSetFlags()[24] = true;
@@ -2519,6 +2582,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       * @return This builder.
       */
     public inc.stanby.schema.JseTracker.Builder clearOpenDate() {
+      openDate = null;
       fieldSetFlags()[24] = false;
       return this;
     }
@@ -3033,7 +3097,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       * Gets the value of the 'time' field.
       * @return The value.
       */
-    public java.lang.Integer getTime() {
+    public java.lang.CharSequence getTime() {
       return time;
     }
 
@@ -3042,7 +3106,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'time'.
       * @return This builder.
       */
-    public inc.stanby.schema.JseTracker.Builder setTime(int value) {
+    public inc.stanby.schema.JseTracker.Builder setTime(java.lang.CharSequence value) {
       validate(fields()[38], value);
       this.time = value;
       fieldSetFlags()[38] = true;
@@ -3063,6 +3127,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       * @return This builder.
       */
     public inc.stanby.schema.JseTracker.Builder clearTime() {
+      time = null;
       fieldSetFlags()[38] = false;
       return this;
     }
@@ -3226,7 +3291,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       * Gets the value of the 'updateDate' field.
       * @return The value.
       */
-    public java.lang.Integer getUpdateDate() {
+    public java.lang.CharSequence getUpdateDate() {
       return updateDate;
     }
 
@@ -3235,7 +3300,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'updateDate'.
       * @return This builder.
       */
-    public inc.stanby.schema.JseTracker.Builder setUpdateDate(int value) {
+    public inc.stanby.schema.JseTracker.Builder setUpdateDate(java.lang.CharSequence value) {
       validate(fields()[43], value);
       this.updateDate = value;
       fieldSetFlags()[43] = true;
@@ -3256,6 +3321,7 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       * @return This builder.
       */
     public inc.stanby.schema.JseTracker.Builder clearUpdateDate() {
+      updateDate = null;
       fieldSetFlags()[43] = false;
       return this;
     }
@@ -3338,6 +3404,84 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
       return this;
     }
 
+    /**
+      * Gets the value of the 'cityCode' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getCityCode() {
+      return cityCode;
+    }
+
+    /**
+      * Sets the value of the 'cityCode' field.
+      * @param value The value of 'cityCode'.
+      * @return This builder.
+      */
+    public inc.stanby.schema.JseTracker.Builder setCityCode(java.lang.CharSequence value) {
+      validate(fields()[46], value);
+      this.cityCode = value;
+      fieldSetFlags()[46] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'cityCode' field has been set.
+      * @return True if the 'cityCode' field has been set, false otherwise.
+      */
+    public boolean hasCityCode() {
+      return fieldSetFlags()[46];
+    }
+
+
+    /**
+      * Clears the value of the 'cityCode' field.
+      * @return This builder.
+      */
+    public inc.stanby.schema.JseTracker.Builder clearCityCode() {
+      cityCode = null;
+      fieldSetFlags()[46] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'geoLocation' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getGeoLocation() {
+      return geoLocation;
+    }
+
+    /**
+      * Sets the value of the 'geoLocation' field.
+      * @param value The value of 'geoLocation'.
+      * @return This builder.
+      */
+    public inc.stanby.schema.JseTracker.Builder setGeoLocation(java.lang.CharSequence value) {
+      validate(fields()[47], value);
+      this.geoLocation = value;
+      fieldSetFlags()[47] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'geoLocation' field has been set.
+      * @return True if the 'geoLocation' field has been set, false otherwise.
+      */
+    public boolean hasGeoLocation() {
+      return fieldSetFlags()[47];
+    }
+
+
+    /**
+      * Clears the value of the 'geoLocation' field.
+      * @return This builder.
+      */
+    public inc.stanby.schema.JseTracker.Builder clearGeoLocation() {
+      geoLocation = null;
+      fieldSetFlags()[47] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public JseTracker build() {
@@ -3356,8 +3500,8 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
         record.clickId = fieldSetFlags()[6] ? this.clickId : (java.lang.CharSequence) defaultValue(fields()[6]);
         record.companyName = fieldSetFlags()[7] ? this.companyName : (java.lang.CharSequence) defaultValue(fields()[7]);
         record.position = fieldSetFlags()[8] ? this.position : (java.lang.Integer) defaultValue(fields()[8]);
-        record.createDateTime = fieldSetFlags()[9] ? this.createDateTime : (java.lang.Integer) defaultValue(fields()[9]);
-        record.createdDateTime = fieldSetFlags()[10] ? this.createdDateTime : (java.lang.Integer) defaultValue(fields()[10]);
+        record.createDateTime = fieldSetFlags()[9] ? this.createDateTime : (java.lang.CharSequence) defaultValue(fields()[9]);
+        record.createdDateTime = fieldSetFlags()[10] ? this.createdDateTime : (java.lang.CharSequence) defaultValue(fields()[10]);
         record.documentId = fieldSetFlags()[11] ? this.documentId : (java.lang.CharSequence) defaultValue(fields()[11]);
         record.eventType = fieldSetFlags()[12] ? this.eventType : (java.lang.CharSequence) defaultValue(fields()[12]);
         record.indexType = fieldSetFlags()[13] ? this.indexType : (java.lang.CharSequence) defaultValue(fields()[13]);
@@ -3366,12 +3510,12 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
         record.jobContent = fieldSetFlags()[16] ? this.jobContent : (java.lang.CharSequence) defaultValue(fields()[16]);
         record.jobTitle = fieldSetFlags()[17] ? this.jobTitle : (java.lang.CharSequence) defaultValue(fields()[17]);
         record.jobType = fieldSetFlags()[18] ? this.jobType : (java.lang.CharSequence) defaultValue(fields()[18]);
-        record.jobVersionDate = fieldSetFlags()[19] ? this.jobVersionDate : (java.lang.Integer) defaultValue(fields()[19]);
+        record.jobVersionDate = fieldSetFlags()[19] ? this.jobVersionDate : (java.lang.CharSequence) defaultValue(fields()[19]);
         record.keyword = fieldSetFlags()[20] ? this.keyword : (java.lang.CharSequence) defaultValue(fields()[20]);
         record.location = fieldSetFlags()[21] ? this.location : (java.lang.CharSequence) defaultValue(fields()[21]);
         record.log_host = fieldSetFlags()[22] ? this.log_host : (java.lang.Boolean) defaultValue(fields()[22]);
         record.newJobs = fieldSetFlags()[23] ? this.newJobs : (java.lang.CharSequence) defaultValue(fields()[23]);
-        record.openDate = fieldSetFlags()[24] ? this.openDate : (java.lang.Integer) defaultValue(fields()[24]);
+        record.openDate = fieldSetFlags()[24] ? this.openDate : (java.lang.CharSequence) defaultValue(fields()[24]);
         record.order = fieldSetFlags()[25] ? this.order : (java.lang.Integer) defaultValue(fields()[25]);
         record.originDocumentId = fieldSetFlags()[26] ? this.originDocumentId : (java.lang.CharSequence) defaultValue(fields()[26]);
         record.originalKeyword = fieldSetFlags()[27] ? this.originalKeyword : (java.lang.CharSequence) defaultValue(fields()[27]);
@@ -3385,14 +3529,16 @@ public class JseTracker extends org.apache.avro.specific.SpecificRecordBase impl
         record.siteCodes = fieldSetFlags()[35] ? this.siteCodes : (java.lang.CharSequence) defaultValue(fields()[35]);
         record.siteName = fieldSetFlags()[36] ? this.siteName : (java.lang.CharSequence) defaultValue(fields()[36]);
         record.tag = fieldSetFlags()[37] ? this.tag : (java.lang.CharSequence) defaultValue(fields()[37]);
-        record.time = fieldSetFlags()[38] ? this.time : (java.lang.Integer) defaultValue(fields()[38]);
+        record.time = fieldSetFlags()[38] ? this.time : (java.lang.CharSequence) defaultValue(fields()[38]);
         record.totalHits = fieldSetFlags()[39] ? this.totalHits : (java.lang.Integer) defaultValue(fields()[39]);
         record.uaCategory = fieldSetFlags()[40] ? this.uaCategory : (java.lang.CharSequence) defaultValue(fields()[40]);
         record.uaValue = fieldSetFlags()[41] ? this.uaValue : (java.lang.CharSequence) defaultValue(fields()[41]);
         record.uid = fieldSetFlags()[42] ? this.uid : (java.lang.CharSequence) defaultValue(fields()[42]);
-        record.updateDate = fieldSetFlags()[43] ? this.updateDate : (java.lang.Integer) defaultValue(fields()[43]);
+        record.updateDate = fieldSetFlags()[43] ? this.updateDate : (java.lang.CharSequence) defaultValue(fields()[43]);
         record.visitId = fieldSetFlags()[44] ? this.visitId : (java.lang.CharSequence) defaultValue(fields()[44]);
         record.workLocation = fieldSetFlags()[45] ? this.workLocation : (java.lang.CharSequence) defaultValue(fields()[45]);
+        record.cityCode = fieldSetFlags()[46] ? this.cityCode : (java.lang.CharSequence) defaultValue(fields()[46]);
+        record.geoLocation = fieldSetFlags()[47] ? this.geoLocation : (java.lang.CharSequence) defaultValue(fields()[47]);
         return record;
       } catch (java.lang.Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

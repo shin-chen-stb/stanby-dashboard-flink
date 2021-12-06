@@ -19,8 +19,7 @@
 package inc.stanby
 
 import inc.stanby.operators.AmazonElasticsearchSink
-import inc.stanby.schema.StanbyEvent
-import inc.stanby.utils.StanbyEventSchema
+import inc.stanby.schema.{JseTracker, StanbyEvent}
 import org.apache.flink.api.common.serialization.SimpleStringSchema
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
 import org.apache.flink.streaming.api.scala._
@@ -29,14 +28,25 @@ import org.apache.http.HttpRequestInterceptor
 import org.apache.flink.streaming.connectors.kinesis.config.{AWSConfigConstants, ConsumerConfigConstants}
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.apache.flink.api.common.functions.FilterFunction
 
-import java.util.Properties;
+import java.util.Properties
 import com.amazonaws.services.kinesisanalytics.runtime.KinesisAnalyticsRuntime
 import inc.stanby.schema.StanbyEvent
-import inc.stanby.utils.StanbyEventSchema
+import inc.stanby.utils.{JseTrackerSchema, StanbyEventSchema}
+import org.apache.flink.api.java.functions.KeySelector
+import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction
+import org.apache.flink.streaming.api.windowing.assigners.EventTimeSessionWindows
+import org.apache.flink.streaming.api.windowing.time.Time
+import org.apache.flink.streaming.api.windowing.triggers.PurgingTrigger
+import org.apache.flink.streaming.api.windowing.windows.{GlobalWindow, TimeWindow}
 import org.apache.flink.streaming.connectors.kinesis.FlinkKinesisConsumer
+import org.apache.flink.table.plan.nodes.datastream.TimeCharacteristic
+import org.apache.flink.util.Collector
+
 import java.io.IOException
-import java.util
+import java.{lang, util}
+import scala.collection.JavaConverters.iterableAsScalaIterableConverter
 object StreamingJob {
   val serviceName = "es";
   val region = "ap-northeast-1";
@@ -50,25 +60,60 @@ object StreamingJob {
     env.addSource(new FlinkKinesisConsumer[StanbyEvent](inputStreamName, new StanbyEventSchema, inputProperties))
   }
 
-  private def createSourceFromStaticConfig(env: StreamExecutionEnvironment, inputStreamName: String) = {
+  private def createJseTrackerSourceFromStaticConfig(env: StreamExecutionEnvironment, inputStreamName: String) = {
     val inputProperties = new Properties
     inputProperties.setProperty(AWSConfigConstants.AWS_REGION, region)
     inputProperties.setProperty(ConsumerConfigConstants.STREAM_INITIAL_POSITION, "TRIM_HORIZON")
-    env.addSource(new FlinkKinesisConsumer[String](inputStreamName, new SimpleStringSchema, inputProperties))
+    env.addSource(new FlinkKinesisConsumer[JseTracker](inputStreamName, new JseTrackerSchema, inputProperties))
   }
+
 
   @throws[Exception]
   def main(args: Array[String]): Unit = { // set up the streaming execution environment
     val env = StreamExecutionEnvironment.getExecutionEnvironment
-    // Unknown error that failed to start application
-    // "java.lang.IllegalArgumentException: Kinesis consumer does not support DeserializationSchema that implements deserialization with a Collector. Unsupported DeserializationSchema: inc.stanby.utils.StanbyEventSchema\n\tat org.apache.flink.streaming.connectors.kinesis.serialization.KinesisDeserializationSchemaWrapper.<init>(KinesisDeserializationSchemaWrapper.java:49) ~[?:?]\n\tat org.apache.flink.streaming.connectors.kinesis.FlinkKinesisConsumer.<init>(FlinkKinesisConsumer.java:179) ~[?:?]\n\tat inc.stanby.StreamingJob$.createStanbyEventSourceFromStaticConfig(StreamingJob.scala:50) ~[?:?]\n\tat inc.stanby.StreamingJob$.main(StreamingJob.scala:64) ~[?:?]\n\tat inc.stanby.StreamingJob.main(StreamingJob.scala) ~[?:?]\n\tat jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]\n\tat jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]\n\tat
-    // https://github.com/apache/flink/blob/master/flink-connectors/flink-connector-kinesis/src/main/java/org/apache/flink/streaming/connectors/kinesis/serialization/KinesisDeserializationSchemaWrapper.java
     val input = createStanbyEventSourceFromStaticConfig(env, "dmt-dataplatform-analytics-stream")
-//    val input = createSourceFromStaticConfig(env, "dmt-dataplatform-analytics-stream")
-
+    val inputTemp = input.keyBy(new KeySelector[StanbyEvent, String] {
+      override def getKey(event: StanbyEvent): String = event.getSsid.toString
+    }).window(EventTimeSessionWindows.withGap(Time.minutes(5)))
+      .process(new CalcSessionTimeWindowFunction())
+    inputTemp.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_session_time", "_doc"))
+    inputTemp.print()
     input.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event", "_doc"))
-
+    val input2 = createJseTrackerSourceFromStaticConfig(env, "dmt-jse-tracker")
+//    input2.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "dmt-jse-tracker", "_doc"))
+    input2.filter(new FilterFunction[JseTracker]() {
+      @throws[Exception]
+      override def filter(value: JseTracker): Boolean = value.getEventType.equals("jobSearchRequest")
+    }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "dmt-jse-job-search", "_doc"))
+    input2.filter(new FilterFunction[JseTracker]() {
+      @throws[Exception]
+      override def filter(value: JseTracker): Boolean = value.getEventType.equals("jobDetailsImpression")
+    }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "dmt-jse-job-detail-impression", "_doc"))
+    input2.filter(new FilterFunction[JseTracker]() {
+      @throws[Exception]
+      override def filter(value: JseTracker): Boolean = value.getEventType.equals("jobImpression")
+    }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "dmt-jse-job-impression", "_doc"))
+    input2.filter(new FilterFunction[JseTracker]() {
+      @throws[Exception]
+      override def filter(value: JseTracker): Boolean = value.getEventType.equals("jobClick")
+    }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "dmt-jse-job-click", "_doc"))
     // execute program
     env.execute("Flink Streaming Scala API Skeleton")
+  }
+}
+
+class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, (String, Long), String, TimeWindow] {
+  val logger = LoggerFactory.getLogger("CalcSessionTimeWindowFunction");
+  override def process(key: String, context: ProcessWindowFunction[StanbyEvent, (String, Long), String, TimeWindow]#Context, input: lang.Iterable[StanbyEvent], out: Collector[(String, Long)]) {
+      var maxEpoch = 0L
+      var minEpoch = Long.MaxValue
+      val inputList = input.asScala
+      for (in <- inputList) {
+       minEpoch = math.min(minEpoch, in.getEpoch)
+       maxEpoch = math.max(maxEpoch, in.getEpoch)
+      }
+      val res = (maxEpoch - minEpoch) / 1000
+      logger.info("CalcSessionWindowResult: " + res.toString)
+      out.collect(Tuple2(key, res))
   }
 }

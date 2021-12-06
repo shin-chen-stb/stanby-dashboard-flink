@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Address extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -2613615165455041464L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Address\",\"namespace\":\"inc.stanby.schema\",\"fields\":[{\"name\":\"addressLevel\",\"type\":\"int\"},{\"name\":\"cityCodes\",\"type\":\"string\"},{\"name\":\"coordinatePoint\",\"type\":{\"type\":\"record\",\"name\":\"GeoLocation\",\"fields\":[{\"name\":\"latitude\",\"type\":\"float\"},{\"name\":\"longitude\",\"type\":\"float\"}]}},{\"name\":\"distance\",\"type\":\"int\"},{\"name\":\"prefectureCode\",\"type\":\"string\"},{\"name\":\"station\",\"type\":\"string\"}]}");
+  private static final long serialVersionUID = 2262270774386541591L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Address\",\"namespace\":\"inc.stanby.schema\",\"fields\":[{\"name\":\"addressLevel\",\"type\":\"int\",\"default\":0},{\"name\":\"cityCodes\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"coordinatePoint\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"GeoLocation\",\"fields\":[{\"name\":\"latitude\",\"type\":\"float\",\"default\":0},{\"name\":\"longitude\",\"type\":\"float\",\"default\":0}],\"default\":null}],\"default\":null},{\"name\":\"distance\",\"type\":\"int\",\"default\":0},{\"name\":\"prefectureCode\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"station\",\"type\":\"string\",\"default\":\"\"}],\"default\":null}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
