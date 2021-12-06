@@ -97,14 +97,18 @@ object StreamingJob {
       @throws[Exception]
       override def filter(value: JseTracker): Boolean = value.getEventType.equals("jobClick")
     }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "dmt-jse-job-click", "_doc"))
+    input2.filter(new FilterFunction[JseTracker]() {
+      @throws[Exception]
+      override def filter(value: JseTracker): Boolean = !value.getGeoLocation.equals(null)
+    }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "dmt-jse-job-request-geolocation", "_doc"))
     // execute program
     env.execute("Flink Streaming Scala API Skeleton")
   }
 }
 
-class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, (String, Long), String, TimeWindow] {
+class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, String, String, TimeWindow] {
   val logger = LoggerFactory.getLogger("CalcSessionTimeWindowFunction");
-  override def process(key: String, context: ProcessWindowFunction[StanbyEvent, (String, Long), String, TimeWindow]#Context, input: lang.Iterable[StanbyEvent], out: Collector[(String, Long)]) {
+   override def process(key: String, context: ProcessWindowFunction[StanbyEvent, String, String, TimeWindow]#Context, input: lang.Iterable[StanbyEvent], out: Collector[String]) {
       var maxEpoch = 0L
       var minEpoch = Long.MaxValue
       val inputList = input.asScala
@@ -114,6 +118,7 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, (
       }
       val res = (maxEpoch - minEpoch) / 1000
       logger.info("CalcSessionWindowResult: " + res.toString)
-      out.collect(Tuple2(key, res))
+      val o = "{\\\"Session\\\":\\\"%s\\\",\\\"SessionTime\\\":%d, \\\"epoch\\\":%d}".format(key, res, maxEpoch)
+      out.collect(o)
   }
 }

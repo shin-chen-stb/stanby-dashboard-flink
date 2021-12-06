@@ -133,11 +133,15 @@ public class JseTrackerSchema implements SerializationSchema<JseTracker>, Deseri
                     String lon = node.get("address").get("coordinatePoint").get("longitude").asText();
                     geoLocation = String.format("%s, %s", lat, lon);
                     LOG.info("geoLocationxxxxx: {}", geoLocation);
-                };
+                } else {
+                    geoLocation = null;
+                }
                 if (node.get("address").has("cityCodes") && node.get("address").get("cityCodes") != null) {
                     LOG.info("cityCodesrrrrrrr: {}", node.get("address").get("cityCodes"));
                     cityCode = String.format("%s-%s", "JP", node.get("address").get("cityCodes").asText().substring(0, 2));
                     LOG.info("cityCodexxxx: {}", cityCode);
+                } else {
+                    cityCode = null;
                 }
             }
             return JseTracker
