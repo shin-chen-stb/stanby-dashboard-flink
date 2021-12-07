@@ -136,9 +136,10 @@ public class JseTrackerSchema implements SerializationSchema<JseTracker>, Deseri
                 } else {
                     geoLocation = null;
                 }
-                if (node.get("address").has("cityCodes") && node.get("address").get("cityCodes") != null) {
-                    LOG.info("cityCodesrrrrrrr: {}", node.get("address").get("cityCodes"));
-                    cityCode = String.format("%s-%s", "JP", node.get("address").get("cityCodes").asText().substring(0, 2));
+                if (node.get("address").has("prefectureCode") && !node.get("address").get("prefectureCode").asText().isEmpty()) {
+                    LOG.info("cityCodesrrrrrrr node: {}", node.toString());
+                    LOG.info("cityCodesrrrrrrr: {}", node.get("address").get("prefectureCode"));
+                    cityCode = String.format("%s-%s", "JP", node.get("address").get("prefectureCode").asText());
                     LOG.info("cityCodexxxx: {}", cityCode);
                 } else {
                     cityCode = null;

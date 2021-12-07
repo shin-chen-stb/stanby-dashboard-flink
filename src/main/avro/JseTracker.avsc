@@ -28,7 +28,7 @@
                 "default": null,
                 "fields": [
                     {"name": "addressLevel", "type": "int", "default": 0},
-                    {"name": "cityCodes", "type": "string", "default": ""},
+                    {"name": "cityCodes", "type": {"type": "array", "items": "string"}, "default": []},
                     {
                         "name": "coordinatePoint",
                         "default": null,

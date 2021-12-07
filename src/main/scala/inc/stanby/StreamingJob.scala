@@ -79,6 +79,7 @@ object StreamingJob {
     inputTemp.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_session_time", "_doc"))
     inputTemp.print()
     input.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event", "_doc"))
+
     val input2 = createJseTrackerSourceFromStaticConfig(env, "dmt-jse-tracker")
 //    input2.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "dmt-jse-tracker", "_doc"))
     input2.filter(new FilterFunction[JseTracker]() {
@@ -99,7 +100,7 @@ object StreamingJob {
     }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "dmt-jse-job-click", "_doc"))
     input2.filter(new FilterFunction[JseTracker]() {
       @throws[Exception]
-      override def filter(value: JseTracker): Boolean = !value.getGeoLocation.equals(null)
+      override def filter(value: JseTracker): Boolean = (value.getGeoLocation != null && value.getGeoLocation.toString.nonEmpty)
     }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "dmt-jse-job-request-geolocation", "_doc"))
     // execute program
     env.execute("Flink Streaming Scala API Skeleton")

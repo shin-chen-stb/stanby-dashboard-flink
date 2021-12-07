@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Address extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 2262270774386541591L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Address\",\"namespace\":\"inc.stanby.schema\",\"fields\":[{\"name\":\"addressLevel\",\"type\":\"int\",\"default\":0},{\"name\":\"cityCodes\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"coordinatePoint\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"GeoLocation\",\"fields\":[{\"name\":\"latitude\",\"type\":\"float\",\"default\":0},{\"name\":\"longitude\",\"type\":\"float\",\"default\":0}],\"default\":null}],\"default\":null},{\"name\":\"distance\",\"type\":\"int\",\"default\":0},{\"name\":\"prefectureCode\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"station\",\"type\":\"string\",\"default\":\"\"}],\"default\":null}");
+  private static final long serialVersionUID = -6409341277928234502L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Address\",\"namespace\":\"inc.stanby.schema\",\"fields\":[{\"name\":\"addressLevel\",\"type\":\"int\",\"default\":0},{\"name\":\"cityCodes\",\"type\":{\"type\":\"array\",\"items\":\"string\"},\"default\":[]},{\"name\":\"coordinatePoint\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"GeoLocation\",\"fields\":[{\"name\":\"latitude\",\"type\":\"float\",\"default\":0},{\"name\":\"longitude\",\"type\":\"float\",\"default\":0}],\"default\":null}],\"default\":null},{\"name\":\"distance\",\"type\":\"int\",\"default\":0},{\"name\":\"prefectureCode\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"station\",\"type\":\"string\",\"default\":\"\"}],\"default\":null}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -52,7 +52,7 @@ public class Address extends org.apache.avro.specific.SpecificRecordBase impleme
   }
 
   @Deprecated public int addressLevel;
-  @Deprecated public java.lang.CharSequence cityCodes;
+  @Deprecated public java.util.List<java.lang.CharSequence> cityCodes;
   @Deprecated public inc.stanby.schema.GeoLocation coordinatePoint;
   @Deprecated public int distance;
   @Deprecated public java.lang.CharSequence prefectureCode;
@@ -74,7 +74,7 @@ public class Address extends org.apache.avro.specific.SpecificRecordBase impleme
    * @param prefectureCode The new value for prefectureCode
    * @param station The new value for station
    */
-  public Address(java.lang.Integer addressLevel, java.lang.CharSequence cityCodes, inc.stanby.schema.GeoLocation coordinatePoint, java.lang.Integer distance, java.lang.CharSequence prefectureCode, java.lang.CharSequence station) {
+  public Address(java.lang.Integer addressLevel, java.util.List<java.lang.CharSequence> cityCodes, inc.stanby.schema.GeoLocation coordinatePoint, java.lang.Integer distance, java.lang.CharSequence prefectureCode, java.lang.CharSequence station) {
     this.addressLevel = addressLevel;
     this.cityCodes = cityCodes;
     this.coordinatePoint = coordinatePoint;
@@ -102,7 +102,7 @@ public class Address extends org.apache.avro.specific.SpecificRecordBase impleme
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: addressLevel = (java.lang.Integer)value$; break;
-    case 1: cityCodes = (java.lang.CharSequence)value$; break;
+    case 1: cityCodes = (java.util.List<java.lang.CharSequence>)value$; break;
     case 2: coordinatePoint = (inc.stanby.schema.GeoLocation)value$; break;
     case 3: distance = (java.lang.Integer)value$; break;
     case 4: prefectureCode = (java.lang.CharSequence)value$; break;
@@ -131,7 +131,7 @@ public class Address extends org.apache.avro.specific.SpecificRecordBase impleme
    * Gets the value of the 'cityCodes' field.
    * @return The value of the 'cityCodes' field.
    */
-  public java.lang.CharSequence getCityCodes() {
+  public java.util.List<java.lang.CharSequence> getCityCodes() {
     return cityCodes;
   }
 
@@ -139,7 +139,7 @@ public class Address extends org.apache.avro.specific.SpecificRecordBase impleme
    * Sets the value of the 'cityCodes' field.
    * @param value the value to set.
    */
-  public void setCityCodes(java.lang.CharSequence value) {
+  public void setCityCodes(java.util.List<java.lang.CharSequence> value) {
     this.cityCodes = value;
   }
 
@@ -240,7 +240,7 @@ public class Address extends org.apache.avro.specific.SpecificRecordBase impleme
     implements org.apache.avro.data.RecordBuilder<Address> {
 
     private int addressLevel;
-    private java.lang.CharSequence cityCodes;
+    private java.util.List<java.lang.CharSequence> cityCodes;
     private inc.stanby.schema.GeoLocation coordinatePoint;
     private inc.stanby.schema.GeoLocation.Builder coordinatePointBuilder;
     private int distance;
@@ -362,7 +362,7 @@ public class Address extends org.apache.avro.specific.SpecificRecordBase impleme
       * Gets the value of the 'cityCodes' field.
       * @return The value.
       */
-    public java.lang.CharSequence getCityCodes() {
+    public java.util.List<java.lang.CharSequence> getCityCodes() {
       return cityCodes;
     }
 
@@ -371,7 +371,7 @@ public class Address extends org.apache.avro.specific.SpecificRecordBase impleme
       * @param value The value of 'cityCodes'.
       * @return This builder.
       */
-    public inc.stanby.schema.Address.Builder setCityCodes(java.lang.CharSequence value) {
+    public inc.stanby.schema.Address.Builder setCityCodes(java.util.List<java.lang.CharSequence> value) {
       validate(fields()[1], value);
       this.cityCodes = value;
       fieldSetFlags()[1] = true;
@@ -593,7 +593,7 @@ public class Address extends org.apache.avro.specific.SpecificRecordBase impleme
       try {
         Address record = new Address();
         record.addressLevel = fieldSetFlags()[0] ? this.addressLevel : (java.lang.Integer) defaultValue(fields()[0]);
-        record.cityCodes = fieldSetFlags()[1] ? this.cityCodes : (java.lang.CharSequence) defaultValue(fields()[1]);
+        record.cityCodes = fieldSetFlags()[1] ? this.cityCodes : (java.util.List<java.lang.CharSequence>) defaultValue(fields()[1]);
         if (coordinatePointBuilder != null) {
           record.coordinatePoint = this.coordinatePointBuilder.build();
         } else {
