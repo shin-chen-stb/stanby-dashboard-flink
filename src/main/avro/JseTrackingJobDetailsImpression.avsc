@@ -1,5 +1,5 @@
 {
-    "name": "JseTracker",
+    "name": "JseTrackingJobDetailsImpression",
     "namespace": "inc.stanby.schema",
     "type": "record",
     "fields": [

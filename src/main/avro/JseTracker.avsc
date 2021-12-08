@@ -196,7 +196,7 @@
                 "fields": [
                     {"name": "unit", "type": "string", "default": ""},
                     {"name": "min", "type": "int", "default": 0},
-                    {"name": "max", "type": "int", "default": 0},
+                    {"name": "max", "type": "int", "default": 0}
                 ]
             }]
         },
@@ -274,6 +274,21 @@
             "name": "cityCode",
             "type": "string",
             "default" : ""
+        },
+        {
+            "name": "salaryUnit",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "salaryMax",
+            "type": "long",
+            "default" : 0
+        },
+        {
+            "name": "salaryMin",
+            "type": "long",
+            "default" : 0
         },
         {
             "name": "geoLocation",

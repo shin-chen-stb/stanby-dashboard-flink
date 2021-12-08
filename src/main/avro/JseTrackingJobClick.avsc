@@ -1,5 +1,5 @@
 {
-    "name": "jseTrackingRelatedJobClick",
+    "name": "JseTrackingJobClick",
     "namespace": "inc.stanby.schema",
     "type": "record",
     "fields": [
@@ -12,16 +12,6 @@
             "name": "category",
             "type": "string",
             "default" : ""
-        },
-        {
-            "name": "originDocumentId",
-            "type": "string",
-            "default" : ""
-        },
-        {
-            "name": "order",
-            "type": "int",
-            "default" : 0
         },
         {
             "name": "role",
@@ -62,6 +52,11 @@
             "name": "ip",
             "type": "string",
             "default": ""
+        },
+        {
+            "name": "searchRequestId",
+            "type": "string",
+            "default" : ""
         },
         {
             "name": "tag",

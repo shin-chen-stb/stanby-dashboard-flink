@@ -13,7 +13,7 @@ import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.node.Obje
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JseTrackerSchema implements SerializationSchema<JseTracker>, DeserializationSchema<JseTracker> {
+public class JseTrackerSchema implements DeserializationSchema<JseTracker> {
 
     private final ObjectMapper mapper = new ObjectMapper();
     private static final Logger LOG = LoggerFactory.getLogger(JseTrackerSchema.class);
@@ -22,11 +22,6 @@ public class JseTrackerSchema implements SerializationSchema<JseTracker>, Deseri
         SpecificData.get().addLogicalTypeConversion(new TimeConversions.TimestampConversion());
     }
 
-    @Override
-    public byte[] serialize(JseTracker event) {
-        LOG.info("Serializing node: {}", toJson(event));
-        return toJson(event).getBytes();
-    }
 
     @Override
     public boolean isEndOfStream(JseTracker event) {
@@ -84,6 +79,9 @@ public class JseTrackerSchema implements SerializationSchema<JseTracker>, Deseri
             LOG.info("Reading node: {}", node.toString());
             String geoLocation = getStringValue("geoLocation", node);
             String cityCode = getStringValue("geoLocation", node);
+            String salaryUnit = getStringValue("salaryUnit", node);
+            Long salaryMin = getLongValue("salaryMin", node);
+            Long salaryMax = getLongValue("salaryMax", node);
             String adDistributionId = getStringValue("adDistributionId", node);
             String adJobs = getStringValue("geoLocation", node);
             String bucketType = getStringValue("bucketType", node);
@@ -110,7 +108,6 @@ public class JseTrackerSchema implements SerializationSchema<JseTracker>, Deseri
             String referer = getStringValue("referer", node);
             String relatedJobs = getStringValue("relatedJobs", node);
             String role = getStringValue("role", node);
-            String salary = getStringValue("salary", node);
             String searchPage = getStringValue("searchPage", node);
             String searchRequestId = getStringValue("searchRequestId", node);
             String searchRequestUrl = getStringValue("searchRequestUrl", node);
@@ -145,6 +142,12 @@ public class JseTrackerSchema implements SerializationSchema<JseTracker>, Deseri
                     cityCode = null;
                 }
             }
+            if (node.has("salary") && !node.get("salary").asText().isEmpty()) {
+                LOG.info("Salaryxxxxx: {}",node.get("salary"));
+                salaryUnit = getStringValue("unit", (ObjectNode) node.get("salary"));
+                salaryMax = getLongValue("unit", (ObjectNode) node.get("salary"));
+                salaryMin = getLongValue("unit", (ObjectNode) node.get("salary"));
+            }
             return JseTracker
                     .newBuilder()
                     .setAdDistributionId(adDistributionId)
@@ -174,7 +177,7 @@ public class JseTrackerSchema implements SerializationSchema<JseTracker>, Deseri
                     .setReferer(referer)
                     .setRelatedJobs(relatedJobs)
                     .setRole(role)
-                    .setSalary(salary)
+                    .setSalary(null)
                     .setSearchPage(searchPage)
                     .setSearchRequestId(searchRequestId)
                     .setSearchRequestUrl(searchRequestUrl)
@@ -191,136 +194,13 @@ public class JseTrackerSchema implements SerializationSchema<JseTracker>, Deseri
                     .setCityCode(cityCode)
                     .setGeoLocation(geoLocation)
                     .setAddress(null)
+                    .setSalaryUnit(salaryUnit)
+                    .setSalaryMax(salaryMax)
+                    .setSalaryMin(salaryMin)
                     .build();
         } catch (Exception e) {
             LOG.warn("Failed to serialize event: {}", new String(bytes), e);
             return null;
         }
-    }
-
-    public static String toJson(JseTracker event) {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append("{");
-        addTextField(builder, event, "adDistributionId");
-        builder.append(", ");
-        addTextField(builder, event, "adJobs");
-        builder.append(", ");
-        addTextField(builder, event, "adRequestId");
-        builder.append(", ");
-        addTextField(builder, event, "bucketType");
-        builder.append(", ");
-        addTextField(builder, event, "category");
-        builder.append(", ");
-        addTextField(builder, event, "clickId");
-        builder.append(", ");
-        addTextField(builder, event, "companyName");
-        builder.append(", ");
-        addTextField(builder, event, "position");
-        builder.append(", ");
-        addTextField(builder, event, "createDateTime");
-        builder.append(", ");
-        addTextField(builder, event, "createdDateTime");
-        builder.append(", ");
-        addField(builder, event, "documentId");
-        builder.append(", ");
-        addTextField(builder, event, "eventType");
-        builder.append(", ");
-        addTextField(builder, event, "indexType");
-        builder.append(", ");
-        addField(builder, event, "ip");
-        builder.append(", ");
-        addTextField(builder, event, "isAd");
-        builder.append(", ");
-        addTextField(builder, event, "jobContent");
-        builder.append(", ");
-        addTextField(builder, event, "jobTitle");
-        builder.append(", ");
-        addTextField(builder, event, "jobType");
-        builder.append(", ");
-        addTextField(builder, event, "jobVersionDate");
-        builder.append(", ");
-        addTextField(builder, event, "keyword");
-        builder.append(", ");
-        addTextField(builder, event, "location");
-        builder.append(", ");
-        addTextField(builder, event, "log_host");
-        builder.append(", ");
-        addTextField(builder, event, "newJobs");
-        builder.append(", ");
-        addTextField(builder, event, "openDate");
-        builder.append(", ");
-        addTextField(builder, event, "order");
-        builder.append(", ");
-        addTextField(builder, event, "originDocumentId");
-        builder.append(", ");
-        addTextField(builder, event, "originalKeyword");
-        builder.append(", ");
-        addTextField(builder, event, "referer");
-        builder.append(", ");
-        addTextField(builder, event, "relatedJobs");
-        builder.append(", ");
-        addTextField(builder, event, "role");
-        builder.append(", ");
-        addTextField(builder, event, "salary");
-        builder.append(", ");
-        addTextField(builder, event, "searchPage");
-        builder.append(", ");
-        addTextField(builder, event, "searchRequestId");
-        builder.append(", ");
-        addTextField(builder, event, "searchRequestUrl");
-        builder.append(", ");
-        addTextField(builder, event, "siteCodes");
-        builder.append(", ");
-        addTextField(builder, event, "siteName");
-        builder.append(", ");
-        addTextField(builder, event, "tag");
-        builder.append(", ");
-        addTextField(builder, event, "time");
-        builder.append(", ");
-        addTextField(builder, event, "totalHits");
-        builder.append(", ");
-        addTextField(builder, event, "uaCategory");
-        builder.append(", ");
-        addTextField(builder, event, "uaValue");
-        builder.append(", ");
-        addTextField(builder, event, "uid");
-        builder.append(", ");
-        addTextField(builder, event, "updateDate");
-        builder.append(", ");
-        addTextField(builder, event, "visitId");
-        builder.append(", ");
-        addTextField(builder, event, "workLocation");
-        builder.append(", ");
-        addTextField(builder, event, "cityCode");
-        builder.append(", ");
-        addTextField(builder, event, "geoLocation");
-        builder.append("}");
-
-        return builder.toString();
-    }
-
-    private static void addField(StringBuilder builder, JseTracker event, String fieldName) {
-        addField(builder, fieldName, event.get(fieldName));
-    }
-
-    private static void addField(StringBuilder builder, String fieldName, Object value) {
-        builder.append("\"");
-        builder.append(fieldName);
-        builder.append("\"");
-
-        builder.append(": ");
-        builder.append(value);
-    }
-
-    private static void addTextField(StringBuilder builder, JseTracker event, String fieldName) {
-        builder.append("\"");
-        builder.append(fieldName);
-        builder.append("\"");
-
-        builder.append(": ");
-        builder.append("\"");
-        builder.append(event.get(fieldName));
-        builder.append("\"");
     }
 }

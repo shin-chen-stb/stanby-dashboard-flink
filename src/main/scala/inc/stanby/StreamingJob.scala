@@ -94,6 +94,10 @@ object StreamingJob {
     }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "dmt-jse-job-click", "_doc"))
     input2.filter(new FilterFunction[JseTracker]() {
       @throws[Exception]
+      override def filter(value: JseTracker): Boolean = value.getEventType.equals("relatedJobsClick")
+    }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "dmt-jse-job-click", "_doc"))
+    input2.filter(new FilterFunction[JseTracker]() {
+      @throws[Exception]
       override def filter(value: JseTracker): Boolean = (value.getGeoLocation != null && value.getGeoLocation.toString.nonEmpty)
     }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "dmt-jse-job-request-geolocation", "_doc"))
     // execute program
