@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory
 import org.apache.flink.api.common.functions.FilterFunction
 
 import java.util.Properties
-import inc.stanby.utils.{JseTrackerSchema, StanbyEventSchema}
+import inc.stanby.utils.{JseTrackerDeserializationSchema, StanbyEventDeserializationSchema}
 import org.apache.flink.api.java.functions.KeySelector
 import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction
 import org.apache.flink.streaming.api.windowing.assigners.EventTimeSessionWindows
@@ -52,14 +52,14 @@ object StreamingJob {
     val inputProperties = new Properties
     inputProperties.setProperty(AWSConfigConstants.AWS_REGION, region)
     inputProperties.setProperty(ConsumerConfigConstants.STREAM_INITIAL_POSITION, "TRIM_HORIZON")
-    env.addSource(new FlinkKinesisConsumer[StanbyEvent](inputStreamName, new StanbyEventSchema, inputProperties))
+    env.addSource(new FlinkKinesisConsumer[StanbyEvent](inputStreamName, new StanbyEventDeserializationSchema, inputProperties))
   }
 
   private def createJseTrackerSourceFromStaticConfig(env: StreamExecutionEnvironment, inputStreamName: String) = {
     val inputProperties = new Properties
     inputProperties.setProperty(AWSConfigConstants.AWS_REGION, region)
     inputProperties.setProperty(ConsumerConfigConstants.STREAM_INITIAL_POSITION, "TRIM_HORIZON")
-    env.addSource(new FlinkKinesisConsumer[JseTracker](inputStreamName, new JseTrackerSchema, inputProperties))
+    env.addSource(new FlinkKinesisConsumer[JseTracker](inputStreamName, new JseTrackerDeserializationSchema, inputProperties))
   }
 
 

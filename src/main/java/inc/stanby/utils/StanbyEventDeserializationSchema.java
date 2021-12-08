@@ -4,24 +4,19 @@ import inc.stanby.schema.StanbyEvent;
 import org.apache.avro.data.TimeConversions;
 import org.apache.avro.specific.SpecificData;
 import org.apache.flink.api.common.serialization.DeserializationSchema;
-import org.apache.flink.api.common.serialization.SerializationSchema;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.formats.avro.typeutils.AvroTypeInfo;
-import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.JsonNode;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.node.ObjectNode;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.util.Map;
-import java.util.HashMap;
 import ua_parser.Parser;
 import ua_parser.Client;
 
-public class StanbyEventSchema implements DeserializationSchema<StanbyEvent> {
+public class StanbyEventDeserializationSchema implements DeserializationSchema<StanbyEvent> {
 
     private final ObjectMapper mapper = new ObjectMapper();
-    private static final Logger LOG = LoggerFactory.getLogger(StanbyEventSchema.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StanbyEventDeserializationSchema.class);
 
     static {
         SpecificData.get().addLogicalTypeConversion(new TimeConversions.TimestampConversion());

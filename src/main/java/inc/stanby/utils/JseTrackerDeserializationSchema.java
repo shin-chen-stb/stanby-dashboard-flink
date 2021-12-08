@@ -1,11 +1,9 @@
 package inc.stanby.utils;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import inc.stanby.schema.JseTracker;
 import org.apache.avro.data.TimeConversions;
 import org.apache.avro.specific.SpecificData;
 import org.apache.flink.api.common.serialization.DeserializationSchema;
-import org.apache.flink.api.common.serialization.SerializationSchema;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.formats.avro.typeutils.AvroTypeInfo;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,10 +11,10 @@ import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.node.Obje
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JseTrackerSchema implements DeserializationSchema<JseTracker> {
+public class JseTrackerDeserializationSchema implements DeserializationSchema<JseTracker> {
 
     private final ObjectMapper mapper = new ObjectMapper();
-    private static final Logger LOG = LoggerFactory.getLogger(JseTrackerSchema.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JseTrackerDeserializationSchema.class);
 
     static {
         SpecificData.get().addLogicalTypeConversion(new TimeConversions.TimestampConversion());
