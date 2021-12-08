@@ -1,0 +1,186 @@
+{
+    "name": "JseTracker",
+    "namespace": "inc.stanby.schema",
+    "type": "record",
+    "fields": [
+        {
+            "name": "adRequestId",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "bucketType",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "category",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "companyName",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "createDateTime",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "eventType",
+            "type": "string",
+            "default": ""
+        },
+        {
+            "name": "ip",
+            "type": "string",
+            "default": ""
+        },
+        {
+            "name": "jobType",
+            "type": "string",
+            "default": ""
+        },
+        {
+            "name": "keyword",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "location",
+            "type": "string",
+            "default": ""
+        },
+        {
+            "name": "log_host",
+            "type": "boolean",
+            "default": false
+        },
+        {
+            "name": "openDate",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "originalKeyword",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "referer",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "role",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "salary_min",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "salary_unit",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "salary_max",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "searchPage",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "searchRequestId",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "searchRequestUrl",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "siteCodes",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "tag",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "time",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "totalHits",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "uaCategory",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "uaValue",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "uid",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "visitId",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "addressLevel",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "latitude",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "longitude",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "distance",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "prefectureCode",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "cityCodes",
+            "type":
+                {
+                "type": "array",
+                "items": "string"
+                },
+            "default": []
+        },
+    ]
+}

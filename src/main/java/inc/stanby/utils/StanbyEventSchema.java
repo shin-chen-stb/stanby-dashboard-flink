@@ -18,19 +18,13 @@ import java.util.HashMap;
 import ua_parser.Parser;
 import ua_parser.Client;
 
-public class StanbyEventSchema implements SerializationSchema<StanbyEvent>, DeserializationSchema<StanbyEvent> {
+public class StanbyEventSchema implements DeserializationSchema<StanbyEvent> {
 
     private final ObjectMapper mapper = new ObjectMapper();
     private static final Logger LOG = LoggerFactory.getLogger(StanbyEventSchema.class);
 
     static {
         SpecificData.get().addLogicalTypeConversion(new TimeConversions.TimestampConversion());
-    }
-
-    @Override
-    public byte[] serialize(StanbyEvent event) {
-        LOG.info("Serializing node: {}", toJson(event));
-        return toJson(event).getBytes();
     }
 
     @Override
@@ -101,67 +95,5 @@ public class StanbyEventSchema implements SerializationSchema<StanbyEvent>, Dese
 
             return null;
         }
-    }
-
-    public static String toJson(StanbyEvent event) {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append("{");
-        addTextField(builder, event, "service");
-        builder.append(", ");
-        addTextField(builder, event, "event_type");
-        builder.append(", ");
-        addTextField(builder, event, "suid");
-        builder.append(", ");
-        addTextField(builder, event, "ssid");
-        builder.append(", ");
-        addTextField(builder, event, "current_url");
-        builder.append(", ");
-        addTextField(builder, event, "referrer");
-        builder.append(", ");
-        addTextField(builder, event, "page");
-        builder.append(", ");
-        addTextField(builder, event, "page_type");
-        builder.append(", ");
-        addTextField(builder, event, "user_agent");
-        builder.append(", ");
-        addTextField(builder, event, "search_request_id");
-        builder.append(", ");
-        addField(builder, event, "epoch");
-        builder.append(", ");
-        addTextField(builder, event, "ip");
-        builder.append(", ");
-        addTextField(builder, event, "ua_os");
-        builder.append(", ");
-        addField(builder, event, "ua_device");
-        builder.append(", ");
-        addTextField(builder, event, "ua_family");
-        builder.append("}");
-
-        return builder.toString();
-    }
-
-    private static void addField(StringBuilder builder, StanbyEvent event, String fieldName) {
-        addField(builder, fieldName, event.get(fieldName));
-    }
-
-    private static void addField(StringBuilder builder, String fieldName, Object value) {
-        builder.append("\"");
-        builder.append(fieldName);
-        builder.append("\"");
-
-        builder.append(": ");
-        builder.append(value);
-    }
-
-    private static void addTextField(StringBuilder builder, StanbyEvent event, String fieldName) {
-        builder.append("\"");
-        builder.append(fieldName);
-        builder.append("\"");
-
-        builder.append(": ");
-        builder.append("\"");
-        builder.append(event.get(fieldName));
-        builder.append("\"");
     }
 }

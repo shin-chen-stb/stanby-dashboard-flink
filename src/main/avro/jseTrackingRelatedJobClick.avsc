@@ -1,0 +1,92 @@
+{
+    "name": "jseTrackingRelatedJobClick",
+    "namespace": "inc.stanby.schema",
+    "type": "record",
+    "fields": [
+        {
+            "name": "bucketType",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "category",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "originDocumentId",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "order",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "role",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "log_host",
+            "type": "boolean",
+            "default": false
+        },
+        {
+            "name": "clickId",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "createDateTime",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "documentId",
+            "type": "string",
+            "default": ""
+        },
+        {
+            "name": "uid",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "eventType",
+            "type": "string",
+            "default": ""
+        },
+        {
+            "name": "ip",
+            "type": "string",
+            "default": ""
+        },
+        {
+            "name": "tag",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "time",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "isAd",
+            "type": "boolean",
+            "default": false
+        },
+        {
+            "name": "uaValue",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "visitId",
+            "type": "string",
+            "default" : ""
+        }
+    ]
+}

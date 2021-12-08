@@ -187,8 +187,18 @@
         },
         {
             "name": "salary",
-            "type": "string",
-            "default" : ""
+            "type" : [
+            "null",
+            {
+                "type": "record",
+                "name": "Salary",
+                "default": null,
+                "fields": [
+                    {"name": "unit", "type": "string", "default": ""},
+                    {"name": "min", "type": "int", "default": 0},
+                    {"name": "max", "type": "int", "default": 0},
+                ]
+            }]
         },
         {
             "name": "searchPage",

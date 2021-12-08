@@ -31,22 +31,17 @@ import org.slf4j.LoggerFactory
 import org.apache.flink.api.common.functions.FilterFunction
 
 import java.util.Properties
-import com.amazonaws.services.kinesisanalytics.runtime.KinesisAnalyticsRuntime
-import inc.stanby.schema.StanbyEvent
 import inc.stanby.utils.{JseTrackerSchema, StanbyEventSchema}
 import org.apache.flink.api.java.functions.KeySelector
 import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction
 import org.apache.flink.streaming.api.windowing.assigners.EventTimeSessionWindows
 import org.apache.flink.streaming.api.windowing.time.Time
-import org.apache.flink.streaming.api.windowing.triggers.PurgingTrigger
 import org.apache.flink.streaming.api.windowing.windows.{GlobalWindow, TimeWindow}
-import org.apache.flink.streaming.connectors.kinesis.FlinkKinesisConsumer
-import org.apache.flink.table.plan.nodes.datastream.TimeCharacteristic
 import org.apache.flink.util.Collector
 
-import java.io.IOException
 import java.{lang, util}
 import scala.collection.JavaConverters.iterableAsScalaIterableConverter
+
 object StreamingJob {
   val serviceName = "es";
   val region = "ap-northeast-1";
@@ -79,9 +74,8 @@ object StreamingJob {
     inputTemp.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_session_time", "_doc"))
     inputTemp.print()
     input.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event", "_doc"))
-
     val input2 = createJseTrackerSourceFromStaticConfig(env, "dmt-jse-tracker")
-//    input2.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "dmt-jse-tracker", "_doc"))
+    //    input2.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "dmt-jse-tracker", "_doc"))
     input2.filter(new FilterFunction[JseTracker]() {
       @throws[Exception]
       override def filter(value: JseTracker): Boolean = value.getEventType.equals("jobSearchRequest")
@@ -109,17 +103,18 @@ object StreamingJob {
 
 class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, String, String, TimeWindow] {
   val logger = LoggerFactory.getLogger("CalcSessionTimeWindowFunction");
-   override def process(key: String, context: ProcessWindowFunction[StanbyEvent, String, String, TimeWindow]#Context, input: lang.Iterable[StanbyEvent], out: Collector[String]) {
-      var maxEpoch = 0L
-      var minEpoch = Long.MaxValue
-      val inputList = input.asScala
-      for (in <- inputList) {
-       minEpoch = math.min(minEpoch, in.getEpoch)
-       maxEpoch = math.max(maxEpoch, in.getEpoch)
-      }
-      val res = (maxEpoch - minEpoch) / 1000
-      logger.info("CalcSessionWindowResult: " + res.toString)
-      val o = "{\\\"Session\\\":\\\"%s\\\",\\\"SessionTime\\\":%d, \\\"epoch\\\":%d}".format(key, res, maxEpoch)
-      out.collect(o)
+
+  override def process(key: String, context: ProcessWindowFunction[StanbyEvent, String, String, TimeWindow]#Context, input: lang.Iterable[StanbyEvent], out: Collector[String]) {
+    var maxEpoch = 0L
+    var minEpoch = Long.MaxValue
+    val inputList = input.asScala
+    for (in <- inputList) {
+      minEpoch = math.min(minEpoch, in.getEpoch)
+      maxEpoch = math.max(maxEpoch, in.getEpoch)
+    }
+    val res = (maxEpoch - minEpoch) / 1000
+    logger.info("CalcSessionWindowResult: " + res.toString)
+    val o = "{\\\"Session\\\":\\\"%s\\\",\\\"SessionTime\\\":%d, \\\"epoch\\\":%d}".format(key, res, maxEpoch)
+    out.collect(o)
   }
 }
