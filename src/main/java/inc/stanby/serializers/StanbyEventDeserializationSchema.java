@@ -69,7 +69,7 @@ public class StanbyEventDeserializationSchema implements DeserializationSchema<S
             if (node.has("epoch")) epoch = node.get("epoch").asLong();
             if (node.has("ip")) ip = node.get("ip").asText();
             if (node.has("area")) area = node.get("area").asText();
-            if (node.has("element")) area = node.get("element").asText();
+            if (node.has("element")) element = node.get("element").asText();
             Parser uaParser = new Parser();
             Client c = uaParser.parse(user_agent.toString());
             String ua_os = String.format("%s_%s", c.os.family, c.os.major);

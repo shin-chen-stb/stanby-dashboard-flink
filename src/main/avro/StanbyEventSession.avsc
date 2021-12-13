@@ -1,0 +1,57 @@
+{
+    "name": "StanbyEventSession",
+    "namespace": "inc.stanby.schema",
+    "type": "record",
+    "fields": [
+        {
+            "name": "eventCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "jobSearchCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "jobDetailCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "adDetailCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "applyJobCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "fromYahoo",
+            "type": "boolean",
+            "default" : false
+        },
+        {
+            "name": "fromRhash",
+            "type": "boolean",
+            "default" : false
+        },
+        {
+            "name": "ssid",
+            "type": "string",
+            "default" : "NONE"
+        },
+        {
+            "name": "sessionTime",
+            "type": "long",
+            "default" : "NONE"
+        },
+        {
+            "name": "sessionEndTime",
+            "type": "string",
+            "default" : "NONE"
+        }
+    ]
+}

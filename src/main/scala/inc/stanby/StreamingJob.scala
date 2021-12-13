@@ -27,17 +27,18 @@ import org.apache.flink.streaming.connectors.kinesis.config.{AWSConfigConstants,
 import org.slf4j.{Logger, LoggerFactory}
 import org.apache.flink.api.common.functions.FilterFunction
 
-import java.util.Properties
+import java.util.{Date, Properties}
 import inc.stanby.serializers.{AdTrackingDeserializationSchema, JseTrackerDeserializationSchema, StanbyEventDeserializationSchema}
 import org.apache.flink.api.common.serialization.SimpleStringSchema
 import org.apache.flink.api.java.functions.KeySelector
 import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction
-import org.apache.flink.streaming.api.windowing.assigners.EventTimeSessionWindows
+import org.apache.flink.streaming.api.windowing.assigners.{EventTimeSessionWindows, ProcessingTimeSessionWindows}
 import org.apache.flink.streaming.api.windowing.time.Time
 import org.apache.flink.streaming.api.windowing.windows.{GlobalWindow, TimeWindow}
 import org.apache.flink.util.Collector
 
 import java.{lang, util}
+import java.text.SimpleDateFormat
 import scala.collection.JavaConverters.iterableAsScalaIterableConverter
 
 object StreamingJob {
@@ -69,7 +70,7 @@ object StreamingJob {
     val adTrackingStream = createAdTrackerSourceFromStaticConfig(env)
     val jseTrackerStream = createJseTrackerSourceFromStaticConfig(env)
 
-//   ------------------------------ ADTracking ------------------------------
+    //   ------------------------------ ADTracking ------------------------------
 
     adTrackingStream.filter(new FilterFunction[AdTracking]() {
       @throws[Exception]
@@ -91,13 +92,59 @@ object StreamingJob {
 
     //   ------------------------------ StanbyAnalytics ------------------------------
 
-    val inputTemp = StanbyEventStream.keyBy(new KeySelector[StanbyEvent, String] {
-      override def getKey(event: StanbyEvent): String = event.getSsid.toString
-    }).window(EventTimeSessionWindows.withGap(Time.minutes(5)))
+    val SessionWindowStream = StanbyEventStream.keyBy(new KeySelector[StanbyEvent, String] {
+      override def getKey(event: StanbyEvent): String = {
+        logger.info("GETKEY Event: " + event.getSsid.toString)
+        event.getSsid.toString
+      }
+    }).window(ProcessingTimeSessionWindows.withGap(Time.minutes(5)))
       .process(new CalcSessionTimeWindowFunction())
-    inputTemp.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_session_time2", "_doc"))
-    StanbyEventStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event2", "_doc"))
+    SessionWindowStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_session", "_doc"))
 
+    SessionWindowStream.filter(new FilterFunction[StanbyEventSession]() {
+      @throws[Exception]
+      override def filter(value: StanbyEventSession): Boolean =
+        value.getFromYahoo
+    }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_session_from_yahoo", "_doc"))
+
+    SessionWindowStream.filter(new FilterFunction[StanbyEventSession]() {
+      @throws[Exception]
+      override def filter(value: StanbyEventSession): Boolean =
+        value.getFromRhash
+    }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_session_from_rhash", "_doc"))
+
+    SessionWindowStream.filter(new FilterFunction[StanbyEventSession]() {
+      @throws[Exception]
+      override def filter(value: StanbyEventSession): Boolean =
+        !value.getFromRhash && value.getFromYahoo
+    }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_session_from_other", "_doc"))
+
+    StanbyEventStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event2", "_doc"))
+    StanbyEventStream.filter(new FilterFunction[StanbyEvent]() {
+      @throws[Exception]
+      override def filter(value: StanbyEvent): Boolean =
+        value.getEventType.equals("link") && value.getPage.toString.equals("search") && value.getElement.toString.equals("広告") && value.getArea.toString.equals("card")
+    }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_ad", "_doc"))
+
+    StanbyEventStream.filter(new FilterFunction[StanbyEvent]() {
+      @throws[Exception]
+      override def filter(value: StanbyEvent): Boolean = value.getEventType.toString.equals("link") && value.getPage.toString.equals("search") && value.getElement.toString.equals("広告") && value.getArea.toString.equals("card") && value.getFromYahoo == true
+    }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_ad_from_yahoo", "_doc"))
+
+    StanbyEventStream.filter(new FilterFunction[StanbyEvent]() {
+      @throws[Exception]
+      override def filter(value: StanbyEvent): Boolean = value.getEventType.toString.equals("link") && value.getPage.toString.equals("search") && value.getElement.toString.equals("求人") && value.getArea.toString.equals("card") && value.getCurrentUrl.toString.startsWith("r_") && value.getFromYahoo == false
+    }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_from_rhash", "_doc"))
+
+    StanbyEventStream.filter(new FilterFunction[StanbyEvent]() {
+      @throws[Exception]
+      override def filter(value: StanbyEvent): Boolean = value.getEventType.toString.equals("link") && value.getPage.toString.equals("search") && value.getElement.toString.equals("求人") && value.getArea.toString.equals("card") && value.getFromYahoo == true
+    }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_from_yahoo", "_doc"))
+
+    StanbyEventStream.filter(new FilterFunction[StanbyEvent]() {
+      @throws[Exception]
+      override def filter(value: StanbyEvent): Boolean = value.getEventType.toString.equals("link") && value.getPage.toString.equals("search") && value.getElement.toString.equals("求人") && value.getArea.toString.equals("card") && !value.getCurrentUrl.toString.startsWith("r_") && value.getFromYahoo == false
+    }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_from_other", "_doc"))
 
     //   ------------------------------ JseTracking ------------------------------
     //    input2.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "dmt-jse-tracker", "_doc"))
@@ -404,20 +451,60 @@ object StreamingJob {
   }
 }
 
-class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, String, String, TimeWindow] {
+class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, StanbyEventSession, String, TimeWindow] {
   val logger: Logger = LoggerFactory.getLogger("CalcSessionTimeWindowFunction");
 
-  override def process(key: String, context: ProcessWindowFunction[StanbyEvent, String, String, TimeWindow]#Context, input: lang.Iterable[StanbyEvent], out: Collector[String]): Unit = {
+  override def process(key: String, context: ProcessWindowFunction[StanbyEvent, StanbyEventSession, String, TimeWindow]#Context, input: lang.Iterable[StanbyEvent], out: Collector[StanbyEventSession]): Unit = {
+    logger.info("CalcSession Process Function been initialized")
     var maxEpoch = 0L
     var minEpoch = Long.MaxValue
     val inputList = input.asScala
+    var eventCount = 0
+    var jobSearchCount = 0
+    var jobDetailCount = 0
+    var adDetailCount = 0
+    var applyJobCount = 0
+    var fromYahoo = false
+    var fromRhash = false
     for (in <- inputList) {
+      if (eventCount == 0) {
+        fromYahoo = in.getFromYahoo
+        fromRhash = in.getCurrentUrl.toString.startsWith("r_")
+      }
+      if (in.getEventType.equals("link") && in.getPage.toString.equals("search") && in.getArea.toString.equals("card")) {
+        jobSearchCount += 1
+      }
+      if (in.getPage.toString.equals("job_detail") && in.getArea.toString.equals("card") && in.getElement.toString.equals("求人")) {
+        jobDetailCount += 1
+      }
+      if (in.getPage.toString.equals("job_detail") && in.getArea.toString.equals("card") && in.getElement.toString.equals("広告")) {
+        adDetailCount += 1
+      }
+      if (in.getPage.toString.equals("job_detail") && in.getArea.toString.equals("content") && in.getElement.toString.equals("応募ボタン")) {
+        applyJobCount += 1
+      }
       minEpoch = math.min(minEpoch, in.getEpoch)
       maxEpoch = math.max(maxEpoch, in.getEpoch)
+      eventCount += 1
     }
+
+    val d = new Date(maxEpoch)
+    val dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+    val sessionEndTime = dateFormat.format(d)
     val res = (maxEpoch - minEpoch) / 1000
-    logger.info("CalcSessionWindowResult: " + res.toString)
-    val o = "{\\\"Session\\\":\\\"%s\\\",\\\"SessionTime\\\":%d, \\\"epoch\\\":%d}".format(key, res, maxEpoch)
-    out.collect(o)
+//    val o = "{\"Session\":\"%s\",\"SessionTime\":%d, \"epoch\":%d}".format(key, res, maxEpoch)
+    val sessionEvent = StanbyEventSession.newBuilder
+      .setSessionTime(res)
+      .setEventCount(eventCount)
+      .setJobSearchCount(jobSearchCount)
+      .setJobDetailCount(jobDetailCount)
+      .setAdDetailCount(adDetailCount)
+      .setApplyJobCount(applyJobCount)
+      .setFromRhash(fromYahoo)
+      .setFromRhash(fromRhash)
+      .setSessionEndTime(sessionEndTime)
+      .setSsid(key)
+      .build()
+    out.collect(sessionEvent)
   }
 }
