@@ -63,6 +63,21 @@
             "default" : "NONE"
         },
         {
+            "name": "area",
+            "type": "string",
+            "default" : "NONE"
+        },
+        {
+            "name": "element",
+            "type": "string",
+            "default" : "NONE"
+        },
+        {
+            "name": "fromYahoo",
+            "type": "boolean",
+            "default" : false
+        },
+        {
             "name": "ua_os",
             "type": "string",
             "default" : "NONE"

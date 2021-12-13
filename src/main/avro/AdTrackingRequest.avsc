@@ -1,0 +1,64 @@
+{
+    "name": "AdTrackingRequest",
+    "namespace": "inc.stanby.schema",
+    "type": "record",
+    "fields": [
+        {
+            "name": "adRequestId",
+            "type": "string",
+            "default" : ""
+        },
+        {"name": "logType", "type": "string", "default": ""},
+        {"name": "uid", "type": "string", "default": ""},
+        {"name": "stanbyBucketType", "type": "string", "default": ""},
+        {"name": "visitId", "type": "string", "default": ""},
+        {"name": "uaValue", "type": "string", "default": ""},
+        {"name": "ip", "type": "string", "default": ""},
+        {"name": "deviceType", "type": "string", "default": ""},
+        {"name": "publisherId", "type": "string", "default": ""},
+        {"name": "publisherChannelId", "type": "string", "default": ""},
+        {"name": "publisherChannelType", "type": "string", "default": ""},
+        {"name": "bucketType", "type": "string", "default": ""},
+        {"name": "companyName", "type": "string", "default": ""},
+        {"name": "systemId", "type": "string", "default": ""},
+        {"name": "yahooCompanyId", "type": "string", "default": ""},
+        {"name": "location", "type": "string", "default": ""},
+        {"name": "distanceLat", "type": "string", "default": ""},
+        {"name": "distanceLon", "type": "string", "default": ""},
+        {"name": "algorithm", "type": "string", "default": ""},
+        {"name": "isBackfill", "type": "boolean", "default": false},
+        {"name": "totalHits", "type": "int", "default": 0},
+        {"name": "addressLevel", "type": "int", "default": 0},
+        {"name": "addressLevel1", "type": "string", "default": ""},
+        {"name": "addressLevel2", "type": "string", "default": ""},
+        {"name": "requestDateTime", "type": "string", "default": ""},
+        {"name": "limit", "type": "int", "default": 0},
+        {"name": "keyword", "type": "string", "default": ""},
+        {"name": "offset", "type": "int", "default": 0},
+        {"name": "sort", "type": "string", "default": ""},
+        {"name": "prefectureCode", "type": "string", "default": ""},
+        {"name": "mode", "type": "string", "default": ""},
+        {"name": "notKeyword", "type": "string", "default": ""},
+        {"name": "requestUrl", "type": "string", "default": ""},
+        {
+            "name": "salaryUnit",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "salaryMax",
+            "type": "long",
+            "default" : 0
+        },
+        {
+            "name": "salaryMin",
+            "type": "long",
+            "default" : 0
+        },
+        {
+            "name": "createDateTime",
+            "type": "string",
+            "default" : ""
+        }
+    ]
+}

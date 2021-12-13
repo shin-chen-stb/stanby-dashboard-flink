@@ -1,0 +1,73 @@
+{
+    "name": "AdTrackingDistribution",
+    "namespace": "inc.stanby.schema",
+    "type": "record",
+    "fields": [
+        {
+            "name": "adRequestId",
+            "type": "string",
+            "default" : ""
+        },
+        {"name": "logType", "type": "string", "default": ""},
+        {"name": "distributionId", "type": "string", "default": ""},
+        {"name": "distributionDateTime", "type": "string", "default": ""},
+        {"name": "requestId", "type": "string", "default": ""},
+        {"name": "uid", "type": "string", "default": ""},
+        {"name": "stanbyBucketType", "type": "string", "default": ""},
+        {"name": "visitId", "type": "string", "default": ""},
+        {"name": "uaValue", "type": "string", "default": ""},
+        {"name": "ip", "type": "string", "default": ""},
+        {"name": "deviceType", "type": "string", "default": ""},
+        {"name": "publisherId", "type": "string", "default": ""},
+        {"name": "publisherChannelId", "type": "string", "default": ""},
+        {"name": "publisherChannelType", "type": "string", "default": ""},
+        {"name": "isRandom", "type": "boolean", "default": false},
+        {"name": "bucketType", "type": "string", "default": ""},
+        {"name": "documentId", "type": "string", "default": ""},
+        {"name": "documentUrl", "type": "string", "default": ""},
+        {"name": "siteCode", "type": "string", "default": ""},
+        {"name": "documentTitle", "type": "string", "default": ""},
+        {"name": "documentContent", "type": "string", "default": ""},
+        {"name": "companyName", "type": "string", "default": ""},
+        {"name": "requirement", "type": "string", "default": ""},
+        {"name": "workingTime", "type": "string", "default": ""},
+        {"name": "jobLabel", "type": {"type": "array", "items": "string"}, "default": []},
+        {"name": "signalLabel", "type": {"type": "array", "items": "string"}, "default": []},
+        {"name": "bidCpc", "type": "int", "default": 0},
+        {"name": "contractCpc", "type": "int", "default": 0},
+        {"name": "finalScore", "type": "double", "default": 0.0},
+        {"name": "originalScore", "type": "double", "default": 0.0},
+        {"name": "distributionOrder", "type": "int", "default": 0},
+        {"name": "systemId", "type": "string", "default": ""},
+        {"name": "updateDate", "type": "string", "default": ""},
+        {"name": "jobVersionDate", "type": "string", "default": ""},
+        {"name": "trackingParam", "type": "string", "default": ""},
+        {"name": "removeParam", "type": "string", "default": ""},
+        {"name": "advertiserId", "type": "string", "default": ""},
+        {"name": "campaignId", "type": "string", "default": ""},
+        {"name": "campaignType", "type": "string", "default": ""},
+        {"name": "jobChannelType", "type": "string", "default": ""},
+        {"name": "predictCtr", "type": "double", "default": 0.0},
+        {"name": "maxCpc", "type": "int", "default": 0},
+        {
+            "name": "salaryUnit",
+            "type": "string",
+            "default" : ""
+        },
+        {
+            "name": "salaryMax",
+            "type": "long",
+            "default" : 0
+        },
+        {
+            "name": "salaryMin",
+            "type": "long",
+            "default" : 0
+        },
+        {
+            "name": "createDateTime",
+            "type": "string",
+            "default" : ""
+        }
+    ]
+}

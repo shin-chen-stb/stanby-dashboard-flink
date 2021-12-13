@@ -202,8 +202,8 @@
         },
         {
             "name": "searchPage",
-            "type": "string",
-            "default" : ""
+            "type": "int",
+            "default" : 0
         },
         {
             "name": "searchRequestId",

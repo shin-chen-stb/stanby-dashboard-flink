@@ -1,4 +1,4 @@
-package inc.stanby.utils;
+package inc.stanby.serializers;
 
 import inc.stanby.schema.StanbyEvent;
 import org.apache.avro.data.TimeConversions;
@@ -32,6 +32,10 @@ public class StanbyEventDeserializationSchema implements DeserializationSchema<S
         return new AvroTypeInfo<>(StanbyEvent.class);
     }
 
+    private boolean checkYahoo(String event_type, String page, String area, String current_url) {
+        return (event_type.equals("link") && page.equals("search") && area.equals("card") && current_url.matches(".*sr_fr.*"));
+    }
+
     @Override
     public StanbyEvent deserialize(byte[] bytes) {
         try {
@@ -47,8 +51,10 @@ public class StanbyEventDeserializationSchema implements DeserializationSchema<S
             String page_type = "";
             String user_agent = "";
             String search_request_id = "";
-            Long epoch = 0L;
+            long epoch = 0L;
             String ip = "";
+            String area = "";
+            String element = "";
 
             if (node.has("service")) service = node.get("service").asText();
             if (node.has("event_type")) event_type = node.get("event_type").asText();
@@ -62,11 +68,14 @@ public class StanbyEventDeserializationSchema implements DeserializationSchema<S
             if (node.has("search_request_id")) search_request_id = node.get("search_request_id").asText();
             if (node.has("epoch")) epoch = node.get("epoch").asLong();
             if (node.has("ip")) ip = node.get("ip").asText();
+            if (node.has("area")) area = node.get("area").asText();
+            if (node.has("element")) area = node.get("element").asText();
             Parser uaParser = new Parser();
             Client c = uaParser.parse(user_agent.toString());
             String ua_os = String.format("%s_%s", c.os.family, c.os.major);
             String ua_device = c.device.family;
             String ua_family = c.userAgent.family;
+            boolean fromYahoo = checkYahoo(event_type, page, area, current_url);
             return StanbyEvent
                     .newBuilder()
                     .setService(service)
@@ -81,6 +90,9 @@ public class StanbyEventDeserializationSchema implements DeserializationSchema<S
                     .setSearchRequestId(search_request_id)
                     .setEpoch(epoch)
                     .setIp(ip)
+                    .setArea(area)
+                    .setElement(element)
+                    .setFromYahoo(fromYahoo)
                     .setUaDevice(ua_os)
                     .setUaOs(ua_device)
                     .setUaFamily(ua_family)

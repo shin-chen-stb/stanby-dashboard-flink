@@ -1,4 +1,4 @@
-package inc.stanby.utils;
+package inc.stanby.serializers;
 
 import inc.stanby.schema.JseTracker;
 import org.apache.avro.data.TimeConversions;
@@ -76,7 +76,7 @@ public class JseTrackerDeserializationSchema implements DeserializationSchema<Js
             ObjectNode node = this.mapper.readValue(bytes, ObjectNode.class);
             LOG.info("Reading node: {}", node.toString());
             String geoLocation = getStringValue("geoLocation", node);
-            String cityCode = getStringValue("geoLocation", node);
+            String cityCode = getStringValue("citycode", node);
             String salaryUnit = getStringValue("salaryUnit", node);
             Long salaryMin = getLongValue("salaryMin", node);
             Long salaryMax = getLongValue("salaryMax", node);
@@ -106,7 +106,7 @@ public class JseTrackerDeserializationSchema implements DeserializationSchema<Js
             String referer = getStringValue("referer", node);
             String relatedJobs = getStringValue("relatedJobs", node);
             String role = getStringValue("role", node);
-            String searchPage = getStringValue("searchPage", node);
+            Integer searchPage = getIntegerValue("searchPage", node);
             String searchRequestId = getStringValue("searchRequestId", node);
             String searchRequestUrl = getStringValue("searchRequestUrl", node);
             String siteCodes = getStringValue("siteCodes", node);
