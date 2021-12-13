@@ -116,7 +116,7 @@ object StreamingJob {
     SessionWindowStream.filter(new FilterFunction[StanbyEventSession]() {
       @throws[Exception]
       override def filter(value: StanbyEventSession): Boolean =
-        !value.getFromRhash && value.getFromYahoo
+        (!value.getFromRhash && !value.getFromYahoo)
     }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_session_from_other", "_doc"))
 
     StanbyEventStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event2", "_doc"))
