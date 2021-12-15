@@ -90,7 +90,7 @@ object StreamingJob {
     }).map { case x => adTracking2AdTrackingDistribution(x) }
       .addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "ad-tracking-distribution", "_doc"))
 
-    //   ------------------------------ StanbyAnalytics ------------------------------
+    //   ------------------------------ StanbyAnalyticsSession ------------------------------
 
     val SessionWindowStream = StanbyEventStream.keyBy(new KeySelector[StanbyEvent, String] {
       override def getKey(event: StanbyEvent): String = {
@@ -119,7 +119,16 @@ object StreamingJob {
         (!value.getFromRhash && !value.getFromYahoo)
     }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_session_from_other", "_doc"))
 
+
+    //   ------------------------------ StanbyAnalytics ------------------------------
     StanbyEventStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event2", "_doc"))
+
+    StanbyEventStream.filter(new FilterFunction[StanbyEvent]() {
+      @throws[Exception]
+      override def filter(value: StanbyEvent): Boolean =
+        value.getEventType.equals("link") && value.getPage.toString.equals("search") && value.getArea.toString.equals("card")
+    }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_search", "_doc"))
+
     StanbyEventStream.filter(new FilterFunction[StanbyEvent]() {
       @throws[Exception]
       override def filter(value: StanbyEvent): Boolean =
@@ -128,22 +137,26 @@ object StreamingJob {
 
     StanbyEventStream.filter(new FilterFunction[StanbyEvent]() {
       @throws[Exception]
-      override def filter(value: StanbyEvent): Boolean = value.getEventType.toString.equals("link") && value.getPage.toString.equals("search") && value.getElement.toString.equals("広告") && value.getArea.toString.equals("card") && value.getFromYahoo == true
+      override def filter(value: StanbyEvent): Boolean =
+        value.getEventType.toString.equals("link") && value.getPage.toString.equals("search") && value.getElement.toString.equals("広告") && value.getArea.toString.equals("card") && value.getFromYahoo == true
     }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_ad_from_yahoo", "_doc"))
 
     StanbyEventStream.filter(new FilterFunction[StanbyEvent]() {
       @throws[Exception]
-      override def filter(value: StanbyEvent): Boolean = value.getEventType.toString.equals("link") && value.getPage.toString.equals("search") && value.getElement.toString.equals("求人") && value.getArea.toString.equals("card") && value.getCurrentUrl.toString.startsWith("r_") && value.getFromYahoo == false
+      override def filter(value: StanbyEvent): Boolean =
+        value.getEventType.toString.equals("link") && value.getPage.toString.equals("search") && value.getElement.toString.equals("求人") && value.getArea.toString.equals("card") && value.getCurrentUrl.toString.startsWith("r_") && value.getFromYahoo == false
     }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_from_rhash", "_doc"))
 
     StanbyEventStream.filter(new FilterFunction[StanbyEvent]() {
       @throws[Exception]
-      override def filter(value: StanbyEvent): Boolean = value.getEventType.toString.equals("link") && value.getPage.toString.equals("search") && value.getElement.toString.equals("求人") && value.getArea.toString.equals("card") && value.getFromYahoo == true
+      override def filter(value: StanbyEvent): Boolean =
+        value.getEventType.toString.equals("link") && value.getPage.toString.equals("search") && value.getElement.toString.equals("求人") && value.getArea.toString.equals("card") && value.getFromYahoo == true
     }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_from_yahoo", "_doc"))
 
     StanbyEventStream.filter(new FilterFunction[StanbyEvent]() {
       @throws[Exception]
-      override def filter(value: StanbyEvent): Boolean = value.getEventType.toString.equals("link") && value.getPage.toString.equals("search") && value.getElement.toString.equals("求人") && value.getArea.toString.equals("card") && !value.getCurrentUrl.toString.startsWith("r_") && value.getFromYahoo == false
+      override def filter(value: StanbyEvent): Boolean =
+        value.getEventType.toString.equals("link") && value.getPage.toString.equals("search") && value.getElement.toString.equals("求人") && value.getArea.toString.equals("card") && !value.getCurrentUrl.toString.startsWith("r_") && value.getFromYahoo == false
     }).addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_from_other", "_doc"))
 
     //   ------------------------------ JseTracking ------------------------------

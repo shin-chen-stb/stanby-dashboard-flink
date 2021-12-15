@@ -23,7 +23,7 @@ under the License.
 
 	<groupId>inc.stanby</groupId>
 	<artifactId>stanby-dashboard-flink</artifactId>
-	<version>1.7.2</version>
+	<version>1.7.3</version>
 	<packaging>jar</packaging>
 
 	<name>stanby-dashboard-flink</name>
