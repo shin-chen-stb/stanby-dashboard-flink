@@ -29,14 +29,9 @@
             "default" : 0
         },
         {
-            "name": "fromYahoo",
-            "type": "boolean",
-            "default" : false
-        },
-        {
-            "name": "fromRhash",
-            "type": "boolean",
-            "default" : false
+            "name": "origin",
+            "type": "string",
+            "default" : "other"
         },
         {
             "name": "ssid",

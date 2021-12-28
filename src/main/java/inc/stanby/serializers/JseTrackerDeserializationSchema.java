@@ -124,7 +124,7 @@ public class JseTrackerDeserializationSchema implements DeserializationSchema<Js
             String createDateTime = getCreateTime(node);
             if (node.has("address") && !node.get("address").isEmpty()) {
                 LOG.info("Addressxxxxx: {}",node.get("address"));
-                if (node.get("address").has("coordinatePoint") && !node.get("address").get("coordinatePoint").asText().isEmpty()) {
+                if (node.get("address").has("coordinatePoint") && !node.get("address").get("coordinatePoint").isEmpty()) {
                     LOG.info("Geolocationxxxxx: {}",node.get("address"));
                     String lat = node.get("address").get("coordinatePoint").get("latitude").asText();
                     String lon = node.get("address").get("coordinatePoint").get("longitude").asText();
@@ -133,13 +133,13 @@ public class JseTrackerDeserializationSchema implements DeserializationSchema<Js
                 } else {
                     geoLocation = null;
                 }
-                if (node.get("address").has("prefectureCode") && !node.get("address").get("prefectureCode").asText().isEmpty()) {
+                if (node.get("address").has("prefectureCode") && !node.get("address").get("prefectureCode").isEmpty()) {
                     cityCode = String.format("%s-%s", "JP", node.get("address").get("prefectureCode").asText());
                 } else {
                     cityCode = null;
                 }
                 if (cityCode == null && node.get("address").has("cityCodes") && !node.get("address").get("cityCodes").isEmpty()) {
-                    cityCode = String.format("%s-%s", "JP", node.get("address").get("cityCodes").get(0));
+                    cityCode = String.format("%s-%s", "JP", node.get("address").get("cityCodes").get(0).asText().replace("\"", "").substring(0, 2));
                 }
                 if (node.get("address").has("station") && !node.get("address").get("station").asText().isEmpty()) {
                     station = node.get("address").get("station").asText();
@@ -147,12 +147,6 @@ public class JseTrackerDeserializationSchema implements DeserializationSchema<Js
                     station = null;
                 }
             }
-//            if (node.has("salary") && !node.get("salary").asText().isEmpty()) {
-//                LOG.info("Salaryxxxxx: {}",node.get("salary"));
-//                salaryUnit = getStringValue("unit", (ObjectNode) node.get("salary"));
-//                salaryMax = getLongValue("salary_max", (ObjectNode) node.get("salary"));
-//                salaryMin = getLongValue("salary_min", (ObjectNode) node.get("salary"));
-//            }
             return JseTracker
                     .newBuilder()
                     .setAdDistributionId(adDistributionId)
@@ -201,9 +195,6 @@ public class JseTrackerDeserializationSchema implements DeserializationSchema<Js
                     .setGeoLocation(geoLocation)
                     .setAddress(null)
                     .setSalary(null)
-//                    .setSalaryUnit(salaryUnit)
-//                    .setSalaryMax(salaryMax)
-//                    .setSalaryMin(salaryMin)
                     .build();
         } catch (Exception e) {
             LOG.warn("Failed to serialize event: {}", new String(bytes), e);

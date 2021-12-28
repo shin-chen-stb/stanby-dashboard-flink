@@ -4,7 +4,7 @@
   <groupId>inc.stanby</groupId>
   <artifactId>dmt-stream-dashboard</artifactId>
   <name>stanby-dashboard-flink</name>
-  <version>1.8.6</version>
+  <version>1.8.10</version>
   <build>
     <plugins>
       <plugin>

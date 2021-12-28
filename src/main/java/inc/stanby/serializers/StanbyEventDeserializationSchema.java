@@ -39,40 +39,63 @@ public class StanbyEventDeserializationSchema implements DeserializationSchema<S
         return (event_type.equals("link") && page.equals("search") && area.equals("card") && current_url.matches(".*sr_fr.*"));
     }
 
+    public String getStringValue(String name, ObjectNode node) {
+        if (node.has(name)) {
+            return node.get(name).asText();
+        }
+        return null;
+    };
+
+    public Integer getIntegerValue(String name, ObjectNode node) {
+        if (node.has(name)) {
+            return node.get(name).asInt();
+        }
+        return null;
+    }
+
+    public Long getLongValue(String name, ObjectNode node) {
+        if (node.has(name)) {
+            return node.get(name).asLong();
+        }
+        return null;
+    }
+
+    public Boolean getBooleanValue(String name, ObjectNode node) {
+        if (node.has(name)) {
+            return node.get(name).asBoolean();
+        }
+        return false;
+    }
+
+    public String getCreateTime(ObjectNode node) {
+        if (node.has("createDateTime") && !node.get("createDateTime").asText().equals("")) {
+            return node.get("createDateTime").asText();
+        } else
+        if (node.has("createdDateTime") && !node.get("createdDateTime").asText().equals("")) {
+            return node.get("createdDateTime").asText();
+        }
+        return null;
+    }
+
     @Override
     public StanbyEvent deserialize(byte[] bytes) {
         try {
             ObjectNode node = this.mapper.readValue(bytes, ObjectNode.class);
             LOG.info("Reading node: {}", node.toString());
-            String service = "";
-            String event_type = "";
-            String suid = "";
-            String ssid = "";
-            String current_url = "";
-            String referrer = "";
-            String page = "";
-            String page_type = "";
-            String user_agent = "";
-            String search_request_id = "";
-            long epoch = 0L;
-            String ip = "";
-            String area = "";
-            String element = "";
-
-            if (node.has("service")) service = node.get("service").asText();
-            if (node.has("event_type")) event_type = node.get("event_type").asText();
-            if (node.has("suid")) suid = node.get("suid").asText();
-            if (node.has("ssid")) ssid = node.get("ssid").asText();
-            if (node.has("current_url")) current_url = node.get("current_url").asText();
-            if (node.has("referrer")) referrer = node.get("referrer").asText();
-            if (node.has("page")) page = node.get("page").asText();
-            if (node.has("page_type")) page_type = node.get("page_type").asText();
-            if (node.has("user_agent")) user_agent = node.get("user_agent").asText();
-            if (node.has("search_request_id")) search_request_id = node.get("search_request_id").asText();
-            if (node.has("epoch")) epoch = node.get("epoch").asLong();
-            if (node.has("ip")) ip = node.get("ip").asText();
-            if (node.has("area")) area = node.get("area").asText();
-            if (node.has("element")) element = node.get("element").asText();
+            String service = getStringValue("service", node);
+            String event_type = getStringValue("event_type", node);
+            String suid = getStringValue("suid", node);
+            String ssid = getStringValue("ssid", node);
+            String current_url = getStringValue("current_url", node);
+            String referrer = getStringValue("referrer", node);
+            String page = getStringValue("page", node);
+            String page_type = getStringValue("page_type", node);
+            String user_agent = getStringValue("user_agent", node);
+            String search_request_id = getStringValue("search_request_id", node);
+            long epoch = getLongValue("epoch", node);
+            String ip = getStringValue("ip", node);
+            String area = getStringValue("area", node);
+            String element = getStringValue("element", node);
             Parser uaParser = new Parser();
             Client c = uaParser.parse(user_agent.toString());
             String ua_os = String.format("%s_%s", c.os.family, c.os.major);

@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 5088417274300660340L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"StanbyEventSession\",\"namespace\":\"inc.stanby.schema\",\"fields\":[{\"name\":\"eventCount\",\"type\":\"int\",\"default\":0},{\"name\":\"jobSearchCount\",\"type\":\"int\",\"default\":0},{\"name\":\"jobDetailCount\",\"type\":\"int\",\"default\":0},{\"name\":\"adDetailCount\",\"type\":\"int\",\"default\":0},{\"name\":\"applyJobCount\",\"type\":\"int\",\"default\":0},{\"name\":\"fromYahoo\",\"type\":\"boolean\",\"default\":false},{\"name\":\"fromRhash\",\"type\":\"boolean\",\"default\":false},{\"name\":\"ssid\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"sessionTime\",\"type\":\"long\",\"default\":\"NONE\"},{\"name\":\"sessionEndTime\",\"type\":\"string\",\"default\":\"NONE\"}]}");
+  private static final long serialVersionUID = 633458711458483840L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"StanbyEventSession\",\"namespace\":\"inc.stanby.schema\",\"fields\":[{\"name\":\"eventCount\",\"type\":\"int\",\"default\":0},{\"name\":\"jobSearchCount\",\"type\":\"int\",\"default\":0},{\"name\":\"jobDetailCount\",\"type\":\"int\",\"default\":0},{\"name\":\"adDetailCount\",\"type\":\"int\",\"default\":0},{\"name\":\"applyJobCount\",\"type\":\"int\",\"default\":0},{\"name\":\"origin\",\"type\":\"string\",\"default\":\"other\"},{\"name\":\"ssid\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"sessionTime\",\"type\":\"long\",\"default\":\"NONE\"},{\"name\":\"sessionEndTime\",\"type\":\"string\",\"default\":\"NONE\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -56,8 +56,7 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
   @Deprecated public int jobDetailCount;
   @Deprecated public int adDetailCount;
   @Deprecated public int applyJobCount;
-  @Deprecated public boolean fromYahoo;
-  @Deprecated public boolean fromRhash;
+  @Deprecated public java.lang.CharSequence origin;
   @Deprecated public java.lang.CharSequence ssid;
   @Deprecated public long sessionTime;
   @Deprecated public java.lang.CharSequence sessionEndTime;
@@ -76,20 +75,18 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
    * @param jobDetailCount The new value for jobDetailCount
    * @param adDetailCount The new value for adDetailCount
    * @param applyJobCount The new value for applyJobCount
-   * @param fromYahoo The new value for fromYahoo
-   * @param fromRhash The new value for fromRhash
+   * @param origin The new value for origin
    * @param ssid The new value for ssid
    * @param sessionTime The new value for sessionTime
    * @param sessionEndTime The new value for sessionEndTime
    */
-  public StanbyEventSession(java.lang.Integer eventCount, java.lang.Integer jobSearchCount, java.lang.Integer jobDetailCount, java.lang.Integer adDetailCount, java.lang.Integer applyJobCount, java.lang.Boolean fromYahoo, java.lang.Boolean fromRhash, java.lang.CharSequence ssid, java.lang.Long sessionTime, java.lang.CharSequence sessionEndTime) {
+  public StanbyEventSession(java.lang.Integer eventCount, java.lang.Integer jobSearchCount, java.lang.Integer jobDetailCount, java.lang.Integer adDetailCount, java.lang.Integer applyJobCount, java.lang.CharSequence origin, java.lang.CharSequence ssid, java.lang.Long sessionTime, java.lang.CharSequence sessionEndTime) {
     this.eventCount = eventCount;
     this.jobSearchCount = jobSearchCount;
     this.jobDetailCount = jobDetailCount;
     this.adDetailCount = adDetailCount;
     this.applyJobCount = applyJobCount;
-    this.fromYahoo = fromYahoo;
-    this.fromRhash = fromRhash;
+    this.origin = origin;
     this.ssid = ssid;
     this.sessionTime = sessionTime;
     this.sessionEndTime = sessionEndTime;
@@ -104,11 +101,10 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
     case 2: return jobDetailCount;
     case 3: return adDetailCount;
     case 4: return applyJobCount;
-    case 5: return fromYahoo;
-    case 6: return fromRhash;
-    case 7: return ssid;
-    case 8: return sessionTime;
-    case 9: return sessionEndTime;
+    case 5: return origin;
+    case 6: return ssid;
+    case 7: return sessionTime;
+    case 8: return sessionEndTime;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -122,11 +118,10 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
     case 2: jobDetailCount = (java.lang.Integer)value$; break;
     case 3: adDetailCount = (java.lang.Integer)value$; break;
     case 4: applyJobCount = (java.lang.Integer)value$; break;
-    case 5: fromYahoo = (java.lang.Boolean)value$; break;
-    case 6: fromRhash = (java.lang.Boolean)value$; break;
-    case 7: ssid = (java.lang.CharSequence)value$; break;
-    case 8: sessionTime = (java.lang.Long)value$; break;
-    case 9: sessionEndTime = (java.lang.CharSequence)value$; break;
+    case 5: origin = (java.lang.CharSequence)value$; break;
+    case 6: ssid = (java.lang.CharSequence)value$; break;
+    case 7: sessionTime = (java.lang.Long)value$; break;
+    case 8: sessionEndTime = (java.lang.CharSequence)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -212,35 +207,19 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
   }
 
   /**
-   * Gets the value of the 'fromYahoo' field.
-   * @return The value of the 'fromYahoo' field.
+   * Gets the value of the 'origin' field.
+   * @return The value of the 'origin' field.
    */
-  public java.lang.Boolean getFromYahoo() {
-    return fromYahoo;
+  public java.lang.CharSequence getOrigin() {
+    return origin;
   }
 
   /**
-   * Sets the value of the 'fromYahoo' field.
+   * Sets the value of the 'origin' field.
    * @param value the value to set.
    */
-  public void setFromYahoo(java.lang.Boolean value) {
-    this.fromYahoo = value;
-  }
-
-  /**
-   * Gets the value of the 'fromRhash' field.
-   * @return The value of the 'fromRhash' field.
-   */
-  public java.lang.Boolean getFromRhash() {
-    return fromRhash;
-  }
-
-  /**
-   * Sets the value of the 'fromRhash' field.
-   * @param value the value to set.
-   */
-  public void setFromRhash(java.lang.Boolean value) {
-    this.fromRhash = value;
+  public void setOrigin(java.lang.CharSequence value) {
+    this.origin = value;
   }
 
   /**
@@ -328,8 +307,7 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
     private int jobDetailCount;
     private int adDetailCount;
     private int applyJobCount;
-    private boolean fromYahoo;
-    private boolean fromRhash;
+    private java.lang.CharSequence origin;
     private java.lang.CharSequence ssid;
     private long sessionTime;
     private java.lang.CharSequence sessionEndTime;
@@ -365,25 +343,21 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
         this.applyJobCount = data().deepCopy(fields()[4].schema(), other.applyJobCount);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.fromYahoo)) {
-        this.fromYahoo = data().deepCopy(fields()[5].schema(), other.fromYahoo);
+      if (isValidValue(fields()[5], other.origin)) {
+        this.origin = data().deepCopy(fields()[5].schema(), other.origin);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.fromRhash)) {
-        this.fromRhash = data().deepCopy(fields()[6].schema(), other.fromRhash);
+      if (isValidValue(fields()[6], other.ssid)) {
+        this.ssid = data().deepCopy(fields()[6].schema(), other.ssid);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.ssid)) {
-        this.ssid = data().deepCopy(fields()[7].schema(), other.ssid);
+      if (isValidValue(fields()[7], other.sessionTime)) {
+        this.sessionTime = data().deepCopy(fields()[7].schema(), other.sessionTime);
         fieldSetFlags()[7] = true;
       }
-      if (isValidValue(fields()[8], other.sessionTime)) {
-        this.sessionTime = data().deepCopy(fields()[8].schema(), other.sessionTime);
+      if (isValidValue(fields()[8], other.sessionEndTime)) {
+        this.sessionEndTime = data().deepCopy(fields()[8].schema(), other.sessionEndTime);
         fieldSetFlags()[8] = true;
-      }
-      if (isValidValue(fields()[9], other.sessionEndTime)) {
-        this.sessionEndTime = data().deepCopy(fields()[9].schema(), other.sessionEndTime);
-        fieldSetFlags()[9] = true;
       }
     }
 
@@ -413,25 +387,21 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
         this.applyJobCount = data().deepCopy(fields()[4].schema(), other.applyJobCount);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.fromYahoo)) {
-        this.fromYahoo = data().deepCopy(fields()[5].schema(), other.fromYahoo);
+      if (isValidValue(fields()[5], other.origin)) {
+        this.origin = data().deepCopy(fields()[5].schema(), other.origin);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.fromRhash)) {
-        this.fromRhash = data().deepCopy(fields()[6].schema(), other.fromRhash);
+      if (isValidValue(fields()[6], other.ssid)) {
+        this.ssid = data().deepCopy(fields()[6].schema(), other.ssid);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.ssid)) {
-        this.ssid = data().deepCopy(fields()[7].schema(), other.ssid);
+      if (isValidValue(fields()[7], other.sessionTime)) {
+        this.sessionTime = data().deepCopy(fields()[7].schema(), other.sessionTime);
         fieldSetFlags()[7] = true;
       }
-      if (isValidValue(fields()[8], other.sessionTime)) {
-        this.sessionTime = data().deepCopy(fields()[8].schema(), other.sessionTime);
+      if (isValidValue(fields()[8], other.sessionEndTime)) {
+        this.sessionEndTime = data().deepCopy(fields()[8].schema(), other.sessionEndTime);
         fieldSetFlags()[8] = true;
-      }
-      if (isValidValue(fields()[9], other.sessionEndTime)) {
-        this.sessionEndTime = data().deepCopy(fields()[9].schema(), other.sessionEndTime);
-        fieldSetFlags()[9] = true;
       }
     }
 
@@ -626,78 +596,41 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
     }
 
     /**
-      * Gets the value of the 'fromYahoo' field.
+      * Gets the value of the 'origin' field.
       * @return The value.
       */
-    public java.lang.Boolean getFromYahoo() {
-      return fromYahoo;
+    public java.lang.CharSequence getOrigin() {
+      return origin;
     }
 
     /**
-      * Sets the value of the 'fromYahoo' field.
-      * @param value The value of 'fromYahoo'.
+      * Sets the value of the 'origin' field.
+      * @param value The value of 'origin'.
       * @return This builder.
       */
-    public inc.stanby.schema.StanbyEventSession.Builder setFromYahoo(boolean value) {
+    public inc.stanby.schema.StanbyEventSession.Builder setOrigin(java.lang.CharSequence value) {
       validate(fields()[5], value);
-      this.fromYahoo = value;
+      this.origin = value;
       fieldSetFlags()[5] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'fromYahoo' field has been set.
-      * @return True if the 'fromYahoo' field has been set, false otherwise.
+      * Checks whether the 'origin' field has been set.
+      * @return True if the 'origin' field has been set, false otherwise.
       */
-    public boolean hasFromYahoo() {
+    public boolean hasOrigin() {
       return fieldSetFlags()[5];
     }
 
 
     /**
-      * Clears the value of the 'fromYahoo' field.
+      * Clears the value of the 'origin' field.
       * @return This builder.
       */
-    public inc.stanby.schema.StanbyEventSession.Builder clearFromYahoo() {
+    public inc.stanby.schema.StanbyEventSession.Builder clearOrigin() {
+      origin = null;
       fieldSetFlags()[5] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'fromRhash' field.
-      * @return The value.
-      */
-    public java.lang.Boolean getFromRhash() {
-      return fromRhash;
-    }
-
-    /**
-      * Sets the value of the 'fromRhash' field.
-      * @param value The value of 'fromRhash'.
-      * @return This builder.
-      */
-    public inc.stanby.schema.StanbyEventSession.Builder setFromRhash(boolean value) {
-      validate(fields()[6], value);
-      this.fromRhash = value;
-      fieldSetFlags()[6] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'fromRhash' field has been set.
-      * @return True if the 'fromRhash' field has been set, false otherwise.
-      */
-    public boolean hasFromRhash() {
-      return fieldSetFlags()[6];
-    }
-
-
-    /**
-      * Clears the value of the 'fromRhash' field.
-      * @return This builder.
-      */
-    public inc.stanby.schema.StanbyEventSession.Builder clearFromRhash() {
-      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -715,9 +648,9 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
       * @return This builder.
       */
     public inc.stanby.schema.StanbyEventSession.Builder setSsid(java.lang.CharSequence value) {
-      validate(fields()[7], value);
+      validate(fields()[6], value);
       this.ssid = value;
-      fieldSetFlags()[7] = true;
+      fieldSetFlags()[6] = true;
       return this;
     }
 
@@ -726,7 +659,7 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
       * @return True if the 'ssid' field has been set, false otherwise.
       */
     public boolean hasSsid() {
-      return fieldSetFlags()[7];
+      return fieldSetFlags()[6];
     }
 
 
@@ -736,7 +669,7 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
       */
     public inc.stanby.schema.StanbyEventSession.Builder clearSsid() {
       ssid = null;
-      fieldSetFlags()[7] = false;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -754,9 +687,9 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
       * @return This builder.
       */
     public inc.stanby.schema.StanbyEventSession.Builder setSessionTime(long value) {
-      validate(fields()[8], value);
+      validate(fields()[7], value);
       this.sessionTime = value;
-      fieldSetFlags()[8] = true;
+      fieldSetFlags()[7] = true;
       return this;
     }
 
@@ -765,7 +698,7 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
       * @return True if the 'sessionTime' field has been set, false otherwise.
       */
     public boolean hasSessionTime() {
-      return fieldSetFlags()[8];
+      return fieldSetFlags()[7];
     }
 
 
@@ -774,7 +707,7 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
       * @return This builder.
       */
     public inc.stanby.schema.StanbyEventSession.Builder clearSessionTime() {
-      fieldSetFlags()[8] = false;
+      fieldSetFlags()[7] = false;
       return this;
     }
 
@@ -792,9 +725,9 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
       * @return This builder.
       */
     public inc.stanby.schema.StanbyEventSession.Builder setSessionEndTime(java.lang.CharSequence value) {
-      validate(fields()[9], value);
+      validate(fields()[8], value);
       this.sessionEndTime = value;
-      fieldSetFlags()[9] = true;
+      fieldSetFlags()[8] = true;
       return this;
     }
 
@@ -803,7 +736,7 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
       * @return True if the 'sessionEndTime' field has been set, false otherwise.
       */
     public boolean hasSessionEndTime() {
-      return fieldSetFlags()[9];
+      return fieldSetFlags()[8];
     }
 
 
@@ -813,7 +746,7 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
       */
     public inc.stanby.schema.StanbyEventSession.Builder clearSessionEndTime() {
       sessionEndTime = null;
-      fieldSetFlags()[9] = false;
+      fieldSetFlags()[8] = false;
       return this;
     }
 
@@ -827,11 +760,10 @@ public class StanbyEventSession extends org.apache.avro.specific.SpecificRecordB
         record.jobDetailCount = fieldSetFlags()[2] ? this.jobDetailCount : (java.lang.Integer) defaultValue(fields()[2]);
         record.adDetailCount = fieldSetFlags()[3] ? this.adDetailCount : (java.lang.Integer) defaultValue(fields()[3]);
         record.applyJobCount = fieldSetFlags()[4] ? this.applyJobCount : (java.lang.Integer) defaultValue(fields()[4]);
-        record.fromYahoo = fieldSetFlags()[5] ? this.fromYahoo : (java.lang.Boolean) defaultValue(fields()[5]);
-        record.fromRhash = fieldSetFlags()[6] ? this.fromRhash : (java.lang.Boolean) defaultValue(fields()[6]);
-        record.ssid = fieldSetFlags()[7] ? this.ssid : (java.lang.CharSequence) defaultValue(fields()[7]);
-        record.sessionTime = fieldSetFlags()[8] ? this.sessionTime : (java.lang.Long) defaultValue(fields()[8]);
-        record.sessionEndTime = fieldSetFlags()[9] ? this.sessionEndTime : (java.lang.CharSequence) defaultValue(fields()[9]);
+        record.origin = fieldSetFlags()[5] ? this.origin : (java.lang.CharSequence) defaultValue(fields()[5]);
+        record.ssid = fieldSetFlags()[6] ? this.ssid : (java.lang.CharSequence) defaultValue(fields()[6]);
+        record.sessionTime = fieldSetFlags()[7] ? this.sessionTime : (java.lang.Long) defaultValue(fields()[7]);
+        record.sessionEndTime = fieldSetFlags()[8] ? this.sessionEndTime : (java.lang.CharSequence) defaultValue(fields()[8]);
         return record;
       } catch (java.lang.Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

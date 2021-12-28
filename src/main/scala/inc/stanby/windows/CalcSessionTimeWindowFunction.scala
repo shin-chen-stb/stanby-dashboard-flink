@@ -24,12 +24,15 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, S
     var jobDetailCount = 0
     var adDetailCount = 0
     var applyJobCount = 0
-    var fromYahoo = false
-    var fromRhash = false
+    var origin = "other"
     for (in <- inputList) {
       if (eventCount == 0) {
-        fromYahoo = in.getFromYahoo
-        fromRhash = in.getCurrentUrl.toString.startsWith("r_")
+        if (in.getFromYahoo) {
+          origin = "yahoo"
+        }
+        if (in.getCurrentUrl.toString.startsWith("r_")) {
+          origin = "rhash"
+        }
       }
       if (in.getEventType.equals("link") && in.getPage.toString.equals("search") && in.getArea.toString.equals("card")) {
         jobSearchCount += 1
@@ -59,8 +62,7 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, S
       .setJobDetailCount(jobDetailCount)
       .setAdDetailCount(adDetailCount)
       .setApplyJobCount(applyJobCount)
-      .setFromRhash(fromYahoo)
-      .setFromRhash(fromRhash)
+      .setOrigin(origin)
       .setSessionEndTime(sessionEndTime)
       .setSsid(key)
       .build()
