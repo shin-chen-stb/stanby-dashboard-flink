@@ -13,6 +13,9 @@ import org.slf4j.LoggerFactory;
 import ua_parser.Parser;
 import ua_parser.Client;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class StanbyEventDeserializationSchema implements DeserializationSchema<StanbyEvent> {
 
     private final ObjectMapper mapper = new ObjectMapper();
@@ -76,6 +79,8 @@ public class StanbyEventDeserializationSchema implements DeserializationSchema<S
             String ua_device = c.device.family;
             String ua_family = c.userAgent.family;
             boolean fromYahoo = checkYahoo(event_type, page, area, current_url);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+            String createDateTime = sdf.format(new Date(epoch));
             return StanbyEvent
                     .newBuilder()
                     .setService(service)
@@ -96,6 +101,7 @@ public class StanbyEventDeserializationSchema implements DeserializationSchema<S
                     .setUaDevice(ua_os)
                     .setUaOs(ua_device)
                     .setUaFamily(ua_family)
+                    .setCreateDateTime(createDateTime)
                     .build();
         } catch (Exception e) {
             LOG.warn("Failed to serialize event: {}", new String(bytes), e);

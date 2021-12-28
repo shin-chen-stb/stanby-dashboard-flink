@@ -5,182 +5,193 @@
     "fields": [
         {
             "name": "adRequestId",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "bucketType",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "category",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "companyName",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "createDateTime",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "eventType",
-            "type": "string",
-            "default": ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "ip",
-            "type": "string",
-            "default": ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "jobType",
-            "type": "string",
-            "default": ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "keyword",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "location",
-            "type": "string",
-            "default": ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "log_host",
-            "type": "boolean",
+            "type": ["null", "boolean"],
             "default": false
         },
         {
             "name": "openDate",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "originalKeyword",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "referer",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "role",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "salary_min",
-            "type": "long",
-            "default" : 0
+            "type": ["null", "long"],
+            "default": null
         },
         {
             "name": "salary_unit",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "salary_max",
-            "type": "long",
-            "default" : 0
+            "type": ["null", "long"],
+            "default": null
         },
         {
             "name": "searchPage",
-            "type": "int",
-            "default" : 0
+            "type": ["null", "int"],
+            "default": null
         },
         {
             "name": "searchRequestId",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "searchRequestUrl",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "requestUrl",
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "siteCodes",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "tag",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "time",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "totalHits",
-            "type": "int",
-            "default" : 0
+            "type": ["null", "int"],
+            "default": null
         },
         {
             "name": "uaCategory",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "uaValue",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "uid",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "visitId",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "addressLevel",
-            "type": "int",
-            "default" : 0
+            "type": ["null", "int"],
+            "default": null
         },
         {
             "name": "latitude",
-            "type": "double",
-            "default" : 0.0
+            "type": ["null", "double"],
+            "default": null
         },
         {
             "name": "longitude",
-            "type": "double",
-            "default" : 0.0
+            "type": ["null", "double"],
+            "default": null
         },
         {
             "name": "distance",
-            "type": "double",
-            "default" : 0.0
+            "type": ["null", "double"],
+            "default": null
         },
         {
             "name": "prefectureCode",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
-            "name": "cityCodes",
-            "type":
-                {
-                "type": "array",
-                "items": "string"
-                },
-            "default": []
+            "name": "station",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "cityCode",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "geoLocation",
+            "type": ["null", "string"],
+            "default": null
         }
     ]
 }

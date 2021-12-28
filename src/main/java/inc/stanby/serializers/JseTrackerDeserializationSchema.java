@@ -35,21 +35,21 @@ public class JseTrackerDeserializationSchema implements DeserializationSchema<Js
         if (node.has(name)) {
             return node.get(name).asText();
         }
-        return "";
+        return null;
     };
 
     public Integer getIntegerValue(String name, ObjectNode node) {
         if (node.has(name)) {
             return node.get(name).asInt();
         }
-        return 0;
+        return null;
     }
 
     public Long getLongValue(String name, ObjectNode node) {
         if (node.has(name)) {
             return node.get(name).asLong();
         }
-        return 0L;
+        return null;
     }
 
     public Boolean getBooleanValue(String name, ObjectNode node) {
@@ -66,7 +66,7 @@ public class JseTrackerDeserializationSchema implements DeserializationSchema<Js
         if (node.has("createdDateTime") && !node.get("createdDateTime").asText().equals("")) {
             return node.get("createdDateTime").asText();
         }
-        return "";
+        return null;
     }
 
 
@@ -77,6 +77,7 @@ public class JseTrackerDeserializationSchema implements DeserializationSchema<Js
             LOG.info("Reading node: {}", node.toString());
             String geoLocation = getStringValue("geoLocation", node);
             String cityCode = getStringValue("citycode", node);
+            String station = getStringValue("station", node);
             String salaryUnit = getStringValue("salaryUnit", node);
             Long salaryMin = getLongValue("salaryMin", node);
             Long salaryMax = getLongValue("salaryMax", node);
@@ -109,6 +110,7 @@ public class JseTrackerDeserializationSchema implements DeserializationSchema<Js
             Integer searchPage = getIntegerValue("searchPage", node);
             String searchRequestId = getStringValue("searchRequestId", node);
             String searchRequestUrl = getStringValue("searchRequestUrl", node);
+            String requestUrl = getStringValue("requestUrl", node);
             String siteCodes = getStringValue("siteCodes", node);
             String siteName = getStringValue("siteName", node);
             String tag = getStringValue("tag", node);
@@ -120,9 +122,9 @@ public class JseTrackerDeserializationSchema implements DeserializationSchema<Js
             String updateDate = getStringValue("updateDate", node);
             String visitId = getStringValue("visitId", node);
             String createDateTime = getCreateTime(node);
-            if (node.has("address") && node.get("address") != null) {
+            if (node.has("address") && !node.get("address").isEmpty()) {
                 LOG.info("Addressxxxxx: {}",node.get("address"));
-                if (node.get("address").has("coordinatePoint") && node.get("address").get("coordinatePoint") != null) {
+                if (node.get("address").has("coordinatePoint") && !node.get("address").get("coordinatePoint").asText().isEmpty()) {
                     LOG.info("Geolocationxxxxx: {}",node.get("address"));
                     String lat = node.get("address").get("coordinatePoint").get("latitude").asText();
                     String lon = node.get("address").get("coordinatePoint").get("longitude").asText();
@@ -132,20 +134,22 @@ public class JseTrackerDeserializationSchema implements DeserializationSchema<Js
                     geoLocation = null;
                 }
                 if (node.get("address").has("prefectureCode") && !node.get("address").get("prefectureCode").asText().isEmpty()) {
-                    LOG.info("cityCodesrrrrrrr node: {}", node.toString());
-                    LOG.info("cityCodesrrrrrrr: {}", node.get("address").get("prefectureCode"));
                     cityCode = String.format("%s-%s", "JP", node.get("address").get("prefectureCode").asText());
-                    LOG.info("cityCodexxxx: {}", cityCode);
                 } else {
                     cityCode = null;
                 }
+                if (node.get("address").has("station") && !node.get("address").get("station").asText().isEmpty()) {
+                    station = node.get("address").get("station").asText();
+                } else {
+                    station = null;
+                }
             }
-            if (node.has("salary") && !node.get("salary").asText().isEmpty()) {
-                LOG.info("Salaryxxxxx: {}",node.get("salary"));
-                salaryUnit = getStringValue("unit", (ObjectNode) node.get("salary"));
-                salaryMax = getLongValue("unit", (ObjectNode) node.get("salary"));
-                salaryMin = getLongValue("unit", (ObjectNode) node.get("salary"));
-            }
+//            if (node.has("salary") && !node.get("salary").asText().isEmpty()) {
+//                LOG.info("Salaryxxxxx: {}",node.get("salary"));
+//                salaryUnit = getStringValue("unit", (ObjectNode) node.get("salary"));
+//                salaryMax = getLongValue("salary_max", (ObjectNode) node.get("salary"));
+//                salaryMin = getLongValue("salary_min", (ObjectNode) node.get("salary"));
+//            }
             return JseTracker
                     .newBuilder()
                     .setAdDistributionId(adDistributionId)
@@ -175,10 +179,10 @@ public class JseTrackerDeserializationSchema implements DeserializationSchema<Js
                     .setReferer(referer)
                     .setRelatedJobs(relatedJobs)
                     .setRole(role)
-                    .setSalary(null)
                     .setSearchPage(searchPage)
                     .setSearchRequestId(searchRequestId)
                     .setSearchRequestUrl(searchRequestUrl)
+                    .setRequestUrl(requestUrl)
                     .setSiteCodes(siteCodes)
                     .setSiteName(siteName)
                     .setTag(tag)
@@ -190,11 +194,13 @@ public class JseTrackerDeserializationSchema implements DeserializationSchema<Js
                     .setUpdateDate(updateDate)
                     .setVisitId(visitId)
                     .setCityCode(cityCode)
+                    .setStation(station)
                     .setGeoLocation(geoLocation)
                     .setAddress(null)
-                    .setSalaryUnit(salaryUnit)
-                    .setSalaryMax(salaryMax)
-                    .setSalaryMin(salaryMin)
+                    .setSalary(null)
+//                    .setSalaryUnit(salaryUnit)
+//                    .setSalaryMax(salaryMax)
+//                    .setSalaryMin(salaryMin)
                     .build();
         } catch (Exception e) {
             LOG.warn("Failed to serialize event: {}", new String(bytes), e);

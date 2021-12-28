@@ -22,8 +22,8 @@ under the License.
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>inc.stanby</groupId>
-	<artifactId>stanby-dashboard-flink</artifactId>
-	<version>1.7.3</version>
+	<artifactId>dmt-stream-dashboard</artifactId>
+	<version>1.8.6</version>
 	<packaging>jar</packaging>
 
 	<name>stanby-dashboard-flink</name>

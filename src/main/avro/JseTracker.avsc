@@ -5,18 +5,18 @@
     "fields": [
         {
             "name": "adDistributionId",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "adJobs",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "adRequestId",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "address",
@@ -27,8 +27,8 @@
                 "name": "Address",
                 "default": null,
                 "fields": [
-                    {"name": "addressLevel", "type": "int", "default": 0},
-                    {"name": "cityCodes", "type": {"type": "array", "items": "string"}, "default": []},
+                    {"name": "addressLevel", "type": ["null", "int"], "default": null},
+                    {"name": "cityCodes", "type": ["null", {"type": "array", "items": "string"}], "default": null},
                     {
                         "name": "coordinatePoint",
                         "default": null,
@@ -44,146 +44,146 @@
                             ]
                         }]
                     },
-                    {"name": "distance", "type": "int", "default": 0},
-                    {"name": "prefectureCode", "type": "string", "default": ""},
-                    {"name": "station", "type": "string", "default": ""}
+                    {"name": "distance", "type": ["null", "int"], "default": null},
+                    {"name": "prefectureCode", "type": ["null", "string"], "default": null},
+                    {"name": "station", "type": ["null", "string"], "default": null}
                 ]
             }]
         },
         {
             "name": "bucketType",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "category",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "clickId",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "companyName",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "position",
-            "type": "int",
-            "default" : 0
+            "type": ["null", "int"],
+            "default" : null
         },
         {
             "name": "createDateTime",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "createdDateTime",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "documentId",
-            "type": "string",
-            "default": ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "eventType",
-            "type": "string",
-            "default": ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "indexType",
-            "type": "string",
-            "default": ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "ip",
-            "type": "string",
-            "default": ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "isAd",
-            "type": "boolean",
+            "type": ["null", "boolean"],
             "default": false
         },
         {
             "name": "jobContent",
-            "type": "string",
-            "default": ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "jobTitle",
-            "type": "string",
-            "default": ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "jobType",
-            "type": "string",
-            "default": ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "jobVersionDate",
-            "type": "string",
-            "default": ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "keyword",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "location",
-            "type": "string",
-            "default": ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "log_host",
-            "type": "boolean",
+            "type": ["null", "boolean"],
             "default": false
         },
         {
             "name": "newJobs",
-            "type": "string",
-            "default": ""
+            "type": ["null", "string"],
+            "default": null
         },
         {
             "name": "openDate",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "order",
-            "type": "int",
-            "default" : 0
+            "type": ["null", "int"],
+            "default" : null
         },
         {
             "name": "originDocumentId",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "originalKeyword",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "referer",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "relatedJobs",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "role",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "salary",
@@ -202,98 +202,113 @@
         },
         {
             "name": "searchPage",
-            "type": "int",
-            "default" : 0
+            "type": ["null", "int"],
+            "default" : null
         },
         {
             "name": "searchRequestId",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "searchRequestUrl",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
+        },
+        {
+            "name": "requestUrl",
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "siteCodes",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "siteName",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "tag",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "time",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "totalHits",
-            "type": "int",
-            "default" : 0
+            "type": ["null", "int"],
+            "default" : null
         },
         {
             "name": "uaCategory",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "uaValue",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "uid",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "updateDate",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "visitId",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "workLocation",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "cityCode",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
+        },
+        {
+            "name": "station",
+            "type": ["null", "string"],
+            "default" : null
+        },
+        {
+            "name": "prefectureCode",
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "salaryUnit",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "salaryMax",
-            "type": "long",
-            "default" : 0
+            "type": ["null", "long"],
+            "default" : null
         },
         {
             "name": "salaryMin",
-            "type": "long",
-            "default" : 0
+            "type": ["null", "long"],
+            "default" : null
         },
         {
             "name": "geoLocation",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         }
     ]
 }

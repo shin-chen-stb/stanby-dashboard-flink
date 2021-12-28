@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Address extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -6409341277928234502L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Address\",\"namespace\":\"inc.stanby.schema\",\"fields\":[{\"name\":\"addressLevel\",\"type\":\"int\",\"default\":0},{\"name\":\"cityCodes\",\"type\":{\"type\":\"array\",\"items\":\"string\"},\"default\":[]},{\"name\":\"coordinatePoint\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"GeoLocation\",\"fields\":[{\"name\":\"latitude\",\"type\":\"float\",\"default\":0},{\"name\":\"longitude\",\"type\":\"float\",\"default\":0}],\"default\":null}],\"default\":null},{\"name\":\"distance\",\"type\":\"int\",\"default\":0},{\"name\":\"prefectureCode\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"station\",\"type\":\"string\",\"default\":\"\"}],\"default\":null}");
+  private static final long serialVersionUID = -6185155569138290868L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Address\",\"namespace\":\"inc.stanby.schema\",\"fields\":[{\"name\":\"addressLevel\",\"type\":[\"null\",\"int\"],\"default\":null},{\"name\":\"cityCodes\",\"type\":[\"null\",{\"type\":\"array\",\"items\":\"string\"}],\"default\":null},{\"name\":\"coordinatePoint\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"GeoLocation\",\"fields\":[{\"name\":\"latitude\",\"type\":\"float\",\"default\":0},{\"name\":\"longitude\",\"type\":\"float\",\"default\":0}],\"default\":null}],\"default\":null},{\"name\":\"distance\",\"type\":[\"null\",\"int\"],\"default\":null},{\"name\":\"prefectureCode\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"station\",\"type\":[\"null\",\"string\"],\"default\":null}],\"default\":null}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -51,10 +51,10 @@ public class Address extends org.apache.avro.specific.SpecificRecordBase impleme
     return DECODER.decode(b);
   }
 
-  @Deprecated public int addressLevel;
+  @Deprecated public java.lang.Integer addressLevel;
   @Deprecated public java.util.List<java.lang.CharSequence> cityCodes;
   @Deprecated public inc.stanby.schema.GeoLocation coordinatePoint;
-  @Deprecated public int distance;
+  @Deprecated public java.lang.Integer distance;
   @Deprecated public java.lang.CharSequence prefectureCode;
   @Deprecated public java.lang.CharSequence station;
 
@@ -239,11 +239,11 @@ public class Address extends org.apache.avro.specific.SpecificRecordBase impleme
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<Address>
     implements org.apache.avro.data.RecordBuilder<Address> {
 
-    private int addressLevel;
+    private java.lang.Integer addressLevel;
     private java.util.List<java.lang.CharSequence> cityCodes;
     private inc.stanby.schema.GeoLocation coordinatePoint;
     private inc.stanby.schema.GeoLocation.Builder coordinatePointBuilder;
-    private int distance;
+    private java.lang.Integer distance;
     private java.lang.CharSequence prefectureCode;
     private java.lang.CharSequence station;
 
@@ -333,7 +333,7 @@ public class Address extends org.apache.avro.specific.SpecificRecordBase impleme
       * @param value The value of 'addressLevel'.
       * @return This builder.
       */
-    public inc.stanby.schema.Address.Builder setAddressLevel(int value) {
+    public inc.stanby.schema.Address.Builder setAddressLevel(java.lang.Integer value) {
       validate(fields()[0], value);
       this.addressLevel = value;
       fieldSetFlags()[0] = true;
@@ -354,6 +354,7 @@ public class Address extends org.apache.avro.specific.SpecificRecordBase impleme
       * @return This builder.
       */
     public inc.stanby.schema.Address.Builder clearAddressLevel() {
+      addressLevel = null;
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -484,7 +485,7 @@ public class Address extends org.apache.avro.specific.SpecificRecordBase impleme
       * @param value The value of 'distance'.
       * @return This builder.
       */
-    public inc.stanby.schema.Address.Builder setDistance(int value) {
+    public inc.stanby.schema.Address.Builder setDistance(java.lang.Integer value) {
       validate(fields()[3], value);
       this.distance = value;
       fieldSetFlags()[3] = true;
@@ -505,6 +506,7 @@ public class Address extends org.apache.avro.specific.SpecificRecordBase impleme
       * @return This builder.
       */
     public inc.stanby.schema.Address.Builder clearDistance() {
+      distance = null;
       fieldSetFlags()[3] = false;
       return this;
     }

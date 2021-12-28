@@ -91,6 +91,11 @@
             "name": "ua_family",
             "type": "string",
             "default" : "NONE"
+        },
+        {
+            "name": "createDateTime",
+            "type": "string",
+            "default" : ""
         }
     ]
 }

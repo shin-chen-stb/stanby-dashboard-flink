@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class StanbyEvent extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 1142879536346644499L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"StanbyEvent\",\"namespace\":\"inc.stanby.schema\",\"fields\":[{\"name\":\"service\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"event_type\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"suid\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"ssid\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"current_url\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"referrer\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"page\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"page_type\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"user_agent\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"search_request_id\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"epoch\",\"type\":\"long\"},{\"name\":\"ip\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"area\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"element\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"fromYahoo\",\"type\":\"boolean\",\"default\":false},{\"name\":\"ua_os\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"ua_device\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"ua_family\",\"type\":\"string\",\"default\":\"NONE\"}]}");
+  private static final long serialVersionUID = 2862945274126159080L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"StanbyEvent\",\"namespace\":\"inc.stanby.schema\",\"fields\":[{\"name\":\"service\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"event_type\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"suid\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"ssid\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"current_url\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"referrer\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"page\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"page_type\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"user_agent\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"search_request_id\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"epoch\",\"type\":\"long\"},{\"name\":\"ip\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"area\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"element\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"fromYahoo\",\"type\":\"boolean\",\"default\":false},{\"name\":\"ua_os\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"ua_device\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"ua_family\",\"type\":\"string\",\"default\":\"NONE\"},{\"name\":\"createDateTime\",\"type\":\"string\",\"default\":\"\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -69,6 +69,7 @@ public class StanbyEvent extends org.apache.avro.specific.SpecificRecordBase imp
   @Deprecated public java.lang.CharSequence ua_os;
   @Deprecated public java.lang.CharSequence ua_device;
   @Deprecated public java.lang.CharSequence ua_family;
+  @Deprecated public java.lang.CharSequence createDateTime;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -97,8 +98,9 @@ public class StanbyEvent extends org.apache.avro.specific.SpecificRecordBase imp
    * @param ua_os The new value for ua_os
    * @param ua_device The new value for ua_device
    * @param ua_family The new value for ua_family
+   * @param createDateTime The new value for createDateTime
    */
-  public StanbyEvent(java.lang.CharSequence service, java.lang.CharSequence event_type, java.lang.CharSequence suid, java.lang.CharSequence ssid, java.lang.CharSequence current_url, java.lang.CharSequence referrer, java.lang.CharSequence page, java.lang.CharSequence page_type, java.lang.CharSequence user_agent, java.lang.CharSequence search_request_id, java.lang.Long epoch, java.lang.CharSequence ip, java.lang.CharSequence area, java.lang.CharSequence element, java.lang.Boolean fromYahoo, java.lang.CharSequence ua_os, java.lang.CharSequence ua_device, java.lang.CharSequence ua_family) {
+  public StanbyEvent(java.lang.CharSequence service, java.lang.CharSequence event_type, java.lang.CharSequence suid, java.lang.CharSequence ssid, java.lang.CharSequence current_url, java.lang.CharSequence referrer, java.lang.CharSequence page, java.lang.CharSequence page_type, java.lang.CharSequence user_agent, java.lang.CharSequence search_request_id, java.lang.Long epoch, java.lang.CharSequence ip, java.lang.CharSequence area, java.lang.CharSequence element, java.lang.Boolean fromYahoo, java.lang.CharSequence ua_os, java.lang.CharSequence ua_device, java.lang.CharSequence ua_family, java.lang.CharSequence createDateTime) {
     this.service = service;
     this.event_type = event_type;
     this.suid = suid;
@@ -117,6 +119,7 @@ public class StanbyEvent extends org.apache.avro.specific.SpecificRecordBase imp
     this.ua_os = ua_os;
     this.ua_device = ua_device;
     this.ua_family = ua_family;
+    this.createDateTime = createDateTime;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -141,6 +144,7 @@ public class StanbyEvent extends org.apache.avro.specific.SpecificRecordBase imp
     case 15: return ua_os;
     case 16: return ua_device;
     case 17: return ua_family;
+    case 18: return createDateTime;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -167,6 +171,7 @@ public class StanbyEvent extends org.apache.avro.specific.SpecificRecordBase imp
     case 15: ua_os = (java.lang.CharSequence)value$; break;
     case 16: ua_device = (java.lang.CharSequence)value$; break;
     case 17: ua_family = (java.lang.CharSequence)value$; break;
+    case 18: createDateTime = (java.lang.CharSequence)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -460,6 +465,22 @@ public class StanbyEvent extends org.apache.avro.specific.SpecificRecordBase imp
   }
 
   /**
+   * Gets the value of the 'createDateTime' field.
+   * @return The value of the 'createDateTime' field.
+   */
+  public java.lang.CharSequence getCreateDateTime() {
+    return createDateTime;
+  }
+
+  /**
+   * Sets the value of the 'createDateTime' field.
+   * @param value the value to set.
+   */
+  public void setCreateDateTime(java.lang.CharSequence value) {
+    this.createDateTime = value;
+  }
+
+  /**
    * Creates a new StanbyEvent RecordBuilder.
    * @return A new StanbyEvent RecordBuilder
    */
@@ -509,6 +530,7 @@ public class StanbyEvent extends org.apache.avro.specific.SpecificRecordBase imp
     private java.lang.CharSequence ua_os;
     private java.lang.CharSequence ua_device;
     private java.lang.CharSequence ua_family;
+    private java.lang.CharSequence createDateTime;
 
     /** Creates a new Builder */
     private Builder() {
@@ -593,6 +615,10 @@ public class StanbyEvent extends org.apache.avro.specific.SpecificRecordBase imp
         this.ua_family = data().deepCopy(fields()[17].schema(), other.ua_family);
         fieldSetFlags()[17] = true;
       }
+      if (isValidValue(fields()[18], other.createDateTime)) {
+        this.createDateTime = data().deepCopy(fields()[18].schema(), other.createDateTime);
+        fieldSetFlags()[18] = true;
+      }
     }
 
     /**
@@ -672,6 +698,10 @@ public class StanbyEvent extends org.apache.avro.specific.SpecificRecordBase imp
       if (isValidValue(fields()[17], other.ua_family)) {
         this.ua_family = data().deepCopy(fields()[17].schema(), other.ua_family);
         fieldSetFlags()[17] = true;
+      }
+      if (isValidValue(fields()[18], other.createDateTime)) {
+        this.createDateTime = data().deepCopy(fields()[18].schema(), other.createDateTime);
+        fieldSetFlags()[18] = true;
       }
     }
 
@@ -1375,6 +1405,45 @@ public class StanbyEvent extends org.apache.avro.specific.SpecificRecordBase imp
       return this;
     }
 
+    /**
+      * Gets the value of the 'createDateTime' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getCreateDateTime() {
+      return createDateTime;
+    }
+
+    /**
+      * Sets the value of the 'createDateTime' field.
+      * @param value The value of 'createDateTime'.
+      * @return This builder.
+      */
+    public inc.stanby.schema.StanbyEvent.Builder setCreateDateTime(java.lang.CharSequence value) {
+      validate(fields()[18], value);
+      this.createDateTime = value;
+      fieldSetFlags()[18] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'createDateTime' field has been set.
+      * @return True if the 'createDateTime' field has been set, false otherwise.
+      */
+    public boolean hasCreateDateTime() {
+      return fieldSetFlags()[18];
+    }
+
+
+    /**
+      * Clears the value of the 'createDateTime' field.
+      * @return This builder.
+      */
+    public inc.stanby.schema.StanbyEvent.Builder clearCreateDateTime() {
+      createDateTime = null;
+      fieldSetFlags()[18] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public StanbyEvent build() {
@@ -1398,6 +1467,7 @@ public class StanbyEvent extends org.apache.avro.specific.SpecificRecordBase imp
         record.ua_os = fieldSetFlags()[15] ? this.ua_os : (java.lang.CharSequence) defaultValue(fields()[15]);
         record.ua_device = fieldSetFlags()[16] ? this.ua_device : (java.lang.CharSequence) defaultValue(fields()[16]);
         record.ua_family = fieldSetFlags()[17] ? this.ua_family : (java.lang.CharSequence) defaultValue(fields()[17]);
+        record.createDateTime = fieldSetFlags()[18] ? this.createDateTime : (java.lang.CharSequence) defaultValue(fields()[18]);
         return record;
       } catch (java.lang.Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
