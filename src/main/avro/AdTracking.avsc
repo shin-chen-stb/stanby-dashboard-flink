@@ -1,0 +1,343 @@
+{
+    "name": "AdTracking",
+    "namespace": "inc.stanby.schema",
+    "type": "record",
+    "fields": [
+        {
+            "name": "category",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "adJobs",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "adRequestId",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "logType",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "distributionId",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "distributionDateTime",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "requestId",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "uid",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "stanbyBucketType",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "visitId",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "uaValue",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "ip",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "deviceType",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "publisherId",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "publisherChannelId",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "publisherChannelType",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "isRandom",
+            "type": ["null", "boolean"],
+            "default": false
+        },
+        {
+            "name": "bucketType",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "documentId",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "documentUrl",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "siteCode",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "documentTitle",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "documentContent",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "companyName",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "requirement",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "workingTime",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "jobLabel",
+            "type": {"type": "array", "items": "string"},
+            "default": []
+        },
+        {
+            "name": "signalLabel",
+            "type": {"type": "array", "items": "string"},
+            "default": []
+        },
+        {
+            "name": "bidCpc",
+            "type": ["null", "int"],
+            "default": null
+        },
+        {
+            "name": "contractCpc",
+            "type": ["null", "int"],
+            "default": null
+        },
+        {
+            "name": "finalScore",
+            "type": ["null", "double"],
+            "default": null
+        },
+        {
+            "name": "originalScore",
+            "type": ["null", "double"],
+            "default": null
+        },
+        {
+            "name": "distributionOrder",
+            "type": ["null", "int"],
+            "default": null
+        },
+        {
+            "name": "systemId",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "updateDate",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "jobVersionDate",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "trackingParam",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "removeParam",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "advertiserId",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "campaignId",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "campaignType",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name":
+            "jobChannelType",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "yahooCompanyId",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "location",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "distanceLat",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "distanceLon",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "algorithm",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "predictCtr",
+            "type": ["null", "double"],
+            "default": null
+        },
+        {
+            "name": "maxCpc",
+            "type": ["null", "int"],
+            "default": null
+        },
+        {
+            "name": "isBackfill",
+            "type": ["null", "boolean"],
+            "default": false
+        },
+        {
+            "name": "totalHits",
+            "type": ["null", "int"],
+            "default": null
+        },
+        {
+            "name": "addressLevel",
+            "type": ["null", "int"],
+            "default": null
+        },
+        {
+            "name": "addressLevel1",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "addressLevel2",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "requestDateTime",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "limit",
+            "type": ["null", "int"],
+            "default": null
+        },
+        {
+            "name": "keyword",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "offset",
+            "type": ["null", "int"],
+            "default": null
+        },
+        {
+            "name": "sort",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "prefectureCode",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "mode",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "notKeyword",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "requestUrl",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "role",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "log_host",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "tag",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "createDateTime",
+            "type": ["null", "string"],
+            "default": null
+        }
+    ]
+}

@@ -25,3 +25,6 @@ hs_err_pid*
 /target
 .idea
 .vscode
+
+# Avro generated schema directory
+/src/main/java/inc/stanby/schema
