@@ -138,6 +138,9 @@ public class JseTrackerDeserializationSchema implements DeserializationSchema<Js
                 } else {
                     cityCode = null;
                 }
+                if (cityCode == null && node.get("address").has("cityCodes") && !node.get("address").get("cityCodes").isEmpty()) {
+                    cityCode = String.format("%s-%s", "JP", node.get("address").get("cityCodes").get(0));
+                }
                 if (node.get("address").has("station") && !node.get("address").get("station").asText().isEmpty()) {
                     station = node.get("address").get("station").asText();
                 } else {
