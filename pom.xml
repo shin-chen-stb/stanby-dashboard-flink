@@ -22,8 +22,8 @@ under the License.
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>inc.stanby</groupId>
-	<artifactId>dmt-stream-dashboard</artifactId>
-	<version>1.8.10</version>
+	<artifactId>stb-stream-dashboard</artifactId>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>stanby-dashboard-flink</name>
@@ -154,7 +154,7 @@ under the License.
             <scope>provided</scope>
         </dependency>
 
-        <dependency>    
+        <dependency>
 			<groupId>org.apache.parquet</groupId>
 			<artifactId>parquet-avro</artifactId>
 			<version>${flink.format.parquet.version}</version>
@@ -215,7 +215,7 @@ under the License.
             <artifactId>flink-connector-elasticsearch7_${scala.binary.version}</artifactId>
             <version>${flink.version}</version>
         </dependency>
-		
+
 	</dependencies>
 
 	<build>

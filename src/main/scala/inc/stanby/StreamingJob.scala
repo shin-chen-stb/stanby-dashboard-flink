@@ -37,18 +37,18 @@ import org.apache.flink.streaming.api.windowing.time.Time
 object StreamingJob {
   val serviceName = "es";
   val region = "ap-northeast-1";
-  val domainEndpoint = "https://vpc-dmt-stream-dashboard-es-nwbf5ojwim3wlhqxzaopghnfju.ap-northeast-1.es.amazonaws.com";
+  val domainEndpoint = "https://vpc-stb-stream-dashboard-dz2o62ysvs7gqqkope7jnimagm.ap-northeast-1.es.amazonaws.com";
   val logger: Logger = LoggerFactory.getLogger("Stanby_Dashboard_Flink");
   val inputProperties = new Properties
   inputProperties.setProperty(AWSConfigConstants.AWS_REGION, region)
   inputProperties.setProperty(ConsumerConfigConstants.STREAM_INITIAL_POSITION, "TRIM_HORIZON")
 
   private def createStanbyEventSourceFromStaticConfig(env: StreamExecutionEnvironment) = {
-    env.addSource(new FlinkKinesisConsumer[StanbyEvent]("dmt-dataplatform-analytics-stream", new StanbyEventDeserializationSchema, inputProperties))
+    env.addSource(new FlinkKinesisConsumer[StanbyEvent]("stb-dataplatform-analytics-stream", new StanbyEventDeserializationSchema, inputProperties))
   }
 
   private def createJseTrackerSourceFromStaticConfig(env: StreamExecutionEnvironment) = {
-    env.addSource(new FlinkKinesisConsumer[JseTracker]("dmt-jse-tracker", new JseTrackerDeserializationSchema, inputProperties))
+    env.addSource(new FlinkKinesisConsumer[JseTracker]("stb-jse-tracker", new JseTrackerDeserializationSchema, inputProperties))
   }
 
 
