@@ -41,7 +41,7 @@ object StreamingJob {
   val logger: Logger = LoggerFactory.getLogger("Stanby_Dashboard_Flink");
   val inputProperties = new Properties
   inputProperties.setProperty(AWSConfigConstants.AWS_REGION, region)
-  inputProperties.setProperty(ConsumerConfigConstants.STREAM_INITIAL_POSITION, "TRIM_HORIZON")
+  inputProperties.setProperty(ConsumerConfigConstants.STREAM_INITIAL_POSITION, "LATEST")
 
   private def createStanbyEventSourceFromStaticConfig(env: StreamExecutionEnvironment) = {
     env.addSource(new FlinkKinesisConsumer[StanbyEvent]("stb-dataplatform-analytics-stream", new StanbyEventDeserializationSchema, inputProperties))
@@ -77,7 +77,7 @@ object StreamingJob {
       @throws[Exception]
       override def filter(value: JseTracker): Boolean = value.getEventType.equals("jobSearchRequest")
     }).map { case x => jseTracker2JseTrackingJobSearchRequest(x) }
-      .addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "dmt-jse-job-search", "_doc"))
+      .addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "jse-job-search", "_doc"))
 
     // execute program
     env.execute("Flink Streaming Scala API Skeleton")

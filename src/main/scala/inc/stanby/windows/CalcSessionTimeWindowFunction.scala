@@ -26,25 +26,27 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, S
     var applyJobCount = 0
     var origin = "other"
     for (in <- inputList) {
-      if (eventCount == 0) {
+      if (eventCount == 0 && !(in.getCurrentUrl == null && in.getFromYahoo == null)) {
         if (in.getFromYahoo) {
           origin = "yahoo"
         }
-        if (in.getCurrentUrl.toString.startsWith("r_")) {
+        else if (in.getCurrentUrl.toString.startsWith("r_")) {
           origin = "rhash"
         }
       }
-      if (in.getEventType.equals("link") && in.getPage.toString.equals("search") && in.getArea.toString.equals("card")) {
+      if (in.getEventType != null && in.getPage != null && in.getArea != null && in.getEventType.toString.equals("link") && in.getPage.toString.equals("search") && in.getArea.toString.equals("card")) {
         jobSearchCount += 1
       }
-      if (in.getPage.toString.equals("job_detail") && in.getArea.toString.equals("card") && in.getElement.toString.equals("求人")) {
-        jobDetailCount += 1
-      }
-      if (in.getPage.toString.equals("job_detail") && in.getArea.toString.equals("card") && in.getElement.toString.equals("広告")) {
-        adDetailCount += 1
-      }
-      if (in.getPage.toString.equals("job_detail") && in.getArea.toString.equals("content") && in.getElement.toString.equals("応募ボタン")) {
-        applyJobCount += 1
+      if (in.getArea != null && in.getElement != null && in.getElement != null) {
+        if (in.getPage.toString.equals("job_detail") && in.getArea.toString.equals("card") && in.getElement.toString.equals("求人")) {
+          jobDetailCount += 1
+        }
+        if (in.getPage.toString.equals("job_detail") && in.getArea.toString.equals("card") && in.getElement.toString.equals("広告")) {
+          adDetailCount += 1
+        }
+        if (in.getPage.toString.equals("job_detail") && in.getArea.toString.equals("content") && in.getElement.toString.equals("応募ボタン")) {
+          applyJobCount += 1
+        }
       }
       minEpoch = math.min(minEpoch, in.getEpoch)
       maxEpoch = math.max(maxEpoch, in.getEpoch)

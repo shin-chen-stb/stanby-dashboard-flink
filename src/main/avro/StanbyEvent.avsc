@@ -5,53 +5,53 @@
     "fields": [
         {
             "name": "service",
-            "type": "string",
-            "default" : "NONE"
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "event_type",
-            "type": "string",
-            "default" : "NONE"
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "suid",
-            "type": "string",
-            "default" : "NONE"
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "ssid",
-            "type": "string",
-            "default" : "NONE"
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "current_url",
-            "type": "string",
-            "default" : "NONE"
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "referrer",
-            "type": "string",
-            "default" : "NONE"
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "page",
-            "type": "string",
-            "default" : "NONE"
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "page_type",
-            "type": "string",
-            "default" : "NONE"
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "user_agent",
-            "type": "string",
-            "default" : "NONE"
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "search_request_id",
-            "type": "string",
-            "default" : "NONE"
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "epoch",
@@ -59,18 +59,18 @@
         },
         {
             "name": "ip",
-            "type": "string",
-            "default" : "NONE"
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "area",
-            "type": "string",
-            "default" : "NONE"
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "element",
-            "type": "string",
-            "default" : "NONE"
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "fromYahoo",
@@ -79,23 +79,23 @@
         },
         {
             "name": "ua_os",
-            "type": "string",
-            "default" : "NONE"
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "ua_device",
-            "type": "string",
-            "default" : "NONE"
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "ua_family",
-            "type": "string",
-            "default" : "NONE"
+            "type": ["null", "string"],
+            "default" : null
         },
         {
             "name": "createDateTime",
-            "type": "string",
-            "default" : ""
+            "type": ["null", "string"],
+            "default" : null
         }
     ]
 }
