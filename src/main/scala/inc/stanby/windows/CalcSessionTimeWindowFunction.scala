@@ -30,7 +30,7 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, S
         if (in.getFromYahoo) {
           origin = "yahoo"
         }
-        else if (in.getCurrentUrl.toString.startsWith("r_")) {
+        else if (in.getCurrentUrl.toString.startsWith("/r_")) {
           origin = "rhash"
         }
       }
@@ -54,9 +54,12 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, S
     }
 
     val d = new Date(maxEpoch)
+    val now = new Date()
     val dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
     val sessionEndTime = dateFormat.format(d)
+    val time = dateFormat.format(now)
     val res = (maxEpoch - minEpoch) / 1000
+
     val sessionEvent = StanbyEventSession.newBuilder
       .setSessionTime(res)
       .setEventCount(eventCount)
@@ -67,6 +70,7 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, S
       .setOrigin(origin)
       .setSessionEndTime(sessionEndTime)
       .setSsid(key)
+      .setTime(time)
       .build()
     out.collect(sessionEvent)
   }

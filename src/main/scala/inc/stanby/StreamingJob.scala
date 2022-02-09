@@ -65,7 +65,7 @@ object StreamingJob {
         logger.info("GETKEY Event: " + event.getSsid.toString)
         event.getSsid.toString
       }
-    }).window(ProcessingTimeSessionWindows.withGap(Time.minutes(5)))
+    }).window(ProcessingTimeSessionWindows.withGap(Time.minutes(30)))
       .process(new CalcSessionTimeWindowFunction())
     SessionWindowStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_session", "_doc"))
 

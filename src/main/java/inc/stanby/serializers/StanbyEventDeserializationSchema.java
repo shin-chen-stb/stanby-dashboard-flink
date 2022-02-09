@@ -104,6 +104,7 @@ public class StanbyEventDeserializationSchema implements DeserializationSchema<S
             boolean fromYahoo = checkYahoo(event_type, page, area, current_url);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
             String createDateTime = sdf.format(new Date(epoch));
+            LOG.info("Finish reading node: {}", node.toString());
             return StanbyEvent
                     .newBuilder()
                     .setService(service)

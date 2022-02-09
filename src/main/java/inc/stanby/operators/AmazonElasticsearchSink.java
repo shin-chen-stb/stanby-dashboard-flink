@@ -30,15 +30,15 @@ import vc.inreach.aws.request.AWSSigningRequestInterceptor;
 public class AmazonElasticsearchSink {
   private static final String ES_SERVICE_NAME = "es";
 
-  private static final int FLUSH_MAX_ACTIONS = 10_000;
-  private static final long FLUSH_INTERVAL_MILLIS = 1_000;
-  private static final int FLUSH_MAX_SIZE_MB = 1;
+  private static final int FLUSH_MAX_ACTIONS = 3000;
+  private static final long FLUSH_INTERVAL_MILLIS = 3000L;
+  private static final int FLUSH_MAX_SIZE_MB = 50;
 
-  private static final Logger LOG = LoggerFactory.getLogger(AmazonElasticsearchSink.class);
 
   public static <T> ElasticsearchSink<T> buildElasticsearchSink(String elasticsearchEndpoint, String region, String indexName, String type) {
     final List<HttpHost> httpHosts = Arrays.asList(HttpHost.create(elasticsearchEndpoint));
     final SerializableAWSSigningRequestInterceptor requestInterceptor = new SerializableAWSSigningRequestInterceptor(region);
+    final Logger LOG = LoggerFactory.getLogger(AmazonElasticsearchSink.class);
 
     ElasticsearchSink.Builder<T> esSinkBuilder = new ElasticsearchSink.Builder<>(
         httpHosts,
@@ -52,6 +52,7 @@ public class AmazonElasticsearchSink {
 
           @Override
           public void process(T element, RuntimeContext ctx, RequestIndexer indexer) {
+            LOG.info("Processing element" + element.toString());
             indexer.add(createIndexRequest(element));
           }
         }

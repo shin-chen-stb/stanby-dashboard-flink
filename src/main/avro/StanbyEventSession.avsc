@@ -41,6 +41,11 @@
         {
             "name": "sessionTime",
             "type": "long",
+            "default" : 0
+        },
+        {
+            "name": "time",
+            "type": "string",
             "default" : "NONE"
         },
         {
