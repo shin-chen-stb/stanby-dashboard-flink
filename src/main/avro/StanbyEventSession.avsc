@@ -19,9 +19,19 @@
             "default" : 0
         },
         {
+            "name": "jobViewablePerSearch",
+            "type": "float",
+            "default" : 0.0
+        },
+        {
             "name": "jobClickCount",
             "type": "int",
             "default" : 0
+        },
+        {
+            "name": "jobClickPerSearch",
+            "type": "float",
+            "default" : 0.0
         },
         {
             "name": "jobDetailCount",
@@ -34,6 +44,11 @@
             "default" : 0
         },
         {
+            "name": "adViewablePerSearch",
+            "type": "float",
+            "default" : 0.0
+        },
+        {
             "name": "adDetailCount",
             "type": "int",
             "default" : 0
@@ -42,6 +57,11 @@
             "name": "adClickCount",
             "type": "int",
             "default" : 0
+        },
+        {
+            "name": "adClickPerSearch",
+            "type": "float",
+            "default" : 0.0
         },
         {
             "name": "applyJobCount",
