@@ -28,6 +28,10 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, S
     var adClickCount = 0
     var adViewableCount = 0
     var applyJobCount = 0
+    var adClickPerSearch = 0
+    var jobClickPerSearch = 0
+    var adViewablePerSearch = 0
+    var jobVieablePerSearch = 0
     var origin = "other"
     for (in <- inputList) {
       if (eventCount == 0 && !(in.getCurrentUrl == null && in.getFromYahoo == null)) {
@@ -63,6 +67,12 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, S
         if (in.getPage.toString.equals("search") && in.getEventType.toString.equals("viewable") && in.getArea.toString.equals("card") && in.getElement.toString.equals("広告")) {
           adViewableCount += 1
         }
+        if (jobSearchCount > 0) {
+          jobClickPerSearch = jobClickCount / jobSearchCount
+          jobVieablePerSearch = jobViewableCount / jobSearchCount
+          adClickPerSearch = adClickCount / jobSearchCount
+          adViewableCount = adViewablePerSearch / jobSearchCount
+        }
       }
       minEpoch = math.min(minEpoch, in.getEpoch)
       maxEpoch = math.max(maxEpoch, in.getEpoch)
@@ -86,6 +96,10 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, S
       .setAdDetailCount(adDetailCount)
       .setAdClickCount(adClickCount)
       .setAdViewableCount(adViewableCount)
+      .setAdViewablePerSearch(adViewablePerSearch)
+      .setJobViewablePerSearch(jobVieablePerSearch)
+      .setAdClickPerSearch(adClickPerSearch)
+      .setJobClickPerSearch(jobClickPerSearch)
       .setApplyJobCount(applyJobCount)
       .setOrigin(origin)
       .setSessionEndTime(sessionEndTime)
