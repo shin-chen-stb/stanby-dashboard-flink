@@ -14,12 +14,32 @@
             "default" : 0
         },
         {
+            "name": "jobViewableCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "jobClickCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
             "name": "jobDetailCount",
             "type": "int",
             "default" : 0
         },
         {
+            "name": "adViewableCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
             "name": "adDetailCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "adClickCount",
             "type": "int",
             "default" : 0
         },

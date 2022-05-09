@@ -22,7 +22,11 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, S
     var eventCount = 0
     var jobSearchCount = 0
     var jobDetailCount = 0
+    var jobViewableCount = 0
+    var jobClickCount = 0
     var adDetailCount = 0
+    var adClickCount = 0
+    var adViewableCount = 0
     var applyJobCount = 0
     var origin = "other"
     for (in <- inputList) {
@@ -34,10 +38,16 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, S
           origin = "rhash"
         }
       }
-      if (in.getEventType != null && in.getPage != null && in.getArea != null && in.getEventType.toString.equals("link") && in.getPage.toString.equals("search") && in.getArea.toString.equals("card")) {
-        jobSearchCount += 1
-      }
-      if (in.getArea != null && in.getElement != null && in.getElement != null) {
+      if (in.getArea != null && in.getElement != null && in.getEventType != null && in.getPage != null) {
+        if (in.getEventType.toString.equals("transition") && in.getPage.toString.equals("search")) {
+          jobSearchCount += 1
+        }
+        if (in.getEventType.toString.equals("link") && in.getPage.toString.equals("search") && in.getArea.toString.equals("card") && in.getElement.toString.equals("求人")) {
+          jobClickCount += 1
+        }
+        if (in.getEventType.toString.equals("link") && in.getPage.toString.equals("search") && in.getArea.toString.equals("card") && in.getElement.toString.equals("広告")) {
+          adClickCount += 1
+        }
         if (in.getPage.toString.equals("job_detail") && in.getArea.toString.equals("card") && in.getElement.toString.equals("求人")) {
           jobDetailCount += 1
         }
@@ -46,6 +56,12 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, S
         }
         if (in.getPage.toString.equals("job_detail") && in.getArea.toString.equals("content") && in.getElement.toString.equals("応募ボタン")) {
           applyJobCount += 1
+        }
+        if (in.getPage.toString.equals("search") && in.getEventType.toString.equals("viewable") && in.getArea.toString.equals("card") && in.getElement.toString.equals("求人")) {
+          jobViewableCount += 1
+        }
+        if (in.getPage.toString.equals("search") && in.getEventType.toString.equals("viewable") && in.getArea.toString.equals("card") && in.getElement.toString.equals("広告")) {
+          adViewableCount += 1
         }
       }
       minEpoch = math.min(minEpoch, in.getEpoch)
@@ -65,7 +81,11 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, S
       .setEventCount(eventCount)
       .setJobSearchCount(jobSearchCount)
       .setJobDetailCount(jobDetailCount)
+      .setJobClickCount(jobClickCount)
+      .setJobViewableCount(jobViewableCount)
       .setAdDetailCount(adDetailCount)
+      .setAdClickCount(adClickCount)
+      .setAdViewableCount(adViewableCount)
       .setApplyJobCount(applyJobCount)
       .setOrigin(origin)
       .setSessionEndTime(sessionEndTime)

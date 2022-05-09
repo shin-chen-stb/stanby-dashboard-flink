@@ -36,7 +36,7 @@ public class StanbyEventDeserializationSchema implements DeserializationSchema<S
     }
 
     private boolean checkYahoo(String event_type, String page, String area, String current_url) {
-        return (event_type.equals("link") && page.equals("search") && area.equals("card") && current_url.matches(".*sr_fr.*"));
+        return current_url.matches(".*sr_fr.*");
     }
 
     public String getStringValue(String name, ObjectNode node) {
