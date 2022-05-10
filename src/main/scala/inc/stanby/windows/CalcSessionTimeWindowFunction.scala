@@ -28,10 +28,10 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, S
     var adClickCount = 0
     var adViewableCount = 0
     var applyJobCount = 0
-    var adClickPerSearch = 0
-    var jobClickPerSearch = 0
-    var adViewablePerSearch = 0
-    var jobVieablePerSearch = 0
+    var adClickPerSearch = 0.0
+    var jobClickPerSearch = 0.0
+    var adViewablePerSearch = 0.0
+    var jobVieablePerSearch = 0.0
     var origin = "other"
     for (in <- inputList) {
       if (eventCount == 0 && !(in.getCurrentUrl == null && in.getFromYahoo == null)) {

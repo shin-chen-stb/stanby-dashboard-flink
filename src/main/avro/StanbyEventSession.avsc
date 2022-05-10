@@ -20,7 +20,7 @@
         },
         {
             "name": "jobViewablePerSearch",
-            "type": "float",
+            "type": "double",
             "default" : 0.0
         },
         {
@@ -30,7 +30,7 @@
         },
         {
             "name": "jobClickPerSearch",
-            "type": "float",
+            "type": "double",
             "default" : 0.0
         },
         {
@@ -45,7 +45,7 @@
         },
         {
             "name": "adViewablePerSearch",
-            "type": "float",
+            "type": "double",
             "default" : 0.0
         },
         {
@@ -60,7 +60,7 @@
         },
         {
             "name": "adClickPerSearch",
-            "type": "float",
+            "type": "double",
             "default" : 0.0
         },
         {

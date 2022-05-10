@@ -60,6 +60,7 @@ class CalcSearchKpiWindowFunction extends ProcessWindowFunction[StanbyEvent, Sta
     val time = dateFormat.format(now)
 
     val stanbyEventSearchKpi = StanbyEventSearchKpi.newBuilder
+      .setSearchRequestId(inputList.head.getSearchRequestId.toString)
       .setEventCount(eventCount)
       .setJobClickCount(jobClickCount)
       .setJobViewableCount(jobViewableCount)
