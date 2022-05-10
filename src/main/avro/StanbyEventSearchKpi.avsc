@@ -1,0 +1,57 @@
+{
+    "name": "StanbyEventSearchKpi",
+    "namespace": "inc.stanby.schema",
+    "type": "record",
+    "fields": [
+        {
+            "name": "eventCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "jobSearchCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "jobViewableCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "jobClickCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "searchPageCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "adViewableCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "adClickCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "origin",
+            "type": "string",
+            "default" : "other"
+        },
+        {
+            "name": "ssid",
+            "type": "string",
+            "default" : "NONE"
+        },
+        {
+            "name": "time",
+            "type": "string",
+            "default" : "NONE"
+        }
+    ]
+}
