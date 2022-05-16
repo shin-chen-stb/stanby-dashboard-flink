@@ -31,6 +31,7 @@ object StreamingJob {
   def main(args: Array[String]): Unit = {
     if (args.length == 0) {
       println("Please add target pipeline name")
+      exit(1)
     }
     val env = StreamExecutionEnvironment.getExecutionEnvironment
     args(0) match {
