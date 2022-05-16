@@ -18,25 +18,25 @@
 
 package inc.stanby
 
+import inc.stanby.operators.AmazonElasticsearchSink
+import inc.stanby.schema._
+import inc.stanby.serializers.JseTrackerDeserializationSchema
+import org.apache.flink.api.common.functions.FilterFunction
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
+import org.apache.flink.streaming.connectors.kinesis.FlinkKinesisConsumer
+import org.apache.flink.streaming.connectors.kinesis.config.{AWSConfigConstants, ConsumerConfigConstants}
 import org.slf4j.{Logger, LoggerFactory}
 
-import scala.sys.exit
+import java.util.Properties
 
 
-object StreamingJob {
-  val logger: Logger = LoggerFactory.getLogger("Stanby_Dashboard_Flink");
+abstract class BasicStream {
+  val serviceName = "es";
+  val region = "ap-northeast-1";
+  val domainEndpoint = "https://vpc-stb-stream-dashboard-dz2o62ysvs7gqqkope7jnimagm.ap-northeast-1.es.amazonaws.com";
+  val inputProperties = new Properties
+  inputProperties.setProperty(AWSConfigConstants.AWS_REGION, region)
+  inputProperties.setProperty(ConsumerConfigConstants.STREAM_INITIAL_POSITION, "LATEST")
 
-  @throws[Exception]
-  def main(args: Array[String]): Unit = {
-    if (args.length == 0) {
-      println("Please add target pipeline name")
-    }
-    val env = StreamExecutionEnvironment.getExecutionEnvironment
-    args(0) match {
-      case "stanby-analytics" => StanbyAnalyticsStream.startStream(env)
-      case "jse-tracking" => JseTrackingStream.startStream(env)
-    }
-    env.execute("Stanby KPI Straming Application")
-  }
+  def startStream(env: StreamExecutionEnvironment)
 }
