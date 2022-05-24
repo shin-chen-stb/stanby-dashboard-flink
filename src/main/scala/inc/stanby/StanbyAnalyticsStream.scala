@@ -57,14 +57,14 @@ object StanbyAnalyticsStream extends BasicStream {
     SessionWindowStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_session", "_doc"))
 
     //   ------------------------------ StanbyAnalyticsSearchKpi ------------------------------
-    val SearchKpiWindowStream = StanbyEventStream.keyBy(new KeySelector[StanbyEvent, String] {
-      override def getKey(event: StanbyEvent): String = {
-        logger.info("GETKEY SearchRequestId: " + event.getSearchRequestId.toString)
-        event.getSearchRequestId.toString
-      }
-    }).window(ProcessingTimeSessionWindows.withGap(Time.minutes(1)))
-      .process(new CalcSearchKpiWindowFunction())
-    SearchKpiWindowStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_search_kpi", "_doc"))
+//    val SearchKpiWindowStream = StanbyEventStream.keyBy(new KeySelector[StanbyEvent, String] {
+    //      override def getKey(event: StanbyEvent): String = {
+//        logger.info("GETKEY SearchRequestId: " + event.getSearchRequestId.toString)
+//        event.getSearchRequestId.toString
+//      }
+//    }).window(ProcessingTimeSessionWindows.withGap(Time.minutes(1)))
+//      .process(new CalcSearchKpiWindowFunction())
+//    SearchKpiWindowStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_search_kpi", "_doc"))
 
 
     //   ------------------------------ StanbyAnalytics ------------------------------

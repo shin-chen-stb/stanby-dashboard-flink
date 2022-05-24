@@ -18,26 +18,27 @@
 
 package inc.stanby
 
+import inc.stanby.operators.AmazonElasticsearchSink
+import inc.stanby.schema._
+import inc.stanby.serializers.AdTrackingDeserializationSchema
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
+import org.apache.flink.streaming.connectors.kinesis.FlinkKinesisConsumer
 import org.slf4j.{Logger, LoggerFactory}
-import com.amazonaws.services.kinesisanalytics.runtime.KinesisAnalyticsRuntime
-import java.util
 
 
-object StreamingJob {
-  val logger: Logger = LoggerFactory.getLogger("Stanby_Dashboard_Flink");
+object AdTrackingStream extends BasicStream {
+  val logger: Logger = LoggerFactory.getLogger("AdTrackingStreamLogger");
+
+  private def createAdTrackerSourceFromStaticConfig(env: StreamExecutionEnvironment) = {
+    env.addSource(new FlinkKinesisConsumer[AdTracking]("dmt-ad-tracking", new AdTrackingDeserializationSchema(), inputProperties))
+  }
 
   @throws[Exception]
-  def main(args: Array[String]): Unit = {
-    import com.amazonaws.services.kinesisanalytics.runtime.KinesisAnalyticsRuntime
-    val applicationProperties = KinesisAnalyticsRuntime.getApplicationProperties
-    val consumerProperties = applicationProperties.get("ConsumerConfigProperties")
-    val env = StreamExecutionEnvironment.getExecutionEnvironment
-    consumerProperties.get("name") match {
-      case "stanby-analytics" => StanbyAnalyticsStream.startStream(env)
-      case "jse-tracking" => JseTrackingStream.startStream(env)
-      case "ad-tracking" => AdTrackingStream.startStream(env)
-    }
-    env.execute("Stanby KPI Streaming Application")
+  override def startStream(env: StreamExecutionEnvironment): Unit = {
+    // set up the streaming execution environment
+    val AdTrackingStream = createAdTrackerSourceFromStaticConfig(env)
+
+    //   ------------------------------ Ad-Tracking ------------------------------
+    AdTrackingStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "ad_tracking", "_doc"))
   }
 }
