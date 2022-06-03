@@ -25,6 +25,10 @@ class CalcJseSearchKpiWindowFunction extends ProcessWindowFunction[JseTracker, J
     var adClickCount = 0
     var relatedJobsClickCount = 0
     var jobDetailsImpressionCount = 0
+    var organicAdClickRatio = 0
+    var adClickRatio = 0
+    var jobImpressionPerClick = 0.0
+    var adImpressionPerClick = 0.0
     val time = inputList.head.getTime
     for (in <- inputList) {
       println(in.toString)
@@ -49,6 +53,19 @@ class CalcJseSearchKpiWindowFunction extends ProcessWindowFunction[JseTracker, J
       eventCount += 1
     }
 
+    if (jobClickCount > 0 && adClickCount > 0) {
+      adClickRatio = adClickCount/(jobClickCount+adClickCount)
+      organicAdClickRatio = jobClickCount/adClickCount
+    }
+
+    if (jobImpressionCount > 0) {
+      jobImpressionPerClick = jobClickCount.toFloat / jobImpressionCount
+    }
+
+    if (adImpressionCount > 0) {
+      adImpressionPerClick = adClickCount.toFloat / adImpressionCount
+    }
+
     val jseTrackingSearchKpi = JseTrackingSearchKpi.newBuilder
       .setSearchRequestId(key)
       .setEventCount(eventCount)
@@ -56,12 +73,14 @@ class CalcJseSearchKpiWindowFunction extends ProcessWindowFunction[JseTracker, J
       .setJobDetailsImpressionCount(jobDetailsImpressionCount)
       .setRelatedJobsClickCount(relatedJobsClickCount)
       .setJobImpressionCount(jobImpressionCount)
-      .setJobImpressionCoverage(jobImpressionCount/20)
+      .setJobImpressionPerClick(jobImpressionPerClick)
+      .setAdImpressionPerClick(adImpressionPerClick)
+      .setJobImpressionCoverage(jobImpressionCount.toFloat/20)
       .setAdClickCount(adClickCount)
       .setAdImpressionCount(adImpressionCount)
-      .setAdImpressionCoverage(adImpressionCount/8)
-      .setOrganicAdClickRatio(jobClickCount/adClickCount)
-      .setAdClickRatio(adClickCount/(jobClickCount+adClickCount))
+      .setAdImpressionCoverage(adImpressionCount.toFloat/8)
+      .setOrganicAdClickRatio(organicAdClickRatio)
+      .setAdClickRatio(adClickRatio)
       .setTime(time)
       .build()
     out.collect(jseTrackingSearchKpi)

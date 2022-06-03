@@ -174,16 +174,6 @@
             "default": null
         },
         {
-            "name": "updateDate",
-            "type": ["null", "string"],
-            "default": null
-        },
-        {
-            "name": "jobVersionDate",
-            "type": ["null", "string"],
-            "default": null
-        },
-        {
             "name": "trackingParam",
             "type": ["null", "string"],
             "default": null

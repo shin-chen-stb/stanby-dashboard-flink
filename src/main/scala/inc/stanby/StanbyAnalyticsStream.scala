@@ -47,24 +47,27 @@ object StanbyAnalyticsStream extends BasicStream {
     val StanbyEventStream = createStanbyEventSourceFromStaticConfig(env)
 
     //   ------------------------------ StanbyAnalyticsSession ------------------------------
-    val SessionWindowStream = StanbyEventStream.keyBy(new KeySelector[StanbyEvent, String] {
-      override def getKey(event: StanbyEvent): String = {
-        logger.info("GETKEY Event: " + event.getSsid.toString)
-        event.getSsid.toString
-      }
-    }).window(ProcessingTimeSessionWindows.withGap(Time.minutes(30)))
-      .process(new CalcSessionTimeWindowFunction())
-    SessionWindowStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_session", "_doc"))
+//    val SessionWindowStream = StanbyEventStream.keyBy(new KeySelector[StanbyEvent, String] {
+//      override def getKey(event: StanbyEvent): String = {
+//        logger.info("GETKEY Event: " + event.getSsid.toString)
+//        event.getSsid.toString
+//      }
+//    }).window(ProcessingTimeSessionWindows.withGap(Time.minutes(30)))
+//      .process(new CalcSessionTimeWindowFunction())
+//    SessionWindowStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_session", "_doc"))
 
     //   ------------------------------ StanbyAnalyticsSearchKpi ------------------------------
-//    val SearchKpiWindowStream = StanbyEventStream.keyBy(new KeySelector[StanbyEvent, String] {
-    //      override def getKey(event: StanbyEvent): String = {
-//        logger.info("GETKEY SearchRequestId: " + event.getSearchRequestId.toString)
-//        event.getSearchRequestId.toString
-//      }
-//    }).window(ProcessingTimeSessionWindows.withGap(Time.minutes(1)))
-//      .process(new CalcSearchKpiWindowFunction())
-//    SearchKpiWindowStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_search_kpi", "_doc"))
+    val SearchKpiWindowStream = StanbyEventStream.filter(new FilterFunction[StanbyEvent]() {
+      @throws[Exception]
+      override def filter(value: StanbyEvent): Boolean = value.getSearchRequestId != null
+    }).keyBy(new KeySelector[StanbyEvent, String] {
+          override def getKey(event: StanbyEvent): String = {
+        logger.info("GETKEY SearchRequestId: " + event.getSearchRequestId.toString)
+        event.getSearchRequestId.toString
+      }
+    }).window(ProcessingTimeSessionWindows.withGap(Time.minutes(5)))
+      .process(new CalcSearchKpiWindowFunction())
+    SearchKpiWindowStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_search_kpi", "_doc"))
 
 
     //   ------------------------------ StanbyAnalytics ------------------------------

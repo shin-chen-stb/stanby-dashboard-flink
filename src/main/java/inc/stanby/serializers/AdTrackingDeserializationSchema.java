@@ -134,8 +134,6 @@ public class AdTrackingDeserializationSchema implements DeserializationSchema<Ad
             Integer distributionOrder = getIntegerValue("distributionOrder", msgNode);
             Double originalScore = getDoubleValue("originalScore", msgNode);
             String systemId = getStringValue("systemId", msgNode);
-            String updateDate = getStringValue("updateDate", msgNode);
-            String jobVersionDate = getStringValue("jobVersionDate", msgNode);
             String trackingParam = getStringValue("trackingParam", msgNode);
             String removeParam = getStringValue("removeParam", msgNode);
             String advertiserId = getStringValue("advertiserId", msgNode);
@@ -185,7 +183,6 @@ public class AdTrackingDeserializationSchema implements DeserializationSchema<Ad
                     .setBucketType(bucketType)
                     .setDocumentUrl(documentUrl)
                     .setSiteCode(siteCode)
-                    .setJobVersionDate(jobVersionDate)
                     .setDocumentTitle(documentTitle)
                     .setLogHost(log_host)
                     .setDocumentContent(documentContent)
@@ -204,7 +201,6 @@ public class AdTrackingDeserializationSchema implements DeserializationSchema<Ad
                     .setAdvertiserId(advertiserId)
                     .setUaValue(uaValue)
                     .setUid(uid)
-                    .setUpdateDate(updateDate)
                     .setVisitId(visitId)
                     .setCampaignId(campaignId)
                     .setCampaignType(campaignType)

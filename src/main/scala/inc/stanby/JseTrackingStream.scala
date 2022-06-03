@@ -53,7 +53,7 @@ object JseTrackingStream extends BasicStream {
         logger.info("GETKEY SearchRequestId: " + event.getSearchRequestId.toString)
         event.getSearchRequestId.toString
       }
-    }).window(ProcessingTimeSessionWindows.withGap(Time.seconds(120)))
+    }).window(ProcessingTimeSessionWindows.withGap(Time.seconds(300)))
       .process(new CalcJseSearchKpiWindowFunction())
     JseSearchKpiWindowStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "jse_search_kpi", "_doc"))
   }

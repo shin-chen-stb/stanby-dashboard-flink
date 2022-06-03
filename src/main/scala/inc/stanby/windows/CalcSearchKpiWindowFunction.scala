@@ -23,6 +23,8 @@ class CalcSearchKpiWindowFunction extends ProcessWindowFunction[StanbyEvent, Sta
     var adClickCount = 0
     var adViewableCount = 0
     var searchPageCount = 0
+    var adViewablePerCount = 0.0
+    var jobViewablePerCount = 0.0
     var origin = "other"
     for (in <- inputList) {
       if (eventCount == 0 && !(in.getCurrentUrl == null && in.getFromYahoo == null)) {
@@ -55,7 +57,15 @@ class CalcSearchKpiWindowFunction extends ProcessWindowFunction[StanbyEvent, Sta
       eventCount += 1
     }
 
-    val now = new Date()
+    if (jobViewableCount > 0) {
+      jobViewablePerCount = jobClickCount.toFloat / jobViewableCount
+    }
+
+    if (adViewableCount > 0) {
+      adViewablePerCount = adClickCount.toFloat / adViewableCount
+    }
+
+    val now = new Date(inputList.head.getEpoch)
     val dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
     val time = dateFormat.format(now)
 
@@ -66,6 +76,8 @@ class CalcSearchKpiWindowFunction extends ProcessWindowFunction[StanbyEvent, Sta
       .setJobViewableCount(jobViewableCount)
       .setAdClickCount(adClickCount)
       .setAdViewableCount(adViewableCount)
+      .setAdViewableImpressionPerClick(adViewablePerCount)
+      .setJobViewableImpressionPerClick(jobViewablePerCount)
       .setOrigin(origin)
       .setSsid(key)
       .setTime(time)

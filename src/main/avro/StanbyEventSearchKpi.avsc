@@ -24,6 +24,16 @@
             "default" : 0
         },
         {
+            "name": "jobViewableImpressionPerClick",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adViewableImpressionPerClick",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
             "name": "jobClickCount",
             "type": "int",
             "default" : 0

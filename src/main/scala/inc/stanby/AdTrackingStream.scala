@@ -30,7 +30,7 @@ object AdTrackingStream extends BasicStream {
   val logger: Logger = LoggerFactory.getLogger("AdTrackingStreamLogger");
 
   private def createAdTrackerSourceFromStaticConfig(env: StreamExecutionEnvironment) = {
-    env.addSource(new FlinkKinesisConsumer[AdTracking]("dmt-ad-tracking", new AdTrackingDeserializationSchema(), inputProperties))
+    env.addSource(new FlinkKinesisConsumer[AdTracking]("stb-ad-tracking", new AdTrackingDeserializationSchema(), inputProperties))
   }
 
   @throws[Exception]
