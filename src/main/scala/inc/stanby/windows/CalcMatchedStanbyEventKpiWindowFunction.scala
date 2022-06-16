@@ -42,7 +42,7 @@ class CalcMatchedStanbyEventKpiWindowFunction extends ProcessAllWindowFunction[S
         biddedAdSearchCount += 1
       }
       jobViewableCount += in.getJobViewableCount
-      jobClickCount = in.getJobClickCount
+      jobClickCount += in.getJobClickCount
       adViewableCount += in.getAdViewableCount
       adClickCount += in.getAdClickCount
     }
