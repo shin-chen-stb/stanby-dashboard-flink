@@ -21,11 +21,12 @@ package inc.stanby
 import inc.stanby.operators.AmazonElasticsearchSink
 import inc.stanby.schema._
 import inc.stanby.serializers.JseTrackerDeserializationSchema
-import inc.stanby.windows.CalcJseSearchKpiWindowFunction
+import inc.stanby.windows.{CalcJseSearchKpiWindowFunction, CalcMatchedJseKpiWindowFunction}
 import org.apache.flink.api.common.functions.FilterFunction
 import org.apache.flink.api.java.functions.KeySelector
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
-import org.apache.flink.streaming.api.windowing.assigners.ProcessingTimeSessionWindows
+import org.apache.flink.streaming.api.functions.windowing.ProcessAllWindowFunction
+import org.apache.flink.streaming.api.windowing.assigners.{ProcessingTimeSessionWindows, TumblingProcessingTimeWindows}
 import org.apache.flink.streaming.api.windowing.time.Time
 import org.apache.flink.streaming.connectors.kinesis.FlinkKinesisConsumer
 import org.slf4j.{Logger, LoggerFactory}
@@ -55,6 +56,9 @@ object JseTrackingStream extends BasicStream {
       }
     }).window(ProcessingTimeSessionWindows.withGap(Time.seconds(300)))
       .process(new CalcJseSearchKpiWindowFunction())
+    val JseTumblingWindowStream = JseSearchKpiWindowStream.windowAll(TumblingProcessingTimeWindows.of(Time.seconds(1)))
+      .process(new CalcMatchedJseKpiWindowFunction())
     JseSearchKpiWindowStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "jse_search_kpi", "_doc"))
+    JseTumblingWindowStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "jse_search_kpi_agg", "_doc"))
   }
 }

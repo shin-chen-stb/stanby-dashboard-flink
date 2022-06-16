@@ -1,0 +1,32 @@
+{
+    "name": "AdTrackingSearchKpi",
+    "namespace": "inc.stanby.schema",
+    "type": "record",
+    "fields": [
+        {
+            "name": "requestId",
+            "type": ["null", "string"],
+            "default": null
+        },
+        {
+            "name": "adClickCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "cpcTotal",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "cpcAvg",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "time",
+            "type": ["null", "string"],
+            "default": null
+        }
+    ]
+}

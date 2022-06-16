@@ -1,26 +1,12 @@
 {
-    "name": "JseTrackingSearchKpi",
+    "name": "StanbyEventSearchKpiAgg",
     "namespace": "inc.stanby.schema",
     "type": "record",
     "fields": [
         {
-            "name": "searchRequestId",
-            "type": "string"
-        },
-        {
-            "name": "eventCount",
+            "name": "jobSearchCount",
             "type": "int",
             "default" : 0
-        },
-        {
-            "name": "jobImpressionCount",
-            "type": "int",
-            "default" : 0
-        },
-        {
-            "name": "jobImpressionCoverage",
-            "type": "double",
-            "default" : 0.0
         },
         {
             "name": "jobClickCount",
@@ -28,64 +14,74 @@
             "default" : 0
         },
         {
-            "name": "relatedJobsClickCount",
-            "type": "int",
-            "default" : 0
-        },
-        {
-            "name": "jobDetailsImpressionCount",
-            "type": "int",
-            "default" : 0
-        },
-        {
-            "name": "jobImpressionPerClick",
-            "type": "double",
-            "default" : 0.0
-        },
-        {
-            "name": "adImpressionPerClick",
-            "type": "double",
-            "default" : 0.0
-        },
-        {
-            "name": "jobClickPerImpression",
-            "type": "double",
-            "default" : 0.0
-        },
-        {
-            "name": "adClickPerImpression",
-            "type": "double",
-            "default" : 0.0
-        },
-        {
-            "name": "adImpressionCount",
-            "type": "int",
-            "default" : 0
-        },
-        {
-            "name": "adImpressionCoverage",
-            "type": "double",
-            "default" : 0.0
-        },
-        {
             "name": "adClickCount",
             "type": "int",
             "default" : 0
         },
         {
+            "name": "jobViewableCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "adViewableCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "jobClickPerSearch",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adClickPerSearch",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "matchedjobClickPerSearch",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "biddedAdClickPerSearch",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "jobClickPerViewable",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adClickPerViewable",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "matchedJobSearchCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "biddedAdSearchCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "matchedOrganicRate",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "biddedAdRate",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
             "name": "time",
             "type": "string",
             "default" : "NONE"
-        },
-        {
-            "name": "organicAdClickRatio",
-            "type": "double",
-            "default" : 0.0
-        },
-        {
-            "name": "AdClickRatio",
-            "type": "double",
-            "default" : 0.0
         }
     ]
 }

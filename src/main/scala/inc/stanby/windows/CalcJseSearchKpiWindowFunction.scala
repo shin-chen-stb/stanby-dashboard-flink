@@ -29,6 +29,8 @@ class CalcJseSearchKpiWindowFunction extends ProcessWindowFunction[JseTracker, J
     var adClickRatio = 0
     var jobImpressionPerClick = 0.0
     var adImpressionPerClick = 0.0
+    var jobClickPerImpression = 0.0
+    var adClickPerImpression = 0.0
     val time = inputList.head.getTime
     for (in <- inputList) {
       println(in.toString)
@@ -59,11 +61,19 @@ class CalcJseSearchKpiWindowFunction extends ProcessWindowFunction[JseTracker, J
     }
 
     if (jobImpressionCount > 0) {
-      jobImpressionPerClick = jobClickCount.toFloat / jobImpressionCount
+      jobClickPerImpression = jobClickCount.toFloat / jobImpressionCount
     }
 
     if (adImpressionCount > 0) {
-      adImpressionPerClick = adClickCount.toFloat / adImpressionCount
+      adClickPerImpression = adClickCount.toFloat / adImpressionCount
+    }
+
+    if (jobClickCount > 0) {
+      jobImpressionPerClick = jobImpressionCount.toFloat / jobClickCount
+    }
+
+    if (adClickCount > 0) {
+      adImpressionPerClick = adImpressionCount.toFloat / adClickCount
     }
 
     val jseTrackingSearchKpi = JseTrackingSearchKpi.newBuilder
@@ -75,6 +85,8 @@ class CalcJseSearchKpiWindowFunction extends ProcessWindowFunction[JseTracker, J
       .setJobImpressionCount(jobImpressionCount)
       .setJobImpressionPerClick(jobImpressionPerClick)
       .setAdImpressionPerClick(adImpressionPerClick)
+      .setJobClickPerImpression(jobClickPerImpression)
+      .setAdClickPerImpression(adClickPerImpression)
       .setJobImpressionCoverage(jobImpressionCount.toFloat/20)
       .setAdClickCount(adClickCount)
       .setAdImpressionCount(adImpressionCount)

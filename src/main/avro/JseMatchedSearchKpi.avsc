@@ -1,14 +1,20 @@
 {
-    "name": "JseTrackingSearchKpi",
+    "name": "JseMatchedSearchKpi",
     "namespace": "inc.stanby.schema",
     "type": "record",
     "fields": [
         {
-            "name": "searchRequestId",
-            "type": "string"
+            "name": "jobSearchCount",
+            "type": "int",
+            "default" : 0
         },
         {
-            "name": "eventCount",
+            "name": "jobClickCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "adClickCount",
             "type": "int",
             "default" : 0
         },
@@ -18,32 +24,27 @@
             "default" : 0
         },
         {
-            "name": "jobImpressionCoverage",
+            "name": "adImpressionCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "jobClickPerSearch",
             "type": "double",
             "default" : 0.0
         },
         {
-            "name": "jobClickCount",
-            "type": "int",
-            "default" : 0
-        },
-        {
-            "name": "relatedJobsClickCount",
-            "type": "int",
-            "default" : 0
-        },
-        {
-            "name": "jobDetailsImpressionCount",
-            "type": "int",
-            "default" : 0
-        },
-        {
-            "name": "jobImpressionPerClick",
+            "name": "adClickPerSearch",
             "type": "double",
             "default" : 0.0
         },
         {
-            "name": "adImpressionPerClick",
+            "name": "matchedjobClickPerSearch",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "biddedAdClickPerSearch",
             "type": "double",
             "default" : 0.0
         },
@@ -58,34 +59,29 @@
             "default" : 0.0
         },
         {
-            "name": "adImpressionCount",
+            "name": "matchedJobSearchCount",
             "type": "int",
             "default" : 0
         },
         {
-            "name": "adImpressionCoverage",
+            "name": "biddedAdSearchCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "matchedOrganicRate",
             "type": "double",
             "default" : 0.0
         },
         {
-            "name": "adClickCount",
-            "type": "int",
-            "default" : 0
+            "name": "biddedAdRate",
+            "type": "double",
+            "default" : 0.0
         },
         {
             "name": "time",
             "type": "string",
             "default" : "NONE"
-        },
-        {
-            "name": "organicAdClickRatio",
-            "type": "double",
-            "default" : 0.0
-        },
-        {
-            "name": "AdClickRatio",
-            "type": "double",
-            "default" : 0.0
         }
     ]
 }
