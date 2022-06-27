@@ -24,12 +24,12 @@
             "default" : 0.0
         },
         {
-            "name": "jobClickCount",
+            "name": "jobCTCount",
             "type": "int",
             "default" : 0
         },
         {
-            "name": "jobClickPerSearch",
+            "name": "jobCTPerSearch",
             "type": "double",
             "default" : 0.0
         },
@@ -54,12 +54,12 @@
             "default" : 0
         },
         {
-            "name": "adClickCount",
+            "name": "adCTCount",
             "type": "int",
             "default" : 0
         },
         {
-            "name": "adClickPerSearch",
+            "name": "adCTPerSearch",
             "type": "double",
             "default" : 0.0
         },

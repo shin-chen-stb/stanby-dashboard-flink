@@ -1,80 +1,105 @@
 {
-    "name": "JseMatchedSearchKpi",
+    "name": "JseTrackingRequestKpi",
     "namespace": "inc.stanby.schema",
     "type": "record",
     "fields": [
         {
-            "name": "jobSearchCount",
+            "name": "searchRequestId",
+            "type": "string",
+            "default" : null
+        },
+        {
+            "name": "searchRequest",
             "type": "int",
             "default" : 0
         },
         {
-            "name": "jobClickCount",
+            "name": "jobImpression",
             "type": "int",
             "default" : 0
         },
         {
-            "name": "adClickCount",
+            "name": "jobDepth",
             "type": "int",
             "default" : 0
         },
         {
-            "name": "jobImpressionCount",
+            "name": "jobCT",
             "type": "int",
             "default" : 0
         },
         {
-            "name": "adImpressionCount",
+            "name": "jobCTYield",
             "type": "int",
             "default" : 0
         },
         {
-            "name": "jobClickPerSearch",
+            "name": "jobCTICTR",
             "type": "double",
             "default" : 0.0
         },
         {
-            "name": "adClickPerSearch",
+            "name": "adCTRatio",
             "type": "double",
             "default" : 0.0
         },
         {
-            "name": "matchedjobClickPerSearch",
-            "type": "double",
-            "default" : 0.0
-        },
-        {
-            "name": "biddedAdClickPerSearch",
-            "type": "double",
-            "default" : 0.0
-        },
-        {
-            "name": "jobClickPerImpression",
-            "type": "double",
-            "default" : 0.0
-        },
-        {
-            "name": "adClickPerImpression",
-            "type": "double",
-            "default" : 0.0
-        },
-        {
-            "name": "matchedJobSearchCount",
+            "name": "organicRequest",
             "type": "int",
             "default" : 0
         },
         {
-            "name": "biddedAdSearchCount",
+            "name": "organicImpression",
             "type": "int",
             "default" : 0
         },
         {
-            "name": "matchedOrganicRate",
+            "name": "organicActualDepthRatio",
             "type": "double",
             "default" : 0.0
         },
         {
-            "name": "biddedAdRate",
+            "name": "organicCT",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "organicICTR",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "organicPageCTR",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adImpression",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "adDepthRatio",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adActualDepthRatio",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adCT",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "adICTR",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adPageCTR",
             "type": "double",
             "default" : 0.0
         },

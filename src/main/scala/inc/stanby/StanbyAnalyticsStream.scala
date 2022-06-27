@@ -22,7 +22,7 @@ import inc.stanby.JseTrackingStream.{domainEndpoint, region}
 import inc.stanby.operators.AmazonElasticsearchSink
 import inc.stanby.schema._
 import inc.stanby.serializers.StanbyEventDeserializationSchema
-import inc.stanby.windows.{CalcMatchedJseKpiWindowFunction, CalcMatchedStanbyEventKpiWindowFunction, CalcSearchKpiWindowFunction}
+import inc.stanby.windows.{CalcJseRequestKpiAggWindowFunction, CalcStanbyAnalyticsRequestKpiAggWindowFunction, CalcStanbyAnalyticsRequestKpiWindowFunction}
 import org.apache.flink.api.common.functions.FilterFunction
 import org.apache.flink.api.java.functions.KeySelector
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
@@ -67,9 +67,9 @@ object StanbyAnalyticsStream extends BasicStream {
         event.getSearchRequestId.toString
       }
     }).window(ProcessingTimeSessionWindows.withGap(Time.minutes(5)))
-      .process(new CalcSearchKpiWindowFunction())
+      .process(new CalcStanbyAnalyticsRequestKpiWindowFunction())
     val StanbyEventTumblingWindowStream = SearchKpiWindowStream.windowAll(TumblingProcessingTimeWindows.of(Time.seconds(1)))
-      .process(new CalcMatchedStanbyEventKpiWindowFunction())
+      .process(new CalcStanbyAnalyticsRequestKpiAggWindowFunction())
     SearchKpiWindowStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_search_kpi", "_doc"))
     StanbyEventTumblingWindowStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "stanby_event_search_kpi_agg", "_doc"))
     //   ------------------------------ StanbyAnalytics ------------------------------

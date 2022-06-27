@@ -1,80 +1,105 @@
 {
-    "name": "StanbyEventSearchKpiAgg",
+    "name": "StanbyAnalyticsRequestKpi",
     "namespace": "inc.stanby.schema",
     "type": "record",
     "fields": [
         {
-            "name": "jobSearchCount",
+            "name": "searchRequestId",
+            "type": "string",
+            "default" : null
+        },
+        {
+            "name": "jobRequest",
             "type": "int",
             "default" : 0
         },
         {
-            "name": "jobClickCount",
+            "name": "jobVImpression",
             "type": "int",
             "default" : 0
         },
         {
-            "name": "adClickCount",
+            "name": "jobVDepth",
             "type": "int",
             "default" : 0
         },
         {
-            "name": "jobViewableCount",
+            "name": "jobCT",
             "type": "int",
             "default" : 0
         },
         {
-            "name": "adViewableCount",
+            "name": "jobCTYield",
             "type": "int",
             "default" : 0
         },
         {
-            "name": "jobClickPerSearch",
+            "name": "jobCTPerVImpression",
             "type": "double",
             "default" : 0.0
         },
         {
-            "name": "adClickPerSearch",
+            "name": "adCTRatio",
             "type": "double",
             "default" : 0.0
         },
         {
-            "name": "matchedjobClickPerSearch",
-            "type": "double",
-            "default" : 0.0
-        },
-        {
-            "name": "biddedAdClickPerSearch",
-            "type": "double",
-            "default" : 0.0
-        },
-        {
-            "name": "jobClickPerViewable",
-            "type": "double",
-            "default" : 0.0
-        },
-        {
-            "name": "adClickPerViewable",
-            "type": "double",
-            "default" : 0.0
-        },
-        {
-            "name": "matchedJobSearchCount",
+            "name": "organicRequest",
             "type": "int",
             "default" : 0
         },
         {
-            "name": "biddedAdSearchCount",
+            "name": "organicVImpression",
             "type": "int",
             "default" : 0
         },
         {
-            "name": "matchedOrganicRate",
+            "name": "organicActualVDepthRatio",
             "type": "double",
             "default" : 0.0
         },
         {
-            "name": "biddedAdRate",
+            "name": "organicCT",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "organicCTPerVImpression",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "organicPageCTR",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adVImpression",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "adVDepthRatio",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adActualVDepthRatio",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adCT",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "adCTPerVImpression",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adPageCTR",
             "type": "double",
             "default" : 0.0
         },

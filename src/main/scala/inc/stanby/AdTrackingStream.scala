@@ -21,7 +21,7 @@ package inc.stanby
 import inc.stanby.operators.AmazonElasticsearchSink
 import inc.stanby.schema._
 import inc.stanby.serializers.AdTrackingDeserializationSchema
-import inc.stanby.windows.CalcAdSearchKpiWindowFunction
+import inc.stanby.windows.CalcAdRequestKpiWindowFunction
 import org.apache.flink.api.common.functions.FilterFunction
 import org.apache.flink.api.java.functions.KeySelector
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
@@ -51,7 +51,7 @@ object AdTrackingStream extends BasicStream {
         event.getRequestId.toString
       }
     }).window(ProcessingTimeSessionWindows.withGap(Time.seconds(300)))
-      .process(new CalcAdSearchKpiWindowFunction())
+      .process(new CalcAdRequestKpiWindowFunction())
     AdSearchKpiWindowStream.addSink(AmazonElasticsearchSink.buildElasticsearchSink(domainEndpoint, region, "ad_search_kpi", "_doc"))
 
     //   ------------------------------ Ad-Tracking ------------------------------

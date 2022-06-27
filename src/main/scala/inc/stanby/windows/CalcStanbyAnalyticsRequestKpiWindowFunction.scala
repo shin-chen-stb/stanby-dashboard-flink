@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import scala.collection.JavaConverters.iterableAsScalaIterableConverter
 
-class CalcSearchKpiWindowFunction extends ProcessWindowFunction[StanbyEvent, StanbyEventSearchKpi, String, TimeWindow] {
+class CalcStanbyAnalyticsRequestKpiWindowFunction extends ProcessWindowFunction[StanbyEvent, StanbyEventSearchKpi, String, TimeWindow] {
   val logger: Logger = LoggerFactory.getLogger("CalcSessionTimeWindowFunction");
 
   override def process(key: String, context: ProcessWindowFunction[StanbyEvent, StanbyEventSearchKpi, String, TimeWindow]#Context, input: lang.Iterable[StanbyEvent], out: Collector[StanbyEventSearchKpi]): Unit = {
@@ -19,14 +19,14 @@ class CalcSearchKpiWindowFunction extends ProcessWindowFunction[StanbyEvent, Sta
     val inputList = input.asScala
     var eventCount = 0
     var jobViewableCount = 0
-    var jobClickCount = 0
-    var adClickCount = 0
+    var jobCTCount = 0
+    var adCTCount = 0
     var adViewableCount = 0
     var searchPageCount = 0
-    var adViewablePerClick = 0.0
-    var jobViewablePerClick = 0.0
-    var jobClickPerViewable = 0.0
-    var adClickPerViewable = 0.0
+    var adViewablePerCT = 0.0
+    var jobViewablePerCT = 0.0
+    var jobCTPerViewable = 0.0
+    var adCTPerViewable = 0.0
     var origin = "other"
     for (in <- inputList) {
       if (eventCount == 0 && !(in.getCurrentUrl == null && in.getFromYahoo == null)) {
@@ -44,10 +44,10 @@ class CalcSearchKpiWindowFunction extends ProcessWindowFunction[StanbyEvent, Sta
       }
       if (in.getArea != null && in.getElement != null && in.getEventType != null && in.getPage != null) {
         if (in.getEventType.toString.equals("link") && in.getPage.toString.equals("search") && in.getArea.toString.equals("card") && in.getElement.toString.equals("求人")) {
-          jobClickCount += 1
+          jobCTCount += 1
         }
         if (in.getEventType.toString.equals("link") && in.getPage.toString.equals("search") && in.getArea.toString.equals("card") && in.getElement.toString.equals("広告")) {
-          adClickCount += 1
+          adCTCount += 1
         }
         if (in.getPage.toString.equals("search") && in.getEventType.toString.equals("viewable") && in.getArea.toString.equals("card") && in.getElement.toString.equals("求人")) {
           jobViewableCount += 1
@@ -60,7 +60,7 @@ class CalcSearchKpiWindowFunction extends ProcessWindowFunction[StanbyEvent, Sta
     }
 
     if (jobViewableCount > 0) {
-      jobClickPerViewable = jobClickCount.toFloat / jobViewableCount
+      jobCTPerViewable = jobClickCount.toFloat / jobViewableCount
     }
 
     if (adViewableCount > 0) {

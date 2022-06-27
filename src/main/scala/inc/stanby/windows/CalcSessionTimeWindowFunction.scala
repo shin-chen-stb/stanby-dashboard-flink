@@ -23,13 +23,13 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, S
     var jobSearchCount = 0
     var jobDetailCount = 0
     var jobViewableCount = 0
-    var jobClickCount = 0
+    var jobCTCount = 0
     var adDetailCount = 0
-    var adClickCount = 0
+    var adCTCount = 0
     var adViewableCount = 0
     var applyJobCount = 0
-    var adClickPerSearch = 0.0
-    var jobClickPerSearch = 0.0
+    var adCTPerSearch = 0.0
+    var jobCTPerSearch = 0.0
     var adViewablePerSearch = 0.0
     var jobVieablePerSearch = 0.0
     var origin = "other"

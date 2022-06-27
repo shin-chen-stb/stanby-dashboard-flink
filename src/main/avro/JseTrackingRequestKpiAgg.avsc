@@ -1,0 +1,186 @@
+{
+    "name": "JseTrackingRequestKpiAgg",
+    "namespace": "inc.stanby.schema",
+    "type": "record",
+    "fields": [
+        {
+            "name": "searchRequestId",
+            "type": "string"
+        },
+        {
+            "name": "eventCount",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "jobRequest",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "jobRequestMatched",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "jobImpression",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "jobDepth",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "jobDepthMatched",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "jobCoverage",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "jobCT",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "jobCTYield",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "jobCTICTR",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "adCTRatio",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "organicRequest",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "organicRequestMatched",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "organicImpression",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "organicDepth",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "organicDepthMatched",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "organicActualDepthRatio",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "organicActualDepthRatioMatched",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "organicCT",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "organicICTR",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "organicPageCTR",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "organicPageCTRMatched",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adRequestMatched",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "adImpression",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "adDepth",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adDepthMatched",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adDepthRatio",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adActualDepthRatio",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adActualDepthRatioMatched",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adCoverage",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adCT",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "adICTR",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "adPageCTR",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adPageCTRMatched",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "time",
+            "type": "string",
+            "default" : "NONE"
+        }
+    ]
+}
