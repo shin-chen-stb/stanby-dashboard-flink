@@ -19,18 +19,20 @@ class CalcJseRequestKpiWindowFunction extends ProcessWindowFunction[JseTracker, 
     logger.info("Calc JSE Search Kpi Process Function been initialized")
     val inputList = input.asScala
     var eventCount = 0
+    var jobRequestMatched = 0
+    var jobImpression = 0
+    var jobCT = 0
+    var jobCTPerJobImpression = 0.0
+    var adCTRatio = 0.0
+    var organicRequestMatched = 0
     var organicImpression = 0
     var organicCT = 0
+    var organicCTPerImpression = 0.0
+    var adRequestMatched = 0
     var adImpression = 0
     var adCT = 0
-    var relatedJobsCTCount = 0
-    var jobDetailsImpressionCount = 0
-    var organicAdCTRatio = 0
-    var adCTRatio = 0
-    var jobImpressionPerClick = 0.0
-    var adImpressionPerClick = 0.0
-    var organicClickPerImpression = 0.0
-    var adClickPerImpression = 0.0
+    var adCTPerImpression = 0.0
+    var origin = "other"
     val time = inputList.head.getTime
     for (in <- inputList) {
       println(in.toString)
@@ -38,56 +40,62 @@ class CalcJseRequestKpiWindowFunction extends ProcessWindowFunction[JseTracker, 
         organicImpression += 1
       }
       if (in.getEventType.toString.equals("jobClick") && !in.getIsAd) {
-        organicClick += 1
+        organicCT += 1
       }
       if (in.getEventType.toString.equals("jobImpression") && in.getIsAd) {
         adImpression += 1
       }
       if (in.getEventType.toString.equals("jobClick") && in.getIsAd) {
-        adClick += 1
-      }
-      if (in.getEventType.toString.equals("relatedJobsClick")) {
-        relatedJobsClickCount += 1
-      }
-      if (in.getEventType.toString.equals("jobDetailsImpression")) {
-        jobDetailsImpressionCount += 1
+        adCT += 1
       }
       eventCount += 1
     }
+    jobImpression = adImpression + organicImpression
+    jobCT = adCT + organicCT
 
-    if (organicClick > 0 && adClick > 0) {
-      adClickRatio = adClick/(organicClick+adClick)
-      organicAdClickRatio = organicClick/adClick
+    if (jobCT > 0) {
+      adCTRatio = adCT / jobCT
+    }
+
+    if (jobImpression > 0) {
+      jobCTPerJobImpression = jobCT.toFloat / jobImpression
     }
 
     if (organicImpression > 0) {
-      organicClickPerImpression = organicClick.toFloat / organicImpression
+      organicCTPerImpression = organicCT.toFloat / organicImpression
     }
 
     if (adImpression > 0) {
-      adClickPerImpression = adClick.toFloat / adImpression
+      adCTPerImpression = adCT.toFloat / adImpression
     }
 
-    if (organicClick > 0) {
-      jobImpressionPerClick = organicImpression.toFloat / organicClick
+    if (jobImpression > 0) {
+      jobRequestMatched += 1
     }
-
-    if (adClick > 0) {
-      adImpressionPerClick = adImpression.toFloat / adClick
+    if (organicImpression > 0) {
+      organicRequestMatched += 1
+    }
+    if (adImpression > 0) {
+      adRequestMatched += 1
     }
 
     val jseTrackingRequestKpi = JseTrackingRequestKpi.newBuilder
       .setSearchRequestId(key)
-      .setEventCount(eventCount)
-      .setOrganicClick(organicClick)
+      .setJobRequest(1)
+      .setJobRequestMatched(jobRequestMatched)
+      .setJobImpression(jobImpression)
+      .setJobCT(jobCT)
+      .setJobICTR(jobCTPerJobImpression)
+      .setOrganicRequest(1)
+      .setOrganicRequestMatched(organicRequestMatched)
       .setOrganicImpression(organicImpression)
-      .setOrganicClickPerImpression(organicClickPerImpression)
-      .setAdClickPerImpression(adClickPerImpression)
-      .setOrganicDepthRatio(organicImpression.toFloat/20)
-      .setAdClick(adClick)
+      .setOrganicCT(organicCT)
+      .setOrganicICTR(organicCTPerImpression)
+      .setAdRequest(1)
+      .setAdRequestMatched(adRequestMatched)
       .setAdImpression(adImpression)
-      .setAdDepthRatio(adImpression.toFloat/8)
-      .setAdClickRatio(adClickRatio)
+      .setAdCT(adCT)
+      .setAdICTR(adCTPerImpression)
       .setTime(time)
       .build()
     out.collect(jseTrackingRequestKpi)

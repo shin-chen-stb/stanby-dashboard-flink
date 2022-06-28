@@ -20,8 +20,13 @@
         },
         {
             "name": "jobVDepth",
-            "type": "int",
-            "default" : 0
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "jobVDepthMatched",
+            "type": "double",
+            "default" : 0.0
         },
         {
             "name": "jobCoverage",
@@ -35,8 +40,13 @@
         },
         {
             "name": "jobCTYield",
-            "type": "int",
-            "default" : 0
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "jobCTYieldMatched",
+            "type": "double",
+            "default" : 0.0
         },
         {
             "name": "jobCTPerVImpression",
@@ -64,6 +74,21 @@
             "default" : 0
         },
         {
+            "name": "organicVDepth",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "organicVDepthMatched",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "organicCoverage",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
             "name": "organicActualVDepthRatio",
             "type": "double",
             "default" : 0.0
@@ -89,6 +114,11 @@
             "default" : 0.0
         },
         {
+            "name": "adRequest",
+            "type": "int",
+            "default" : 0
+        },
+        {
             "name": "adRequestMatched",
             "type": "int",
             "default" : 0
@@ -99,7 +129,22 @@
             "default" : 0
         },
         {
-            "name": "adVDepthRatio",
+            "name": "adVDepth",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adVDepthMatched",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adCoverage",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "adDepthRatio",
             "type": "double",
             "default" : 0.0
         },

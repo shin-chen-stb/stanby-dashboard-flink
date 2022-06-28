@@ -1,6 +1,6 @@
 package inc.stanby.windows
 
-import inc.stanby.schema.{StanbyAnalyticsRequestKpi, StanbyAnalyticsRequestKpiAgg, StanbyEventSearchKpi, StanbyEventSearchKpiAgg}
+import inc.stanby.schema.{StanbyAnalyticsRequestKpi, StanbyAnalyticsRequestKpiAgg, StanbyAnalyticsRequestKpiAgg}
 import org.apache.flink.streaming.api.functions.windowing.ProcessAllWindowFunction
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow
 import org.apache.flink.util.Collector
@@ -15,85 +15,131 @@ class CalcStanbyAnalyticsRequestKpiAggWindowFunction extends ProcessAllWindowFun
   override def process(context: ProcessAllWindowFunction[StanbyAnalyticsRequestKpi, StanbyAnalyticsRequestKpiAgg, TimeWindow]#Context, input: lang.Iterable[StanbyAnalyticsRequestKpi], out: Collector[StanbyAnalyticsRequestKpiAgg]): Unit = {
     logger.info("Calc Search Kpi Tumbling Window Function been initialized")
     val inputList = input.asScala
-    var jobSearchCount = 0
-    var matchedJobSearchCount = 0
-    var organicViewableImpression = 0
+    var jobRequest = 0
+    var jobRequestMatched = 0
+    var jobVImpression = 0
+    var jobCoverage = 0.0
+    var jobCT = 0
+    var jobVDepth = 0.0
+    var jobVDepthMatched = 0.0
+    var jobCTPerJobVImpression = 0.0
+    var jobCTYield = 0.0
+    var jobCTYieldMatched = 0.0
+    var adCTRatio = 0.0
+    var organicRequest = 0
+    var organicRequestMatched = 0
+    var organicVImpression = 0
+    var organicVDepth = 0.0
+    var organicVDepthMatched = 0.0
+    var organicActualDepthRatio = 0.0
+    var organicActualDepthRatioMatched = 0.0
+    var organicCoverage = 0.0
     var organicCT = 0
+    var organicCTPerImpression = 0.0
+    var organicPageCTR = 0.0
+    var organicPageCTRMatched = 0.0
+    var adRequest = 0
+    var adRequestMatched = 0
+    var adCoverage = 0.0
+    var adVImpression = 0
+    var adVDepth = 0.0
+    var adVDepthMatched = 0.0
+    var adDepthRatio = 0.0
+    var adActualDepthRatio = 0.0
+    var adActualDepthRatioMatched = 0.0
     var adCT = 0
-    var adViewableCount = 0
-    var biddedAdSearchCount = 0
-    var adCTPerViewable = 0.0
-    var jobViewablePerCT = 0.0
-    var jobCTPerViewable = 0.0
-    var adViewablePerCT = 0.0
-    var matchedJobCTPerViewable = 0.0
-    var jobCTPerSearch = 0.0
-    var adCTPerSearch = 0.0
-    var matchedJobCTPerSearch = 0.0
-    var biddedAdCTPerSearch = 0.0
-    var matchedOrganicRate = 0.0
-    var biddedAdRate = 0.0
+    var adCTPerVImpression = 0.0
+    var adPageCTR = 0.0
+    var adPageCTRMatched = 0.0
     for (in <- inputList) {
-      jobSearchCount += 1
-      if (in.getorganicViewableImpression > 0) {
-        matchedJobSearchCount += 1
-      }
-      if (in.getAdViewableCount > 0) {
-        biddedAdSearchCount += 1
-      }
-      organicViewableImpression += in.getorganicViewableImpression
-      organicCT += in.getorganicClick
-      adViewableCount += in.getAdViewableCount
-      adClick += in.getadClick
+      jobRequest += in.getJobRequest
+      organicRequest += in.getOrganicRequest
+      adRequest += in.getAdRequest
+      jobRequestMatched += in.getJobRequestMatched
+      organicRequestMatched += in.getOrganicRequestMatched
+      adRequestMatched += in.getAdRequestMatched
+      jobVImpression += in.getJobVImpression
+      jobCT += in.getJobCT
+      organicVImpression += in.getOrganicVImpression
+      organicCT += in.getOrganicCT
+      adVImpression += in.getAdVImpression
+      adCT += in.getAdCT
+    }
+    jobCoverage = jobRequestMatched.toFloat / jobRequest
+    organicCoverage = organicRequestMatched.toFloat / organicRequest
+    adCoverage = adRequestMatched.toFloat / adRequest
+    jobVDepth = jobVImpression.toFloat / jobRequest
+    organicVDepth = organicVImpression.toFloat / organicRequest
+    adVDepth = adVImpression.toFloat / adRequest
+    organicPageCTR = organicCT.toFloat / organicRequest
+    adPageCTR = adCT.toFloat / adRequest
+
+    if (jobVImpression > 0) {
+      jobCTPerJobVImpression = organicCT.toFloat / organicVImpression
     }
 
-    if (organicViewableImpression > 0) {
-      jobClickPerViewable = organicClick.toFloat / organicViewableImpression
-      matchedJobClickPerViewable = organicClick.toFloat / organicViewableImpression
+    if (organicVImpression > 0) {
+      organicCTPerImpression = organicCT.toFloat / organicVImpression
     }
 
-    if (adViewableCount > 0) {
-      adClickPerViewable = adClick.toFloat / adViewableCount
+    if (adVImpression > 0) {
+      adCTPerVImpression = adCT.toFloat / adVImpression
     }
 
-    if (organicClick > 0) {
-      jobViewablePerClick = organicViewableImpression.toFloat / organicClick
-      matchedOrganicRate = matchedJobSearchCount.toFloat / jobSearchCount
+    if (jobRequest > 0) {
+      jobCTYield = jobCT.toFloat / jobRequest
     }
 
-    if (adClick > 0) {
-      adViewablePerClick = adViewableCount.toFloat / adClick
-      biddedAdRate = biddedAdSearchCount.toFloat / adClick
+    if (jobRequestMatched > 0) {
+      jobCTYieldMatched = jobCT.toFloat / jobRequestMatched
+      jobVDepthMatched = jobVImpression.toFloat / jobRequestMatched
+    }
+    if (organicRequestMatched > 0) {
+      organicPageCTRMatched = organicCT.toFloat / organicRequestMatched
+      organicVDepthMatched = organicVImpression.toFloat / organicRequestMatched
+    }
+    if (adRequestMatched > 0) {
+      adPageCTRMatched = adCT.toFloat / adRequestMatched
+      adVDepthMatched = adVDepthMatched.toFloat / adRequestMatched
+    }
+    if (jobCT > 0) {
+      adCTRatio = adCT.toFloat / jobCT
     }
 
-    if (jobSearchCount > 0) {
-      jobClickPerSearch = organicClick.toFloat / jobSearchCount
-      adClickPerSearch = adClick.toFloat / jobSearchCount
-    }
-
-    if (matchedJobSearchCount > 0) {
-      matchedJobClickPerSearch = organicClick.toFloat / matchedJobSearchCount
-    }
-    if (biddedAdSearchCount > 0) {
-      biddedAdClickPerSearch = adClick.toFloat / biddedAdSearchCount
-    }
     val time = inputList.head.getTime
 
     val stanbyAnalyticsRequestKpiAgg = StanbyAnalyticsRequestKpiAgg.newBuilder
-      .setOrganicClick(organicClick)
-      .setAdClick(adClick)
-      .setOrganicViewableImpression(organicViewableImpression)
-      .setAdViewableImpression(adViewableCount)
-      .setJobClickPerViewable(jobClickPerViewable)
-      .setAdClickPerViewable(adClickPerViewable)
-      .setJobClickPerSearch(jobClickPerSearch)
-      .setAdClickPerSearch(adClickPerSearch)
-      .setMatchedJobSearchCount(matchedJobSearchCount)
-      .setBiddedAdSearchCount(biddedAdSearchCount)
-      .setMatchedOrganicRate(matchedOrganicRate)
-      .setBiddedAdRate(biddedAdRate)
-      .setBiddedAdClickPerSearch(biddedAdClickPerSearch)
-      .setMatchedjobClickPerSearch(matchedJobClickPerSearch)
+      .setJobRequest(jobRequest)
+      .setJobRequestMatched(jobRequestMatched)
+      .setJobVImpression(jobVImpression)
+      .setJobVDepth(jobVDepth)
+      .setJobVDepthMatched(jobVDepthMatched)
+      .setJobCoverage(jobCoverage)
+      .setJobCT(jobCT)
+      .setJobCTPerVImpression(jobCTPerJobVImpression)
+      .setJobCTYield(jobCTYield)
+      .setJobCTYieldMatched(jobCTYieldMatched)
+      .setAdCTRatio(adCTRatio)
+      .setOrganicRequest(organicRequest)
+      .setOrganicRequestMatched(organicRequestMatched)
+      .setOrganicVImpression(organicVImpression)
+      .setOrganicVDepth(organicVDepth)
+      .setOrganicVDepthMatched(organicVDepthMatched)
+      .setOrganicCoverage(organicCoverage)
+      .setOrganicCT(organicCT)
+      .setOrganicCTPerVImpression(organicCTPerImpression)
+      .setOrganicPageCTR(organicPageCTR)
+      .setOrganicPageCTRMatched(organicPageCTRMatched)
+      .setAdRequest(adRequest)
+      .setAdRequestMatched(adRequestMatched)
+      .setAdVImpression(adVImpression)
+      .setAdVDepth(adVDepth)
+      .setAdVDepthMatched(adVDepthMatched)
+      .setAdCoverage(adCoverage)
+      .setAdCTPerVImpression(adCTPerVImpression)
+      .setAdCT(adCT)
+      .setAdPageCTR(adPageCTR)
+      .setAdPageCTRMatched(adPageCTRMatched)
       .setTime(time)
       .build()
     out.collect(stanbyAnalyticsRequestKpiAgg)

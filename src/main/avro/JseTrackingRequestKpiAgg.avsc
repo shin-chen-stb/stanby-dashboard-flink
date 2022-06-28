@@ -49,13 +49,18 @@
         },
         {
             "name": "jobCTYield",
-            "type": "int",
-            "default" : 0
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "jobCTYieldMatched",
+            "type": "double",
+            "default" : 0.0
         },
         {
             "name": "jobCTICTR",
-            "type": "int",
-            "default" : 0
+            "type": "double",
+            "default" : 0.0
         },
         {
             "name": "adCTRatio",

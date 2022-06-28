@@ -9,7 +9,17 @@
             "default" : null
         },
         {
+            "name": "origin",
+            "type": "string",
+            "default" : null
+        },
+        {
             "name": "jobRequest",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "jobRequestMatched",
             "type": "int",
             "default" : 0
         },
@@ -49,6 +59,11 @@
             "default" : 0
         },
         {
+            "name": "organicRequestMatched",
+            "type": "int",
+            "default" : 0
+        },
+        {
             "name": "organicVImpression",
             "type": "int",
             "default" : 0
@@ -72,6 +87,16 @@
             "name": "organicPageCTR",
             "type": "double",
             "default" : 0.0
+        },
+        {
+            "name": "adRequest",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "adRequestMatched",
+            "type": "int",
+            "default" : 0
         },
         {
             "name": "adVImpression",
