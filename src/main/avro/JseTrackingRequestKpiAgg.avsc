@@ -29,13 +29,13 @@
         },
         {
             "name": "jobDepth",
-            "type": "int",
-            "default" : 0
+            "type": "double",
+            "default" : 0.0
         },
         {
             "name": "jobDepthMatched",
-            "type": "int",
-            "default" : 0
+            "type": "double",
+            "default" : 0.0
         },
         {
             "name": "jobCoverage",

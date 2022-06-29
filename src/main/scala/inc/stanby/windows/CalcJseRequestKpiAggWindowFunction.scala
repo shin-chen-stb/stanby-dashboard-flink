@@ -15,85 +15,137 @@ class CalcJseRequestKpiAggWindowFunction extends ProcessAllWindowFunction[JseTra
   override def process(context: ProcessAllWindowFunction[JseTrackingRequestKpi, JseTrackingRequestKpiAgg, TimeWindow]#Context, input: lang.Iterable[JseTrackingRequestKpi], out: Collector[JseTrackingRequestKpiAgg]): Unit = {
     logger.info("Calc Search Kpi Tumbling Window Function been initialized")
     val inputList = input.asScala
-    var jobSearchCount = 0
-    var matchedOrganicRequest = 0
+    var jobRequest = 0
+    var jobRequestMatched = 0
+    var jobImpression = 0
+    var jobCoverage = 0.0
+    var jobCT = 0
+    var jobICTR = 0.0
+    var jobDepth = 0.0
+    var jobDepthMatched = 0.0
+    var jobCTYield = 0.0
+    var jobCTYieldMatched = 0.0
+    var adCTRatio = 0.0
+    var organicRequest = 0
+    var organicRequestMatched = 0
     var organicImpression = 0
+    var organicDepth = 0.0
+    var organicDepthMatched = 0.0
+    var organicActualDepthRatio = 0.0
+    var organicActualDepthRatioMatched = 0.0
+    var organicCoverage = 0.0
     var organicCT = 0
-    var adCT = 0
+    var organicICTR = 0.0
+    var organicPageCTR = 0.0
+    var organicPageCTRMatched = 0.0
+    var adRequest = 0
+    var adRequestMatched = 0
+    var adCoverage = 0.0
     var adImpression = 0
-    var matchedAdRequest = 0
-    var adCTPerImpression = 0.0
-    var jobImpressionPerCT = 0.0
-    var organicCTPerImpression = 0.0
-    var adImpressionPerCT = 0.0
-    var adBiddedCTPerImpression = 0.0
-    var matchedorganicCTPerImpression = 0.0
-    var organicCTPerSearch = 0.0
-    var adClickPerRequest = 0.0
-    var matchedorganicClickPerSearch = 0.0
-    var biddedadClickPerRequest = 0.0
-    var matchedOrganicRate = 0.0
-    var biddedAdRate = 0.0
+    var adDepth = 0.0
+    var adDepthMatched = 0.0
+    var adDepthRatio = 0.0
+    var adActualDepthRatio = 0.0
+    var adActualDepthRatioMatched = 0.0
+    var adCT = 0
+    var adICTR = 0.0
+    var adPageCTR = 0.0
+    var adPageCTRMatched = 0.0
     for (in <- inputList) {
-      jobSearchCount += 1
-      if (in.getOrganicImpression > 0) {
-        matchedOrganicRequest += 1
-      }
-      if (in.getAdImpression > 0) {
-        matchedAdRequest += 1
-      }
+      jobRequest += in.getJobRequest
+      organicRequest += in.getOrganicRequest
+      adRequest += in.getAdRequest
+      jobRequestMatched += in.getJobRequestMatched
+      organicRequestMatched += in.getOrganicRequestMatched
+      adRequestMatched += in.getAdRequestMatched
+      jobImpression += in.getJobImpression
       organicImpression += in.getOrganicImpression
-      organicClick = in.getOrganicClick
       adImpression += in.getAdImpression
-      adClick += in.getAdClick
+      jobCT += in.getJobCT
+      organicCT += in.getOrganicCT
+      adCT += in.getAdCT
+    }
+    jobCTYield = jobCT.toFloat / jobRequest
+    organicPageCTR = organicCT.toFloat / organicRequest
+    adPageCTR = adCT.toFloat / adRequest
+    jobCoverage = jobRequestMatched.toFloat / jobRequest
+    organicCoverage = organicRequestMatched.toFloat / organicRequest
+    adCoverage = adRequestMatched.toFloat / adRequest
+    jobDepth = jobImpression.toFloat / jobRequest
+    organicDepth = organicImpression.toFloat / organicRequest
+    adDepth = adImpression.toFloat / adRequest
+    organicActualDepthRatio = organicDepth.toFloat / 20
+    organicActualDepthRatioMatched = organicDepthMatched.toFloat / 20
+    adActualDepthRatio = adDepth.toFloat / 8
+    adActualDepthRatioMatched = adDepthMatched.toFloat / 8
+    if (jobImpression > 0) {
+      jobICTR = jobCT.toFloat / jobImpression
     }
 
     if (organicImpression > 0) {
-      organicClickPerImpression = organicClick.toFloat / organicImpression
-      matchedorganicClickPerImpression = organicClick.toFloat / organicImpression
+      organicICTR = organicCT.toFloat / organicImpression
     }
 
     if (adImpression > 0) {
-      adClickPerImpression = adClick.toFloat / adImpression
-      adBiddedClickPerImpression = adClick.toFloat / matchedAdRequest
+      adICTR = adCT.toFloat / adImpression
     }
 
-    if (organicClick > 0) {
-      jobImpressionPerClick = organicImpression.toFloat / organicClick
-      matchedOrganicRate = matchedOrganicRequest.toFloat / jobSearchCount
+    if (jobRequestMatched > 0) {
+      jobCTYieldMatched = jobCT.toFloat / jobRequestMatched
+      jobDepthMatched = jobImpression.toFloat / jobRequestMatched
     }
 
-    if (adClick > 0) {
-      adImpressionPerClick = adImpression.toFloat / adClick
-      biddedAdRate = matchedAdRequest.toFloat / adClick
+    if (organicRequestMatched > 0) {
+      organicPageCTRMatched = organicCT.toFloat / organicRequestMatched
+      organicDepthMatched = organicImpression.toFloat / organicRequestMatched
     }
 
-    if (jobSearchCount > 0) {
-      organicClickPerSearch = organicClick.toFloat / jobSearchCount
-      adClickPerRequest = adClick.toFloat / jobSearchCount
+    if (adRequestMatched > 0) {
+      adPageCTRMatched = adCT.toFloat / adRequestMatched
+      adDepthMatched = adDepthMatched.toFloat / adRequestMatched
     }
 
-    if (matchedOrganicRequest > 0) {
-      matchedorganicClickPerSearch = organicClick.toFloat / matchedOrganicRequest
+    if (jobDepthMatched > 0) {
+      adDepthRatio = adDepthMatched.toFloat / jobDepthMatched
     }
-    if (matchedAdRequest > 0) {
-      biddedadClickPerRequest = adClick.toFloat / matchedAdRequest
+
+    if (jobCT > 0) {
+      adCTRatio = adCT.toFloat / jobCT
     }
     val time = inputList.head.getTime
 
     val jseTrackingRequestKpiAgg = JseTrackingRequestKpiAgg.newBuilder
-      .setOrganicClick(organicClick)
-      .setAdClick(adClick)
-      .setOrganicImpression(organicImpression)
-      .setAdImpression(adImpression)
-      .setOrganicClickPerImpression(organicClickPerImpression)
-      .setAdClickPerImpression(adClickPerImpression)
-      .setOrganicClickPerRequest(organicClickPerSearch)
-      .setAdClickPerRequest(adClickPerRequest)
-      .setMatchedOrganicRequest(matchedOrganicRequest)
-      .setMatchedAdRequest(matchedAdRequest)
-      .setMatchedOrganicRate(matchedOrganicRate)
-      .setMatchedAdRate(biddedAdRate)
+      .setJobRequest(jobRequest)
+      .setJobRequestMatched(jobRequestMatched)
+      .setJobImpression(jobImpression)
+      .setJobDepth(jobDepth)
+      .setJobDepthMatched(jobDepthMatched)
+      .setJobCoverage(jobCoverage)
+      .setJobCT(jobCT)
+      .setJobICTR(jobICTR)
+      .setJobCTYield(jobCTYield)
+      .setJobCTYieldMatched(jobCTYieldMatched)
+      .setAdCTRatio(adCTRatio)
+      .setOrganicRequest(organicRequest)
+      .setOrganicRequestMatched(organicRequestMatched)
+      .setOrganicVImpression(organicVImpression)
+      .setOrganicVDepth(organicVDepth)
+      .setOrganicVDepthMatched(organicVDepthMatched)
+      .setOrganicCoverage(organicCoverage)
+      .setOrganicCT(organicCT)
+      .setOrganicCTPerVImpression(organicCTPerImpression)
+      .setOrganicPageCTR(organicPageCTR)
+      .setOrganicPageCTRMatched(organicPageCTRMatched)
+      .setAdRequest(adRequest)
+      .setAdRequestMatched(adRequestMatched)
+      .setAdVImpression(adVImpression)
+      .setAdVDepth(adVDepth)
+      .setAdVDepthMatched(adVDepthMatched)
+      .setAdCoverage(adCoverage)
+      .setAdCTPerVImpression(adCTPerVImpression)
+      .setAdCT(adCT)
+      .setAdPageCTR(adPageCTR)
+      .setAdPageCTRMatched(adPageCTRMatched)
       .setTime(time)
       .build()
     out.collect(jseTrackingRequestKpiAgg)

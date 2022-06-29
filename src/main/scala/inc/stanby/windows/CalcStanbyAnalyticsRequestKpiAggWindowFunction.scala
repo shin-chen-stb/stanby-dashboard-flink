@@ -31,8 +31,6 @@ class CalcStanbyAnalyticsRequestKpiAggWindowFunction extends ProcessAllWindowFun
     var organicVImpression = 0
     var organicVDepth = 0.0
     var organicVDepthMatched = 0.0
-    var organicActualDepthRatio = 0.0
-    var organicActualDepthRatioMatched = 0.0
     var organicCoverage = 0.0
     var organicCT = 0
     var organicCTPerImpression = 0.0
@@ -44,9 +42,6 @@ class CalcStanbyAnalyticsRequestKpiAggWindowFunction extends ProcessAllWindowFun
     var adVImpression = 0
     var adVDepth = 0.0
     var adVDepthMatched = 0.0
-    var adDepthRatio = 0.0
-    var adActualDepthRatio = 0.0
-    var adActualDepthRatioMatched = 0.0
     var adCT = 0
     var adCTPerVImpression = 0.0
     var adPageCTR = 0.0
