@@ -58,7 +58,7 @@
             "default" : 0.0
         },
         {
-            "name": "jobCTICTR",
+            "name": "jobICTR",
             "type": "double",
             "default" : 0.0
         },
@@ -93,6 +93,11 @@
             "default" : 0.0
         },
         {
+            "name": "organicCoverage",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
             "name": "organicActualDepthRatio",
             "type": "double",
             "default" : 0.0
@@ -121,6 +126,11 @@
             "name": "organicPageCTRMatched",
             "type": "double",
             "default" : 0.0
+        },
+        {
+            "name": "adRequest",
+            "type": "int",
+            "default" : 0
         },
         {
             "name": "adRequestMatched",
@@ -169,8 +179,8 @@
         },
         {
             "name": "adICTR",
-            "type": "int",
-            "default" : 0
+            "type": "double",
+            "default" : 0.0
         },
         {
             "name": "adPageCTR",

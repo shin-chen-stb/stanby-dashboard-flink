@@ -9,12 +9,17 @@
             "default": null
         },
         {
-            "name": "adCTCount",
+            "name": "adCT",
             "type": "int",
             "default" : 0
         },
         {
             "name": "adRequest",
+            "type": "int",
+            "default" : 0
+        },
+        {
+            "name": "adRequestMatched",
             "type": "int",
             "default" : 0
         },
@@ -30,6 +35,21 @@
         },
         {
             "name": "cpc",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "revenue",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "rps",
+            "type": "double",
+            "default" : 0.0
+        },
+        {
+            "name": "rpsMatched",
             "type": "double",
             "default" : 0.0
         },

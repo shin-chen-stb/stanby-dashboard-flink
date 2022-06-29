@@ -4,7 +4,7 @@
   <groupId>inc.stanby</groupId>
   <artifactId>stb-stream-dashboard</artifactId>
   <name>stanby-dashboard-flink</name>
-  <version>1.6.6</version>
+  <version>1.7.0</version>
   <build>
     <plugins>
       <plugin>

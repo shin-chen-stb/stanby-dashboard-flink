@@ -49,10 +49,10 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, S
       }
       if (in.getArea != null && in.getElement != null && in.getEventType != null && in.getPage != null) {
         if (in.getEventType.toString.equals("link") && in.getPage.toString.equals("search") && in.getArea.toString.equals("card") && in.getElement.toString.equals("求人")) {
-          jobClickCount += 1
+          jobCTCount += 1
         }
         if (in.getEventType.toString.equals("link") && in.getPage.toString.equals("search") && in.getArea.toString.equals("card") && in.getElement.toString.equals("広告")) {
-          adClickCount += 1
+          adCTCount += 1
         }
         if (in.getPage.toString.equals("job_detail") && in.getArea.toString.equals("card") && in.getElement.toString.equals("求人")) {
           jobDetailCount += 1
@@ -70,9 +70,9 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, S
           adViewableCount += 1
         }
         if (jobSearchCount > 0) {
-          jobClickPerSearch = jobClickCount / jobSearchCount
+          jobCTPerSearch = jobCTCount / jobSearchCount
           jobVieablePerSearch = jobViewableCount / jobSearchCount
-          adClickPerSearch = adClickCount / jobSearchCount
+          adCTPerSearch = adCTCount / jobSearchCount
           adViewablePerSearch = adViewableCount / jobSearchCount
         }
       }
@@ -93,15 +93,15 @@ class CalcSessionTimeWindowFunction extends ProcessWindowFunction[StanbyEvent, S
       .setEventCount(eventCount)
       .setJobSearchCount(jobSearchCount)
       .setJobDetailCount(jobDetailCount)
-      .setJobClickCount(jobClickCount)
+      .setJobCTCount(jobCTCount)
       .setJobViewableCount(jobViewableCount)
       .setAdDetailCount(adDetailCount)
-      .setAdClickCount(adClickCount)
+      .setAdCTCount(adCTCount)
       .setAdViewableCount(adViewableCount)
       .setAdViewablePerSearch(adViewablePerSearch)
       .setJobViewablePerSearch(jobVieablePerSearch)
-      .setAdClickPerSearch(adClickPerSearch)
-      .setJobClickPerSearch(jobClickPerSearch)
+      .setAdCTPerSearch(adCTPerSearch)
+      .setJobCTPerSearch(jobCTPerSearch)
       .setApplyJobCount(applyJobCount)
       .setOrigin(origin)
       .setSessionEndTime(sessionEndTime)
